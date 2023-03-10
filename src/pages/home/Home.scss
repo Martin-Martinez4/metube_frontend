@@ -1,0 +1,36 @@
+
+.home{
+
+    &__videoarea{
+      
+      height: 99vh;
+      width: calc(100vw - 250px);
+      overflow-y: auto;
+
+      margin-bottom: 2rem;
+
+      justify-content: center;
+
+
+      &__container{
+
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+      }
+
+    }
+  
+}
+
+.whitespace{
+
+  height: 12rem;
+
+}
+
+.video-js {
+  position: relative !important;
+  width: 100% !important;
+  height: auto !important;
+}
