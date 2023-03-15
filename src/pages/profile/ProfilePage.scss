@@ -1,0 +1,55 @@
+
+.profilepage{
+    
+    &__content{
+        
+        width: calc(100vw - 15vw);
+        height: 99vh;
+
+        overflow: auto;
+
+    }
+
+    &__nav{
+
+        display: flex;
+        width: 90%;
+
+        height: fit-content;
+
+        justify-content: space-around;
+
+        font-weight: 700;
+
+        border-bottom: 1px solid #becbcf;
+
+        
+        margin: auto;
+        margin-bottom: 2rem;
+        
+    }
+
+    &__headerimage{
+        width: 100%;
+        height: calc((100vw - 15vw)/6.2 - 1px);
+
+        background: #808B8E;
+    }
+
+    &__userprofile{
+        width: 5rem;
+        height: 5rem;
+
+        border-radius: 100%;
+
+        background: #808B8E;
+    }
+
+    &__channelname{
+        word-break: break-word;
+        max-width: 25vw;
+    }
+
+   
+}
+

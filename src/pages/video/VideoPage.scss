@@ -1,0 +1,109 @@
+
+.videopage{
+
+    &__container{
+
+        display: flex;
+
+        justify-content: center;
+
+        height: 99vh;
+        overflow: auto;
+
+
+
+    }
+
+    &__suggestions{
+
+        width: 20vw;
+        margin-left: 2rem;
+
+    }
+
+    &__video{
+
+        width: 65vw;
+
+        margin-top: .5rem;
+
+        &__info{
+            word-break: break-all;
+
+            &__button{
+
+                &--subscribe{
+
+                    font-size: 1.2rem;
+                    padding: .5rem;
+                }
+
+            }
+
+            &__icons{
+
+            }
+        }
+
+        &__title{
+            font-size: 1.5rem;
+            margin: .5rem 0 .5rem 0;
+        }
+
+    }
+
+    &__comments{
+
+        width: 60vw;
+        margin-left: 2rem;
+
+        &__comment{
+            display: flex;
+            
+            &__text{
+
+                width: 90%;
+
+                font-size: .9rem;
+                line-height: 1.4rem;
+
+                word-break: break-word;
+
+            }
+        }
+
+    }
+
+    &__responses{
+
+        width: 50vw;
+        margin-left: 2rem;
+        
+
+        &__response{
+            display: flex;
+            
+            &__text{
+                
+                width: 90%;
+
+                font-size: .9rem;
+                line-height: 1.4rem;
+
+                word-break: break-word;
+
+            }
+        }
+
+    }
+
+
+}
+summary{ 
+    list-style: none;
+    
+    // &::marker{ 
+    //     display: none; 
+    // } 
+}
+

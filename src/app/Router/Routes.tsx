@@ -4,6 +4,7 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 
 import App from "../../App";
 import Home from "../../pages/home/Home";
+import ProfilePage from "../../pages/profile/ProfilePage";
 import VideoPage from "../../pages/video/VideoPage";
 
 export const routes: RouteObject[] = [
@@ -16,6 +17,10 @@ export const routes: RouteObject[] = [
             {
                 path: "video", 
                 element: <VideoPage />,
+            },
+            {
+                path: "profile", 
+                element: <ProfilePage />,
             },
           
             {

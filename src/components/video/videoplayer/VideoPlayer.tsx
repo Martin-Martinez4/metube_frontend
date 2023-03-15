@@ -13,8 +13,9 @@ function VideoPlayer() {
       controls: true,
       responsive: true,
       fluid: true,
+      aspectRatio: '16:9',
       sources: [{
-        src: "http://localhost:8081/media/trigun_ep1/stream/",
+        src: "http://localhost:8081/media/Trigun_Ep1/stream/",
         type: "application/x-mpegURL"
       }]
     };
@@ -33,7 +34,7 @@ function VideoPlayer() {
     };
 
   return (
-    <div style={{ width: "40vw", height: "auto"}}>
+    <div style={{ width: "100%", height: "auto"}}>
         <VideoJS options={videoJsOptions} onReady={handlePlayerReady} />
 
     </div>

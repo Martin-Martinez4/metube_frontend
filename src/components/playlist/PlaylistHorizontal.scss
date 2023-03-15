@@ -1,0 +1,25 @@
+
+.playlist{
+    width: 100%; 
+    overflow: hidden; 
+    box-sizing: border-box;
+
+    &__container{
+
+        overflow: hidden;
+    }
+
+    &--horizontal{
+            
+        height: auto;
+        display: flex;
+        width: 100%;
+        
+    }
+
+    &__horizontalline{
+
+        border-top: 1px solid #becbcf;
+    }
+}
+
