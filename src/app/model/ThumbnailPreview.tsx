@@ -1,7 +1,13 @@
 
 export type ThumbnailPreviewProps = {
 
-    width?: string
+    width?: string,
+    id: string
+    title?: string,
+    channelname?: string,
+    views?: number,
+    thumbnail?: string,
+    profile_id?: string,
   }
   
 

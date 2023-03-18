@@ -15,7 +15,7 @@ export const routes: RouteObject[] = [
         children: [
          
             {
-                path: "video", 
+                path: "video/:video_id", 
                 element: <VideoPage />,
             },
             {

@@ -1,10 +1,13 @@
 
 import LeftsideNav from "../../components/nav/leftsidenav/LeftsideNav"
+import TopNav from "../../components/nav/topnav/TopNav"
 import PlaylistHorizontal from "../../components/playlist/PlaylistHorizontal"
 import "./ProfilePage.scss"
 
 function ProfilePage() {
     return (
+        <>
+        <TopNav></TopNav>
         <div className="flex">
             <LeftsideNav></LeftsideNav>
             <div className="profilepage__content">
@@ -63,6 +66,7 @@ function ProfilePage() {
                 </div>
             </div>
         </div>
+        </>
     )
 }
 

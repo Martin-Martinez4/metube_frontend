@@ -1,11 +1,15 @@
 
+import { useNavigate } from "react-router-dom";
 import "./TopNav.scss";
 
 function TopNav() {
+
+  const navigate = useNavigate();
+
   return (
     <div className="topnav">
         <div>
-            <img src="/NameAndLogoSmall.svg"></img>
+            <img className="pointer" src="/NameAndLogoSmall.svg" onClick={() => {navigate(`/`)}}></img>
         </div>
         <fieldset className="topnav__searchbar">
             <input type="search" className="topnav__searchbar__input"></input>

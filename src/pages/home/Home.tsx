@@ -4,23 +4,33 @@ import ThumbnailPreview from "../../components/video/thumbnailpreview/ThumbnailP
 import LeftsideNav from "../../components/nav/leftsidenav/LeftsideNav";
 import 'video.js/dist/video-js.css';
 
-import { useQuery, gql } from "@apollo/client";
+import { useQuery } from "@apollo/client";
+import { gql } from "../../__generated__/gql";
 
 import "./Home.scss";
 
-const VIDEOS_QUERY = gql`
-
+const VIDEOS_QUERY = gql(/* GraphQL */`
 query Videos{
   videos(amount: 4){
     id
-     url
+    url
+    contentinformation{
+      title
+    }
+    thumbnail{
+      url
+    }
     statistic{
-      likes
+      views
+    }
+    profile{
+      id
+      username
     }
   
   }
 }
-`
+`);
 
 function Home() {
 
@@ -32,7 +42,6 @@ function Home() {
   return (
 <>
 
-    {console.log(data)}
     <TopNav></TopNav>
     <div className="home">
 
@@ -45,7 +54,7 @@ function Home() {
 
             <div className="home__videoarea__container">
 
-              <ThumbnailPreview width="19vw"></ThumbnailPreview>
+              {/* <ThumbnailPreview width="19vw"></ThumbnailPreview>
               <ThumbnailPreview width="19vw"></ThumbnailPreview>
               <ThumbnailPreview width="19vw"></ThumbnailPreview>
               <ThumbnailPreview width="19vw"></ThumbnailPreview>
@@ -53,7 +62,25 @@ function Home() {
               <ThumbnailPreview width="19vw"></ThumbnailPreview>
               <ThumbnailPreview width="19vw"></ThumbnailPreview>
               <ThumbnailPreview width="19vw"></ThumbnailPreview>
-              <ThumbnailPreview width="19vw"></ThumbnailPreview>
+              <ThumbnailPreview width="19vw"></ThumbnailPreview> */}
+
+              {data?.videos?.map((video) => {
+
+                if(video === null) return
+                const {id, contentinformation, profile, statistic, thumbnail } = video
+              
+              return (
+                <ThumbnailPreview
+                  id={id} 
+                  title={contentinformation ? contentinformation.title : ""} 
+                  channelname={profile ? profile.username : ""} 
+                  views={statistic ? statistic.views : undefined} 
+                  thumbnail={thumbnail ? thumbnail.url : ""} 
+                  profile_id={profile ? profile.id : ""} 
+                  width="19vw"
+                ></ThumbnailPreview>)
+              
+              })}
               
             </div>
 
