@@ -10,8 +10,14 @@
 */
 
 @font-face {
-	font-family: Lora;
-	src: url(./fonts/Lora-Regular.ttf);
+	font-family: FiraSans;
+	font-style: normal;
+	src: url(/fonts/FiraSans-Regular.ttf);
+}
+@font-face {
+	font-family: FiraSans;
+	font-style: light;
+	src: url(/fonts/FiraSans-Light.ttf);
 }
 
 html, body, div, span, applet, object, iframe,
@@ -41,7 +47,7 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 body {
-	line-height: 1.2;
+	line-height: 1.1;
 	overflow: hidden;
 }
 /* ol, ul {
@@ -63,7 +69,7 @@ table {
 	box-sizing: border-box;
 	color: #23202C;
 
-	font-family: Lora, Arial, Helvetica, sans-serif;
+	font-family: FiraSans, Arial, Helvetica, sans-serif;
 }
 
 .btn{
@@ -198,5 +204,9 @@ table {
 
 .breakword{
 	word-break: break-word;
+}
+
+.cover{
+	object-fit: cover;
 }
 

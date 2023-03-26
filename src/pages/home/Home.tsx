@@ -24,7 +24,6 @@ query Videos{
       views
     }
     profile{
-      id
       username
     }
   
@@ -51,18 +50,15 @@ function Home() {
 
         {/* need to implement infinite scrolling */}
         <div className="home__videoarea">
+        <div className="home__categoriesnav">
+          <span className="home__categoriesnav__category marginr4">All</span> 
+          <span className="home__categoriesnav__category marginr4">Computer programming</span> 
+          <span className="home__categoriesnav__category marginr4">Coding</span>
+          <span className="home__categoriesnav__category marginr4">Animation</span>
+
+        </div>
 
             <div className="home__videoarea__container">
-
-              {/* <ThumbnailPreview width="19vw"></ThumbnailPreview>
-              <ThumbnailPreview width="19vw"></ThumbnailPreview>
-              <ThumbnailPreview width="19vw"></ThumbnailPreview>
-              <ThumbnailPreview width="19vw"></ThumbnailPreview>
-
-              <ThumbnailPreview width="19vw"></ThumbnailPreview>
-              <ThumbnailPreview width="19vw"></ThumbnailPreview>
-              <ThumbnailPreview width="19vw"></ThumbnailPreview>
-              <ThumbnailPreview width="19vw"></ThumbnailPreview> */}
 
               {data?.videos?.map((video) => {
 
@@ -71,12 +67,13 @@ function Home() {
               
               return (
                 <ThumbnailPreview
+                  key={id}
                   id={id} 
                   title={contentinformation ? contentinformation.title : ""} 
                   channelname={profile ? profile.username : ""} 
                   views={statistic ? statistic.views : undefined} 
                   thumbnail={thumbnail ? thumbnail.url : ""} 
-                  profile_id={profile ? profile.id : ""} 
+                  profile_id={profile ? profile.username : ""} 
                   width="19vw"
                 ></ThumbnailPreview>)
               

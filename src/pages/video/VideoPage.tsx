@@ -29,7 +29,6 @@ import "./VideoPage.scss";
           views
         }
         profile{
-          id
           username
         }
       
@@ -41,13 +40,12 @@ function VideoPage() {
 
   const {video_id} = useParams();
 
-  console.log(typeof video_id)
-
+  
   
   const { loading, error, data } = useQuery(VIDEO_QUERY, {
     variables: { id: `${video_id}` },
   });
-  
+
   
   if(loading){
     return <p>Loading...</p>
@@ -56,7 +54,6 @@ function VideoPage() {
   return (
     <>
       <TopNav></TopNav>
-
       <div className="videopage__container">
 
 
@@ -99,7 +96,7 @@ function VideoPage() {
 
               <div className="flex AlignItemsCenter">
 
-                <img className="thumbnailpreview__info__userprofile marginr2" src={`http://localhost:8081/profile/` + data?.video?.profile?.id + "/"}></img>
+                <img className="thumbnailpreview__info__userprofile marginr2" src={`http://localhost:8081/profile/` + data?.video?.profile?.username + "/"}></img>
                 <div className="flexColumn">
                   <span style={{ wordBreak: "break-word", maxWidth: "25vw" }}>{data?.video?.profile?.username}</span>
                   <span>184K subscribers </span>
@@ -139,7 +136,7 @@ function VideoPage() {
                   It can reach this (massive? lol) limit if you are quoting other people's lengthy responses and adding your own.
                   WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
                 </p>
-                <p><img src="ResponsesIcon.svg"></img> 200k replies</p>
+                <p><img src="/ResponsesIcon.svg"></img> 200k replies</p>
                 <div className="videopage__responses margint4">
 
                   <div className="videopage__responses__response">
@@ -210,7 +207,7 @@ function VideoPage() {
                   It can reach this (massive? lol) limit if you are quoting other people's lengthy responses and adding your own.
                   WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
                 </p>
-                <p><img src="ResponsesIcon.svg"></img> 200k replies</p>
+                <p><img src="/ResponsesIcon.svg"></img> 200k replies</p>
                 <div className="videopage__responses margint4">
 
                   <div className="videopage__responses__response">

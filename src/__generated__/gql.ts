@@ -13,8 +13,9 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "\nquery Videos{\n  videos(amount: 4){\n    id\n    url\n    contentinformation{\n      title\n    }\n    thumbnail{\n      url\n    }\n    statistic{\n      views\n    }\n    profile{\n      id\n      username\n    }\n  \n  }\n}\n": types.VideosDocument,
-    "\n    query Video($id: ID!){\n      video(id: $id){\n        id\n        url\n        contentinformation{\n          title\n          description\n          published\n        }\n        thumbnail{\n          url\n        }\n        statistic{\n          likes\n          dislikes\n          views\n        }\n        profile{\n          id\n          username\n        }\n      \n      }\n    }\n  ": types.VideoDocument,
+    "\nquery Videos{\n  videos(amount: 4){\n    id\n    url\n    contentinformation{\n      title\n    }\n    thumbnail{\n      url\n    }\n    statistic{\n      views\n    }\n    profile{\n      username\n    }\n  \n  }\n}\n": types.VideosDocument,
+    "\nquery Profile($id: ID!){\n  profile(id: $id){\n    username\n    displayname\n    subscribers\n  \n  }\n}\n": types.ProfileDocument,
+    "\n    query Video($id: ID!){\n      video(id: $id){\n        id\n        url\n        contentinformation{\n          title\n          description\n          published\n        }\n        thumbnail{\n          url\n        }\n        statistic{\n          likes\n          dislikes\n          views\n        }\n        profile{\n          username\n        }\n      \n      }\n    }\n  ": types.VideoDocument,
 };
 
 /**
@@ -34,11 +35,15 @@ export function gql(source: string): unknown;
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\nquery Videos{\n  videos(amount: 4){\n    id\n    url\n    contentinformation{\n      title\n    }\n    thumbnail{\n      url\n    }\n    statistic{\n      views\n    }\n    profile{\n      id\n      username\n    }\n  \n  }\n}\n"): (typeof documents)["\nquery Videos{\n  videos(amount: 4){\n    id\n    url\n    contentinformation{\n      title\n    }\n    thumbnail{\n      url\n    }\n    statistic{\n      views\n    }\n    profile{\n      id\n      username\n    }\n  \n  }\n}\n"];
+export function gql(source: "\nquery Videos{\n  videos(amount: 4){\n    id\n    url\n    contentinformation{\n      title\n    }\n    thumbnail{\n      url\n    }\n    statistic{\n      views\n    }\n    profile{\n      username\n    }\n  \n  }\n}\n"): (typeof documents)["\nquery Videos{\n  videos(amount: 4){\n    id\n    url\n    contentinformation{\n      title\n    }\n    thumbnail{\n      url\n    }\n    statistic{\n      views\n    }\n    profile{\n      username\n    }\n  \n  }\n}\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n    query Video($id: ID!){\n      video(id: $id){\n        id\n        url\n        contentinformation{\n          title\n          description\n          published\n        }\n        thumbnail{\n          url\n        }\n        statistic{\n          likes\n          dislikes\n          views\n        }\n        profile{\n          id\n          username\n        }\n      \n      }\n    }\n  "): (typeof documents)["\n    query Video($id: ID!){\n      video(id: $id){\n        id\n        url\n        contentinformation{\n          title\n          description\n          published\n        }\n        thumbnail{\n          url\n        }\n        statistic{\n          likes\n          dislikes\n          views\n        }\n        profile{\n          id\n          username\n        }\n      \n      }\n    }\n  "];
+export function gql(source: "\nquery Profile($id: ID!){\n  profile(id: $id){\n    username\n    displayname\n    subscribers\n  \n  }\n}\n"): (typeof documents)["\nquery Profile($id: ID!){\n  profile(id: $id){\n    username\n    displayname\n    subscribers\n  \n  }\n}\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n    query Video($id: ID!){\n      video(id: $id){\n        id\n        url\n        contentinformation{\n          title\n          description\n          published\n        }\n        thumbnail{\n          url\n        }\n        statistic{\n          likes\n          dislikes\n          views\n        }\n        profile{\n          username\n        }\n      \n      }\n    }\n  "): (typeof documents)["\n    query Video($id: ID!){\n      video(id: $id){\n        id\n        url\n        contentinformation{\n          title\n          description\n          published\n        }\n        thumbnail{\n          url\n        }\n        statistic{\n          likes\n          dislikes\n          views\n        }\n        profile{\n          username\n        }\n      \n      }\n    }\n  "];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};

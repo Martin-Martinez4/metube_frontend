@@ -6,22 +6,22 @@ function LeftsideNav() {
 
     const entries = [
         {
-            icon: "./ProfileImageSmall.svg",
+            icon: "/ProfileImageSmall.svg",
             title: "test entry"
 
         },
         {
-            icon: "./ProfileImageSmall.svg",
+            icon: "/ProfileImageSmall.svg",
             title: "test entry"
 
         },
         {
-            icon: "./ProfileImageSmall.svg",
+            icon: "/ProfileImageSmall.svg",
             title: "Thin Binding of Babishsssssssssssssssssssssssssss sssssssssss"
 
         },
         {
-            icon: "./ProfileImageSmall.svg",
+            icon: "/ProfileImageSmall.svg",
             title: "Thin Binding of Babishsssssssssssssssssssssssssss sssssssssss"
 
         },

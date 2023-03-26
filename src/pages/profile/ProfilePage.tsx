@@ -1,33 +1,55 @@
 
-import LeftsideNav from "../../components/nav/leftsidenav/LeftsideNav"
-import TopNav from "../../components/nav/topnav/TopNav"
-import PlaylistHorizontal from "../../components/playlist/PlaylistHorizontal"
-import "./ProfilePage.scss"
+import { useQuery } from "@apollo/client";
+import { useParams } from "react-router-dom";
+import LeftsideNav from "../../components/nav/leftsidenav/LeftsideNav";
+import TopNav from "../../components/nav/topnav/TopNav";
+import PlaylistHorizontal from "../../components/playlist/PlaylistHorizontal";
+import { gql } from "../../__generated__/gql";
+import "./ProfilePage.scss";
+
+const PROFILE_QUERY = gql(/* GraphQL */`
+query Profile($id: ID!){
+  profile(id: $id){
+    username
+    displayname
+    subscribers
+  
+  }
+}
+`);
 
 function ProfilePage() {
+
+    const {profile_id} = useParams()
+
+    const {data, loading, error} = useQuery(PROFILE_QUERY, {
+        variables: {id: `${profile_id}`}
+    })
+
     return (
         <>
         <TopNav></TopNav>
         <div className="flex">
             <LeftsideNav></LeftsideNav>
             <div className="profilepage__content">
-                <div className="profilepage__headerimage">
+                <div className="profilepage__headerimage margint1">
                     {/* a big image goes here */}
-                    <div></div>
+                    {/* <div></div> */}
+                    <img className="profilepage__headerimage cover" src="/channels4_banner.jpg" alt="" />
                 </div>
 
                 <div className="marginl6 margint4">
                     <div className="profilepage__profileinformation marginb4">
-                        {/* profile and sub button goes here */}
+
                         <div className="flex AlignItemsCenter justifyContentSpaceBetween marginb3">
 
                             <div className="flex AlignItemsCenter">
 
-                                <img className="profilepage__userprofile marginr2"></img>
+                                <img className="profilepage__userprofile marginr2" src={`http://localhost:8081/profile/${profile_id}/`}></img>
                                 <div className="flexColumn">
-                                    {/* <span>Channel Name Channel Name Channel Name Channel Name Channell</span> */}
-                                    <span className="profilepage__channelname">Channel Name</span>
-                                    <span>184K subscribers </span>
+                                 
+                                    <span className="profilepage__channelname">{data?.profile?.username}</span>
+                                    <span className="profilepage__subcount">{data?.profile?.subscribers} subscribers </span>
                                 </div>
                             </div>
 
@@ -45,7 +67,6 @@ function ProfilePage() {
                         {/* changes what is displayed in this area */}
                         <div className="profilepage__nav">
                             {/* Lazy load sections */}
-                            <span className="marginr2 marginb2 pointer">Home</span>
                             <span className="marginr2 marginb2 pointer">Videos</span>
                             <span className="marginr2 marginb2 pointer">Playlists</span>
                             <span className="marginr2 marginb2 pointer">Channels</span>
@@ -59,6 +80,8 @@ function ProfilePage() {
                         <PlaylistHorizontal></PlaylistHorizontal>
                         <PlaylistHorizontal></PlaylistHorizontal>
                         <PlaylistHorizontal></PlaylistHorizontal>
+
+                        {/* <div className="whitespace"></div> */}
                         
 
                     </div>
