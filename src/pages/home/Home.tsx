@@ -9,7 +9,7 @@ import { gql } from "../../__generated__/gql";
 
 import "./Home.scss";
 
-const VIDEOS_QUERY = gql(/* GraphQL */`
+export const VIDEOS_QUERY = gql(/* GraphQL */`
 query Videos{
   videos(amount: 4){
     id
@@ -35,7 +35,7 @@ function Home() {
 
   const {data, loading, error} = useQuery(VIDEOS_QUERY);
 
-  if (loading) return <p>Loading</p>
+  if (loading) return <p>Loading...</p>
   if (error) return <p>{`${error}`}</p>
 
   return (

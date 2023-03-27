@@ -2,6 +2,7 @@
 import { useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
 import { formatdate } from "../../app/utilis/dateFormaters";
+import dayjs from 'dayjs';
 import TopNav from "../../components/nav/topnav/TopNav"
 import ThumbnailPreviewSmall from "../../components/video/thumbnailpreview/ThumbnailPreviewSmall";
 import VideoDescription from "../../components/video/videodescription/VideoDescription";
