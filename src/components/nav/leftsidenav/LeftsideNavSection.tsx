@@ -10,12 +10,13 @@ type LeftsideNavEntry = {
 type LeftsideNavSection = {
     header?: string;
     entries: LeftsideNavEntry[]
+    iconClasses?: string
 
 };
 
 
 
-function LeftsideNavSection({header, entries}: LeftsideNavSection) {
+function LeftsideNavSection({header, entries, iconClasses}: LeftsideNavSection) {
   return (
     <div className="LeftsideNavSection">
         {
@@ -31,15 +32,15 @@ function LeftsideNavSection({header, entries}: LeftsideNavSection) {
                 entries.map(entry => {
                     return(
                         <div className="LeftsideNavSection__entry">
-                            <img className="LeftsideNavSection__entries--icon" src={`${entry.icon}`} />
-                            <span className="LeftsideNavSection__entries--title" >{entry.title}</span>
+                            <img className={`LeftsideNavSection__entries--icon pointer ${iconClasses? iconClasses : ""}`} src={`${entry.icon}`} />
+                            <span className="LeftsideNavSection__entries--title pointer" >{entry.title}</span>
                         </div>
                     )
                 })
             }
         </div>
 
-        <hr />
+        <hr className="LeftsideNavSection__linebreak margint4"/>
 
     </div>
   )

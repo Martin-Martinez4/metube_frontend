@@ -66,6 +66,7 @@ function Home() {
                 const {id, contentinformation, profile, statistic, thumbnail } = video
               
               return (
+                <>
                 <ThumbnailPreview
                   key={id}
                   id={id} 
@@ -75,7 +76,28 @@ function Home() {
                   thumbnail={thumbnail ? thumbnail.url : ""} 
                   profile_id={profile ? profile.username : ""} 
                   width="19vw"
-                ></ThumbnailPreview>)
+                ></ThumbnailPreview>
+                <ThumbnailPreview
+                  key={id}
+                  id={id} 
+                  title={contentinformation ? contentinformation.title : ""} 
+                  channelname={profile ? profile.username : ""} 
+                  views={statistic ? statistic.views : undefined} 
+                  thumbnail={thumbnail ? thumbnail.url : ""} 
+                  profile_id={profile ? profile.username : ""} 
+                  width="19vw"
+                ></ThumbnailPreview>
+                <ThumbnailPreview
+                  key={id}
+                  id={id} 
+                  title={contentinformation ? contentinformation.title : ""} 
+                  channelname={profile ? profile.username : ""} 
+                  views={statistic ? statistic.views : undefined} 
+                  thumbnail={thumbnail ? thumbnail.url : ""} 
+                  profile_id={profile ? profile.username : ""} 
+                  width="19vw"
+                ></ThumbnailPreview>
+                </>)
               
               })}
               

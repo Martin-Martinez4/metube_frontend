@@ -16,7 +16,7 @@ function ThumbnailPreview({ id, width, title, channelname, views, thumbnail, pro
 
             <div onClick={() => {navigate(`/profile/${profile_id}`)}} className="thumbnailpreview__info">
 
-              <img className="thumbnailpreview__info__userprofile" src={`http://localhost:8081/profile/` + profile_id + "/"}></img>
+              <img className="thumbnailpreview__info__userprofile" src={`http://localhost:8081/profile/` + channelname + "/"}></img>
 
               <div className="thumbnailpreview__info__textarea">
                   <p className="thumbnailpreview__videotitle">{title}</p>

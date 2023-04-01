@@ -19,7 +19,7 @@ export const routes: RouteObject[] = [
                 element: <VideoPage />,
             },
             {
-                path: "profile/:profile_id", 
+                path: "profile/:username", 
                 element: <ProfilePage />,
             },
           

@@ -8,8 +8,8 @@ import { gql } from "../../__generated__/gql";
 import "./ProfilePage.scss";
 
 const PROFILE_QUERY = gql(/* GraphQL */`
-query Profile($id: ID!){
-  profile(id: $id){
+query Profile($username: String!){
+  profile(username: $username){
     username
     displayname
     subscribers
@@ -20,10 +20,10 @@ query Profile($id: ID!){
 
 function ProfilePage() {
 
-    const {profile_id} = useParams()
+    const {username} = useParams()
 
     const {data, loading, error} = useQuery(PROFILE_QUERY, {
-        variables: {id: `${profile_id}`}
+        variables: {username: `${username}`}
     })
 
     return (
@@ -35,7 +35,8 @@ function ProfilePage() {
                 <div className="profilepage__headerimage margint1">
                     {/* a big image goes here */}
                     {/* <div></div> */}
-                    <img className="profilepage__headerimage cover" src="/channels4_banner.jpg" alt="" />
+                    {/* <img className="profilepage__headerimage cover" src="/channels4_banner.jpg" alt="" /> */}
+                    <img className="profilepage__headerimage cover" src={`http://localhost:8081/banner/${username}/`} alt="" />
                 </div>
 
                 <div className="marginl6 margint4">
@@ -45,7 +46,7 @@ function ProfilePage() {
 
                             <div className="flex AlignItemsCenter">
 
-                                <img className="profilepage__userprofile marginr2" src={`http://localhost:8081/profile/${profile_id}/`}></img>
+                                <img className="profilepage__userprofile marginr2" src={`http://localhost:8081/profile/${username}/`}></img>
                                 <div className="flexColumn">
                                  
                                     <span className="profilepage__channelname">{data?.profile?.username}</span>
