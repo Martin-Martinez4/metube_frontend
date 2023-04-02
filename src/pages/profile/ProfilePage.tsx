@@ -33,9 +33,6 @@ function ProfilePage() {
             <LeftsideNav></LeftsideNav>
             <div className="profilepage__content">
                 <div className="profilepage__headerimage margint1">
-                    {/* a big image goes here */}
-                    {/* <div></div> */}
-                    {/* <img className="profilepage__headerimage cover" src="/channels4_banner.jpg" alt="" /> */}
                     <img className="profilepage__headerimage cover" src={`http://localhost:8081/banner/${username}/`} alt="" />
                 </div>
 

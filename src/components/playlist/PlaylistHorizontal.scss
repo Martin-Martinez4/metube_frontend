@@ -6,15 +6,40 @@
 
     &__container{
 
+        width: 99%;
         overflow: hidden;
+        position: relative;
     }
 
     &--horizontal{
             
         height: auto;
         display: flex;
-        width: 100%;
+        width: fit-content;
         
+    }
+
+    &__seeMore{
+        text-align: center;
+        justify-content: center;
+        width: 3rem;
+        height: 3rem;
+        border: grey;
+        background-color: white;
+        position: absolute;
+        bottom: 50%;
+        right: 0vw;
+    }
+    &__seeLess{
+        text-align: center;
+        justify-content: center;
+        width: 3rem;
+        height: 3rem;
+        border: grey;
+        background-color: white;
+        position: absolute;
+        bottom: 50%;
+        left: 0vw;
     }
 
     &__horizontalline{
