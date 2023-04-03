@@ -1,0 +1,117 @@
+.login {
+
+    position: relative;
+    height: 100vh;
+
+    
+
+    &__container {
+
+        padding: 2rem 0 2rem 0;
+        box-sizing: border-box;
+
+        border-radius: 10px;
+        box-sizing: border-box;
+
+        width: 30vw;
+        height: fit-content;
+        min-height: 60vh;
+
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -moz-transform: translateX(-50%) translateY(-50%);
+        -webkit-transform: translateX(-50%) translateY(-50%);
+        transform: translateX(-50%) translateY(-50%);
+
+        border: 1px solid var(--grey);
+
+
+    }
+
+    &__logo {
+
+        height: 5rem;
+
+    }
+
+    &__formheader {
+
+        font-size: 2rem;
+
+
+    }
+
+    &__form {
+
+        width: 80%;
+
+
+        &__textInput {
+
+            height: 3.5rem;
+            width: 100%;
+
+            border-radius: 5px;
+            box-sizing: border-box;
+
+            font-size: 1rem;
+
+            padding: 1rem;
+
+            &:focus {
+                &::placeholder {
+                    transition: opacity .2s;
+                    opacity: 0;
+
+                }
+
+                &+.login__form__textInput--label {
+
+                    display: inline-block;
+                    opacity: 1;
+                    animation: fadeInUp .2s linear;
+                }
+
+            }
+
+            &--label {
+
+                background: var(--white);
+                position: absolute;
+                top: -7px;
+                left: 15px;
+                border-radius: 5px;
+
+                display: none;
+
+            }
+
+            &--group {
+
+                position: relative;
+                width: 70%;
+
+            }
+
+        }
+
+        &--text{
+            width: 70%;
+            font-size: 1rem;
+        }
+
+        &--buttonGroup{
+
+            width: 70%;
+        }
+
+        &--createAccount{
+            border: none;
+            transition: background-color 600ms linear;
+            transition: color 400ms linear;
+        }
+
+    }
+
+}

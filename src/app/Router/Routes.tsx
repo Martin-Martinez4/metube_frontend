@@ -6,6 +6,7 @@ import App from "../../App";
 import Home from "../../pages/home/Home";
 import ProfilePage from "../../pages/profile/ProfilePage";
 import VideoPage from "../../pages/video/VideoPage";
+import Login from "../../pages/auth/Login";
 
 export const routes: RouteObject[] = [
 
@@ -21,6 +22,10 @@ export const routes: RouteObject[] = [
             {
                 path: "profile/:username", 
                 element: <ProfilePage />,
+            },
+            {
+                path: "login", 
+                element: <Login />,
             },
           
             {

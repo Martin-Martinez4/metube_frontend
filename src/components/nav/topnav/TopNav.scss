@@ -25,9 +25,9 @@
 
         border-radius: 20px;
 
-        border: 1px solid #808B8E;
+        border: 1px solid var(--grey);
 
-        background-color: #FEFEFF;
+        background-color: var(--white);
 
         &:focus-within{
 
@@ -42,7 +42,7 @@
             height: 2rem;
             width: 40vw;
 
-            background-color: #FEFEFF;
+            background-color: var(--white);
     
             border-radius:  20px  0  0 20px;
 
