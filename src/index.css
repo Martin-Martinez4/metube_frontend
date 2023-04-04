@@ -1,46 +1,97 @@
+#root {
+  --white: #FEFEFF;
+  --grey: #808B8E;
+  --gray: #808B8E;
+  --black: #23202C;
 
-#root{
-	--white: #FEFEFF;
-    --grey: #808B8E;
-    --gray: #808B8E;
-    --black: #23202C;
+  --red: #F51548;
+  --darkred: #f3073e;
+  --blue: #3E6B7D;
+  --darkblue: #243F4A;
+  --lightblue: #67AECA;
 
-    --red: #F51548;
-    --blue: #3E6B7D;
-    --darkblue: #243F4A;
-    --lightblue: #67AECA;
 }
 
 .elementToFadeInAndOut {
-    opacity: 1;
-    animation: fadeIn 1s linear;
+  opacity: 1;
+  animation: fadeIn 1s linear;
 }
 
 
 @keyframes fadeIn {
-  0%{ opacity: 0 }
-  75% { opacity: .5 }
-  100% { opacity: 1 }
-}
-@keyframes fadeOut {
-  0%{ opacity: 1 }
-  75% { opacity: .5 }
-  100% { opacity: 0 }
+  0% {
+    opacity: 0
+  }
+
+  75% {
+    opacity: .5
+  }
+
+  100% {
+    opacity: 1
+  }
 }
 
-@keyframes moveUp{
-    from {top: 0px;} 
+@keyframes fadeOut {
+  0% {
+    opacity: 1
+  }
+
+  75% {
+    opacity: .5
+  }
+
+  100% {
+    opacity: 0
+  }
+}
+
+@keyframes moveUp {
+  from {
+    top: 0px;
+  }
 }
 
 @keyframes fadeInUp {
-  0%{ opacity: 0; top: 0 }
-  75% { opacity: .5 }
-  100% { opacity: 1 }
+  0% {
+    opacity: 0;
+    top: 0
+  }
+
+  75% {
+    opacity: .5
+  }
+
+  100% {
+    opacity: 1
+  }
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0
+  }
+
+  75% {
+    opacity: .5
+  }
+
+  100% {
+    opacity: 1;
+    top: -7px
+  }
 }
 
 @keyframes shrink {
-  0%{ scale: 1; }
-  75% { scale: .75; }
-  100% { scale: 0; }
-}
+  0% {
+    scale: 1;
+  }
 
+  75% {
+    scale: .75;
+  }
+
+  100% {
+    scale: 0;
+  }
+}

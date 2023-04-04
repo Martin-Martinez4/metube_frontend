@@ -14,7 +14,7 @@ describe('sanity check', () => {
   });
 });
   
-describe('formatdate testt', () => {
+describe('formatdate test', () => {
   it("It should return 0 mins", () => {
 
     const currentTime = formatdate(new Date().toString())

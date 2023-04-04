@@ -1,6 +1,8 @@
-import { useState } from "react"
-import { handleFormInputChange } from "../../app/utilis/eventhandlers";
-import TopNav from "../../components/nav/topnav/TopNav"
+
+import { useState, FocusEvent } from "react";
+import TextInput from "../../app/form/TextInput";
+import TopNav from "../../components/nav/topnav/TopNav";
+import { Validator } from "../../app/utilis/validateInput";
 
 import "./login.scss";
 
@@ -11,7 +13,20 @@ function login() {
     const [formState, setFormState] = useState({
         signinUsername: "",
         signinPassword: "",
+
+        registerUsername: "",
+        registerDisplayname: "",
+        registerPassword: "",
+        registerConfirmPassword: "",
     })
+
+    const signin = () => {
+
+        return
+
+    }
+
+    const inputValidator = new Validator("");
 
     return (
         <>
@@ -26,14 +41,23 @@ function login() {
                             <img className="login__logo marginb5" src="./NameAndLogoSmallAlt.svg" ></img>
                             <span className="login__formheader marginb4">Signin</span>
                             <form className="login__form flexColumn AlignItemsCenter" onSubmit={() => { }}>
-                                <label className="login__form__textInput--group">
-                                    <input className="login__form__textInput marginb5" type="text" placeholder="username" name="signinUsername" value={formState.signinUsername} onChange={(e) => handleFormInputChange(e, formState, setFormState)}></input>
-                                    <p className="login__form__textInput--label">username</p>
-                                </label>
-                                <label className="login__form__textInput--group">
-                                    <input className="login__form__textInput marginb5" type="password" placeholder="password"  name="signinPassword" value={formState.signinPassword} onChange={(e) => handleFormInputChange(e, formState, setFormState)}></input>
-                                    <p className="login__form__textInput--label">password</p>
-                                </label>
+
+                                <TextInput 
+                                    stateObject={formState} 
+                                    setStateObject={setFormState} 
+                                    inputName="signinUsername" 
+                                    label="username"
+                                    validationFunction={(e: FocusEvent<HTMLInputElement>) => {
+
+                                        inputValidator.setValue = formState.signinUsername;
+                                        const errors = inputValidator.typeCheck("string").maxLength(2).allowAlphaNumericOnly().required().getErrors;
+                                        inputValidator.clearErrors();
+
+                                        return errors;
+
+                                    }}
+                                />
+                                <TextInput stateObject={formState} setStateObject={setFormState} inputName="signinPassword" label="password" type="password"></TextInput>
 
                                 <p className="login__form--text marginb5">Not your computer? Use Guest mode to sign in privately.</p>
                                 <div className="login__form--buttonGroup flex justifyContentSpaceBetween">
@@ -56,23 +80,13 @@ function login() {
                                 <span className="login__formheader marginb4">Register</span>
                                 <form className="login__form flexColumn AlignItemsCenter" onSubmit={() => { }}>
 
-                                    <label className="login__form__textInput--group">
-                                        <input className="login__form__textInput marginb5" type="text" placeholder="username" name="registerUsername" value={formMode}></input>
-                                        <p className="login__form__textInput--label">username</p>
-                                    </label>
-                                    <label className="login__form__textInput--group">
-                                        <input className="login__form__textInput marginb5" type="text" placeholder="display name" name="registerDisplayname"></input>
-                                        <p className="login__form__textInput--label">display name</p>
-                                    </label>
+                                    <TextInput stateObject={formState} setStateObject={setFormState} inputName="registerUsername" label="username"></TextInput>
 
-                                    <label className="login__form__textInput--group">
-                                        <input className="login__form__textInput marginb5" type="password" placeholder="password" name="registerPassword"></input>
-                                        <p className="login__form__textInput--label">password</p>
-                                    </label>
-                                    <label className="login__form__textInput--group">
-                                        <input className="login__form__textInput marginb5" type="password" placeholder="confirm password" name="registerPassword2"></input>
-                                        <p className="login__form__textInput--label">confirm password</p>
-                                    </label>
+                                    <TextInput stateObject={formState} setStateObject={setFormState} inputName="registerDisplayname" label="display name"></TextInput>
+
+                                    <TextInput stateObject={formState} setStateObject={setFormState} inputName="registerPassword" label="password" type="password"></TextInput>
+                                    <TextInput stateObject={formState} setStateObject={setFormState} inputName="registerConfirmPassword" label="confirm password" type="password"></TextInput>
+
 
                                     <p className="login__form--text marginb5">Not your computer? Use Guest mode to sign in privately.</p>
                                     <div className="login__form--buttonGroup flex justifyContentSpaceBetween">

@@ -103,6 +103,12 @@ table {
 	justify-content: space-between;
 }
 
+.padding1{
+
+	padding: .25rem;
+
+}
+
 .marginl1{
 	margin-left: .25rem;
 }
@@ -167,6 +173,9 @@ table {
 .bgred{
 	background-color: var(--red);
 }
+.bgdarkred{
+	background-color: var(--darkred);
+}
 
 .bggrey{
 	background-color: var(--grey);
@@ -178,6 +187,9 @@ table {
 
 .colorwhite{
 	color: var(--white);
+}
+.colorred{
+	color: var(--red);
 }
 .colordarkblue{
 	color: var(--darkblue);

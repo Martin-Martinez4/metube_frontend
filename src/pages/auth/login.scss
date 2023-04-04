@@ -3,7 +3,7 @@
     position: relative;
     height: 100vh;
 
-    
+
 
     &__container {
 
@@ -49,7 +49,7 @@
 
         &__textInput {
 
-            height: 3.5rem;
+            height: 3rem;
             width: 100%;
 
             border-radius: 5px;
@@ -60,6 +60,11 @@
             padding: 1rem;
 
             &:focus {
+
+                outline: solid;
+                outline-width: 1px;
+                outline-color: var(--lightblue);
+
                 &::placeholder {
                     transition: opacity .2s;
                     opacity: 0;
@@ -67,15 +72,23 @@
                 }
 
                 &+.login__form__textInput--label {
+                    box-sizing: border-box;
 
                     display: inline-block;
                     opacity: 1;
-                    animation: fadeInUp .2s linear;
+                    font-size: .95rem;
+                    transform: translate3d(0, 0rem, 0);
+
+                    color: var(--blue);
+
+                    transition: all 0.2s ease-in-out;
                 }
 
             }
 
             &--label {
+
+                box-sizing: border-box;
 
                 background: var(--white);
                 position: absolute;
@@ -83,7 +96,33 @@
                 left: 15px;
                 border-radius: 5px;
 
-                display: none;
+                font-size: 1rem;
+
+                color: var(--grey);
+
+                transform: translate3d(0, 1.5rem, 0);
+                transition: all 0.2s linear;
+
+            }
+
+            &--labelActive {
+
+                box-sizing: border-box;
+
+
+                background: var(--white);
+                position: absolute;
+                top: -7px;
+                left: 15px;
+                border-radius: 5px;
+
+                font-size: .95rem;
+
+                color: var(--blue);
+
+
+                display: inline-block;
+                opacity: 1;
 
             }
 
@@ -96,17 +135,17 @@
 
         }
 
-        &--text{
+        &--text {
             width: 70%;
             font-size: 1rem;
         }
 
-        &--buttonGroup{
+        &--buttonGroup {
 
             width: 70%;
         }
 
-        &--createAccount{
+        &--createAccount {
             border: none;
             transition: background-color 600ms linear;
             transition: color 400ms linear;

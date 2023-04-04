@@ -65,8 +65,8 @@ describe("Tests Home page", () => {
             </MockedProvider>
         );
         expect(await screen.findByText("Loading...")).toBeInTheDocument();
-        expect(await screen.findByText("test username")).toBeInTheDocument();
-        expect(await screen.findByText("video title")).toBeInTheDocument();
+        expect(await screen.findByText("coding_channel")).toBeInTheDocument();
+        expect(await screen.getAllByText("video title")[0]).toBeInTheDocument();
         fireEvent.click(screen.getAllByText("video title")[0])
         expect(mockedUsedNavigate).toHaveBeenCalledWith('/profile/test username');
     });
@@ -81,7 +81,8 @@ describe("Tests Home page", () => {
 
             </MockedProvider>
         );
-        expect(await screen.findByText("test username")).toBeInTheDocument();
+        expect(await screen.findByText("coding_channel")).toBeInTheDocument();
+        expect(await screen.getAllByText("video title")[0]).toBeInTheDocument();
         expect(await document.getElementsByClassName("thumbnailpreview__thumbnail")[0]).toBeInTheDocument();
         fireEvent.click(document.getElementsByClassName("thumbnailpreview__thumbnail")[0])
         expect(mockedUsedNavigate).toHaveBeenCalledWith('/video/1');
