@@ -1,5 +1,5 @@
 
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useReactiveVar } from "@apollo/client";
 import "./TopNav.scss";
 import { loggedInUserVar } from "../../../app/apolloCache/InMemoryCache";
@@ -8,7 +8,9 @@ function TopNav() {
 
   const navigate = useNavigate();
 
-  const loggedInUser = useReactiveVar(loggedInUserVar)
+  const loggedInUser = useReactiveVar(loggedInUserVar);
+
+  const { state } = useLocation();
 
   return (
     <div className="topnav">
@@ -17,13 +19,29 @@ function TopNav() {
         </div>
         <fieldset className="topnav__searchbar">
             <input type="search" className="topnav__searchbar__input"
-            // placeholder={`${loggedInUser.isLoggedIn}`}></input>
-            placeholder="Search..."></input>
+            placeholder={`${loggedInUser.Username}`}></input>
+            {/* placeholder="Search..."></input> */}
             <button type="submit"className="topnav__searchbar__button"><img style={{ width: "40%" }} src="/MagnifyingGlass2.svg"></img></button>
         </fieldset>
 
         <div>
-            <div className="hamburger">
+            <div className="hamburger pointer" onClick={() => {
+
+              if(location.pathname === "/login" && state?.continue !== undefined){
+
+                navigate('/login', { replace: true, state: {continue: state?.continue} })
+                
+              }
+              else if(location.pathname === "/login"){
+
+                navigate('/login', { replace: true, state: {continue: "/"} })
+
+              }
+              else{
+
+                navigate('/login', { replace: true, state: {continue: location.pathname} })
+              }
+            }}>
               <p className="line line1"></p>
               <p className="line line2"></p>
               <p className="line line3"></p>

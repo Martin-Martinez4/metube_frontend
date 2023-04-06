@@ -14,14 +14,6 @@ const TextInput = <T extends  {[index: string]: string}>({stateObject, setStateO
 
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-
-      setValidationErrors([]);
-
-    }, 2000);
-    return () => clearTimeout(timer);
-  }, [validationErrors]);
 
   return (
     <>

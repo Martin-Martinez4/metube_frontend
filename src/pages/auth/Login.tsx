@@ -1,12 +1,39 @@
 
 import { useState, FocusEvent } from "react";
 import TextInput from "../../app/form/TextInput";
+import { loggedInUserVar } from "../../app/apolloCache/InMemoryCache";
 import TopNav from "../../components/nav/topnav/TopNav";
 import { Validator } from "../../app/utilis/validateInput";
+import { gql } from "../../__generated__/gql";
+
 
 import "./login.scss";
+import { useMutation } from "@apollo/client";
+import { useLocation, useNavigate } from "react-router-dom";
+
+export const LOGIN_QUERY = gql(/* GraphQL */`
+mutation Login($username: String!, $password: String!){
+  login(login:{username:$username, password: $password}){
+   username
+    displayname
+    subscribers
+    isChannel
+  }
+}
+`);
 
 function login() {
+
+    //     Good practice is to include the next URL in the current URL, so you can send them to the URL they originally tried to access. This is good for deeplinkinf, bookmarks, sharing etc.
+
+    // login?continue=/clients/17736/invoices/77
+
+    // After the login succeeds, check the URL for a continue query, and navigate there.
+
+    const [login, user] = useMutation(LOGIN_QUERY);
+    const navigate = useNavigate();
+    const { state } = useLocation();
+
 
     const [formMode, setFormMode] = useState("login")
 
@@ -18,13 +45,127 @@ function login() {
         registerDisplayname: "",
         registerPassword: "",
         registerConfirmPassword: "",
+
     })
 
-    const signin = () => {
+    const [formSigninErrors, setFormSigninErrors] = useState<string[]>([]);
+    const [formRegisterErrors, setFormRegisterErrors] = useState<string[]>([]);
+
+
+
+    const handleSignin = () => {
+
+        // Vlaidation
+        inputValidator.clearErrors();
+        inputValidator.setValue = formState.signinUsername;
+        const usernameErrors = inputValidator.typeCheck("string").maxLength(20).allowAlphaNumericOnly().required().getErrors;
+
+        inputValidator.clearErrors();
+        inputValidator.setValue = formState.signinPassword;
+        const passwordErrors = inputValidator.typeCheck("string").maxLength(20).required().getErrors;
+
+
+        setFormSigninErrors([])
+
+        if (passwordErrors.length > 0 || usernameErrors.length > 0) {
+
+            let errors = []
+            for (let i = 0; i < passwordErrors.length; i++) {
+
+                errors.push("Password: " + passwordErrors[i])
+            }
+            for (let i = 0; i < usernameErrors.length; i++) {
+
+                errors.push("Username: " + usernameErrors[i])
+            }
+
+            setFormSigninErrors([...errors])
+
+            return
+
+        }
+
+        // Do sign in stuff
+
+        login({
+            variables: {
+                username: formState.signinUsername,
+                password: formState.signinPassword,
+            }
+        })
+            .then(res => {
+
+                const user = res.data?.login
+                loggedInUserVar({
+                    isLoggedIn: true,
+                    Username: user?.username as string,
+                    Displayname: user?.displayname as string,
+                    IsChannel: user?.isChannel as boolean,
+
+
+                })
+            })
+
+        navigate(`${state?.continue || "/"}`)
 
         return
 
     }
+
+    const handleRegister = () => {
+
+        // Vlaidation
+        inputValidator.clearErrors();
+        inputValidator.setValue = formState.registerUsername;
+        const usernameErrors = inputValidator.typeCheck("string").maxLength(20).allowAlphaNumericOnly().required().getErrors;
+
+        inputValidator.clearErrors();
+        inputValidator.setValue = formState.registerDisplayname;
+        const displaynameErrors = inputValidator.typeCheck("string").maxLength(20).allowAlphaNumericOnly().required().getErrors;
+
+        inputValidator.clearErrors();
+        inputValidator.setValue = formState.registerPassword;
+        const passwordErrors = inputValidator.typeCheck("string").maxLength(20).required().getErrors;
+
+        if (formState.registerPassword !== formState.registerConfirmPassword) {
+
+            passwordErrors.push("Passwords must match.")
+
+        }
+
+        setFormRegisterErrors([])
+
+        if (passwordErrors.length > 0 || usernameErrors.length > 0) {
+
+            let errors = []
+            for (let i = 0; i < usernameErrors.length; i++) {
+
+                errors.push("Username: " + usernameErrors[i])
+            }
+            for (let i = 0; i < displaynameErrors.length; i++) {
+
+                errors.push("Displayname: " + displaynameErrors[i])
+            }
+            for (let i = 0; i < passwordErrors.length; i++) {
+
+                errors.push("Password: " + passwordErrors[i])
+            }
+
+
+            setFormRegisterErrors([...errors])
+
+            return
+
+        }
+
+        // Do registration stuff
+
+        return
+
+
+    }
+
+    // useEffect(() => {}, [formSigninErrors])
 
     const inputValidator = new Validator("");
 
@@ -37,27 +178,54 @@ function login() {
                     formMode === "login"
                         ?
                         <div className="login__container flexColumn AlignItemsCenter">
+                            {
+
+                                formSigninErrors.length > 0
+                                    ?
+                                    formSigninErrors.map((formSigninError) => {
+
+                                        return (<p className="marginb3 bgred colorwhite padding1" style={{ float: "left", width: "70%", }}>{formSigninError}</p>)
+
+                                    })
+                                    :
+                                    ""
+                            }
 
                             <img className="login__logo marginb5" src="./NameAndLogoSmallAlt.svg" ></img>
                             <span className="login__formheader marginb4">Signin</span>
                             <form className="login__form flexColumn AlignItemsCenter" onSubmit={() => { }}>
 
-                                <TextInput 
-                                    stateObject={formState} 
-                                    setStateObject={setFormState} 
-                                    inputName="signinUsername" 
+                                <TextInput
+                                    stateObject={formState}
+                                    setStateObject={setFormState}
+                                    inputName="signinUsername"
                                     label="username"
                                     validationFunction={(e: FocusEvent<HTMLInputElement>) => {
 
-                                        inputValidator.setValue = formState.signinUsername;
-                                        const errors = inputValidator.typeCheck("string").maxLength(2).allowAlphaNumericOnly().required().getErrors;
                                         inputValidator.clearErrors();
+                                        inputValidator.setValue = formState.signinUsername;
+                                        const errors = inputValidator.typeCheck("string").maxLength(20).allowAlphaNumericOnly().required().getErrors;
 
                                         return errors;
 
                                     }}
                                 />
-                                <TextInput stateObject={formState} setStateObject={setFormState} inputName="signinPassword" label="password" type="password"></TextInput>
+                                <TextInput
+                                    stateObject={formState}
+                                    setStateObject={setFormState}
+                                    inputName="signinPassword"
+                                    label="password"
+                                    type="password"
+                                    validationFunction={(e: FocusEvent<HTMLInputElement>) => {
+
+                                        inputValidator.clearErrors();
+                                        inputValidator.setValue = formState.signinPassword;
+                                        const errors = inputValidator.typeCheck("string").maxLength(20).required().getErrors;
+
+                                        return errors;
+
+                                    }}
+                                ></TextInput>
 
                                 <p className="login__form--text marginb5">Not your computer? Use Guest mode to sign in privately.</p>
                                 <div className="login__form--buttonGroup flex justifyContentSpaceBetween">
@@ -66,7 +234,7 @@ function login() {
                                         className=" login__form--createAccount btn colorblue pointer hoverbgblue hovercolorwhite"
                                         onClick={() => setFormMode("register")}
                                     >Create Account</div>
-                                    <div className="btn bgblue colorwhite hoverlighten">Signin</div>
+                                    <div className="btn bgblue colorwhite hoverlighten" onClick={() => handleSignin()}>Signin</div>
                                 </div>
                             </form>
 
@@ -75,17 +243,87 @@ function login() {
                         formMode === "register"
                             ?
                             <div className="login__container flexColumn AlignItemsCenter">
+                                {
+
+                                    formRegisterErrors.length > 0
+                                        ?
+                                        formRegisterErrors.map((formRegisterError) => {
+
+                                            return (<p className="marginb3 bgred colorwhite padding1" style={{ float: "left", width: "70%", }}>{formRegisterError}</p>)
+
+                                        })
+                                        :
+                                        ""
+                                }
 
                                 <img className="login__logo marginb5" src="./NameAndLogoSmallAlt.svg" ></img>
                                 <span className="login__formheader marginb4">Register</span>
                                 <form className="login__form flexColumn AlignItemsCenter" onSubmit={() => { }}>
 
-                                    <TextInput stateObject={formState} setStateObject={setFormState} inputName="registerUsername" label="username"></TextInput>
+                                    <TextInput
+                                        stateObject={formState}
+                                        setStateObject={setFormState}
+                                        inputName="registerUsername"
+                                        label="username"
+                                        validationFunction={(e: FocusEvent<HTMLInputElement>) => {
 
-                                    <TextInput stateObject={formState} setStateObject={setFormState} inputName="registerDisplayname" label="display name"></TextInput>
+                                            inputValidator.clearErrors();
+                                            inputValidator.setValue = formState.registerUsername;
+                                            const errors = inputValidator.typeCheck("string").maxLength(20).allowAlphaNumericOnly().required().getErrors;
 
-                                    <TextInput stateObject={formState} setStateObject={setFormState} inputName="registerPassword" label="password" type="password"></TextInput>
-                                    <TextInput stateObject={formState} setStateObject={setFormState} inputName="registerConfirmPassword" label="confirm password" type="password"></TextInput>
+                                            return errors;
+
+                                        }}
+                                    ></TextInput>
+
+                                    <TextInput
+                                        stateObject={formState}
+                                        setStateObject={setFormState}
+                                        inputName="registerDisplayname"
+                                        label="display name"
+                                        validationFunction={(e: FocusEvent<HTMLInputElement>) => {
+
+                                            inputValidator.clearErrors();
+                                            inputValidator.setValue = formState.registerDisplayname;
+                                            const errors = inputValidator.typeCheck("string").maxLength(20).allowAlphaNumericOnly().required().getErrors;
+
+                                            return errors;
+
+                                        }}
+                                    ></TextInput>
+
+                                    <TextInput
+                                        stateObject={formState}
+                                        setStateObject={setFormState}
+                                        inputName="registerPassword"
+                                        label="password"
+                                        type="password"
+                                        validationFunction={(e: FocusEvent<HTMLInputElement>) => {
+
+                                            inputValidator.clearErrors();
+                                            inputValidator.setValue = formState.registerPassword;
+                                            const errors = inputValidator.typeCheck("string").maxLength(20).required().getErrors;
+
+                                            return errors;
+
+                                        }}
+                                    ></TextInput>
+                                    <TextInput
+                                        stateObject={formState}
+                                        setStateObject={setFormState}
+                                        inputName="registerConfirmPassword"
+                                        label="confirm password"
+                                        type="password"
+                                        validationFunction={(e: FocusEvent<HTMLInputElement>) => {
+
+                                            inputValidator.clearErrors();
+                                            inputValidator.setValue = formState.registerConfirmPassword;
+                                            const errors = inputValidator.typeCheck("string").maxLength(20).required().getErrors;
+
+                                            return errors;
+
+                                        }}
+                                    ></TextInput>
 
 
                                     <p className="login__form--text marginb5">Not your computer? Use Guest mode to sign in privately.</p>
@@ -95,7 +333,7 @@ function login() {
                                             className=" login__form--createAccount btn colorblue pointer hoverbgblue hovercolorwhite"
                                             onClick={() => setFormMode("login")}
                                         >Back</div>
-                                        <div className="btn bgblue colorwhite hoverlighten">Next</div>
+                                        <div className="btn bgblue colorwhite hoverlighten" onClick={handleRegister}>Next</div>
                                     </div>
                                 </form>
 

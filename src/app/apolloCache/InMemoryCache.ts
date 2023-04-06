@@ -20,8 +20,8 @@ const isLoggednIn = () => {
     
     return { 
         isLoggedIn: false,  
-        Username: undefined,
-        Displayname: undefined,
+        Username: "",
+        Displayname: "",
         IsChannel: false, 
     }
 }

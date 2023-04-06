@@ -35,9 +35,7 @@ function PlaylistHorizontal() {
 
 
             </div>
-            <>
-            {console.log((playListPage+1) * 5)}
-            </>
+          
             {playListPage > 0 
             ?
             <img src="/ChevronRight.svg" alt="see more" className="playlist__seeLess round pointer" onClick={() => setPlayListPage(playListPage - 1)}></img>
