@@ -14,7 +14,18 @@ import { useLocation, useNavigate } from "react-router-dom";
 export const LOGIN_QUERY = gql(/* GraphQL */`
 mutation Login($username: String!, $password: String!){
   login(login:{username:$username, password: $password}){
-   username
+    username
+    displayname
+    subscribers
+    isChannel
+  }
+}
+`);
+
+export const REGISTER_QUERY = gql(/* GraphQL */`
+mutation Register($username: String!, $displayname: String!, $password: String!, $password2: String!){
+  register(profileToRegister:{username: $username, displayname: $displayname, password: $password, password2:$password2}){
+    username
     displayname
     subscribers
     isChannel
@@ -24,13 +35,9 @@ mutation Login($username: String!, $password: String!){
 
 function login() {
 
-    //     Good practice is to include the next URL in the current URL, so you can send them to the URL they originally tried to access. This is good for deeplinkinf, bookmarks, sharing etc.
 
-    // login?continue=/clients/17736/invoices/77
-
-    // After the login succeeds, check the URL for a continue query, and navigate there.
-
-    const [login, user] = useMutation(LOGIN_QUERY);
+    const [login] = useMutation(LOGIN_QUERY);
+    const [register] = useMutation(REGISTER_QUERY);
     const navigate = useNavigate();
     const { state } = useLocation();
 
@@ -101,12 +108,14 @@ function login() {
                     Username: user?.username as string,
                     Displayname: user?.displayname as string,
                     IsChannel: user?.isChannel as boolean,
-
-
                 })
+
+                navigate(`${state?.continue || "/"}`)
+            })
+            .catch(err => {
+                setFormSigninErrors([...formSigninErrors, "username or password are incorrect."])
             })
 
-        navigate(`${state?.continue || "/"}`)
 
         return
 
@@ -159,13 +168,34 @@ function login() {
         }
 
         // Do registration stuff
+        register({
+            variables: {
+                username: formState.registerUsername,
+                displayname: formState.registerDisplayname,
+                password: formState.registerPassword,
+                password2: formState.registerConfirmPassword,
+            }
+        })
+        .then(res => {
+
+            const user = res.data?.register
+            loggedInUserVar({
+                isLoggedIn: true,
+                Username: user?.username as string,
+                Displayname: user?.displayname as string,
+                IsChannel: user?.isChannel as boolean,
+            })
+
+            navigate(`${state?.continue || "/"}`)
+        })
+        .catch(err => {
+            setFormSigninErrors([...formRegisterErrors, "an error occured while registering user."])
+        })
 
         return
 
 
     }
-
-    // useEffect(() => {}, [formSigninErrors])
 
     const inputValidator = new Validator("");
 
@@ -184,7 +214,7 @@ function login() {
                                     ?
                                     formSigninErrors.map((formSigninError) => {
 
-                                        return (<p className="marginb3 bgred colorwhite padding1" style={{ float: "left", width: "70%", }}>{formSigninError}</p>)
+                                        return (<p key={"form " + formSigninError} className="marginb3 bgred colorwhite padding1" style={{ float: "left", width: "70%", }}>{formSigninError}</p>)
 
                                     })
                                     :

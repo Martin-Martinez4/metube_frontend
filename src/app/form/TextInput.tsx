@@ -20,7 +20,7 @@ const TextInput = <T extends  {[index: string]: string}>({stateObject, setStateO
       {
         validationErrors.map((validationError) => {
 
-          return(<p className="marginb3 bgred colorwhite padding1" style={{ float: "left", width: "70%", }}>{validationError}</p>)
+          return(<p key={inputName + " " + validationError} className="marginb3 bgred colorwhite padding1" style={{ float: "left", width: "70%", }}>{validationError}</p>)
 
         })
       }

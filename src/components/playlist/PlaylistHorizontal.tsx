@@ -6,32 +6,35 @@ import "./PlaylistHorizontal.scss"
 
 function PlaylistHorizontal() {
 
+    const numberOfVideosPerPage = 4.5;
+    const videoWidth = 16;
+    const videoWidthUnit = "vw"
+
     const [playListPage, setPlayListPage] = useState(0)
-    const playlistLength = 12
+    // will be dynamic later
+    const playlistLength = 12;
+
 
     return (
         <div className="playlist__container">
             <p className="margint4">Playlist Title</p>
-            {/* style={{ transform: `translateX(-(100 * index)% )` }} */}
 
+            <div className="playlist--horizontal" style={{ transform: `translateX(${-(videoWidth * numberOfVideosPerPage * playListPage)}${videoWidthUnit} )` }}>
 
-            {/* <div className="playlist--horizontal" style={{ transform: `translateX(-(100 * 5)% )` }}> */}
-            <div className="playlist--horizontal" style={{ transform: `translateX(${-(16 * 4.5 * playListPage)}vw )` }}>
+                <ThumbnailPreviewSmall id="" width={`${videoWidth}${videoWidthUnit}`}></ThumbnailPreviewSmall>
+                <ThumbnailPreviewSmall id="" width={`${videoWidth}${videoWidthUnit}`}></ThumbnailPreviewSmall>
+                <ThumbnailPreviewSmall id="" width={`${videoWidth}${videoWidthUnit}`}></ThumbnailPreviewSmall>
+                <ThumbnailPreviewSmall id="" width={`${videoWidth}${videoWidthUnit}`}></ThumbnailPreviewSmall>
 
-                <ThumbnailPreviewSmall id="" width="16vw"></ThumbnailPreviewSmall>
-                <ThumbnailPreviewSmall id="" width="16vw"></ThumbnailPreviewSmall>
-                <ThumbnailPreviewSmall id="" width="16vw"></ThumbnailPreviewSmall>
-                <ThumbnailPreviewSmall id="" width="16vw"></ThumbnailPreviewSmall>
+                <ThumbnailPreviewSmall id="" width={`${videoWidth}${videoWidthUnit}`}></ThumbnailPreviewSmall>
+                <ThumbnailPreviewSmall id="" width={`${videoWidth}${videoWidthUnit}`}></ThumbnailPreviewSmall>
+                <ThumbnailPreviewSmall id="" width={`${videoWidth}${videoWidthUnit}`}></ThumbnailPreviewSmall>
+                <ThumbnailPreviewSmall id="" width={`${videoWidth}${videoWidthUnit}`}></ThumbnailPreviewSmall>
 
-                <ThumbnailPreviewSmall id="" width="16vw"></ThumbnailPreviewSmall>
-                <ThumbnailPreviewSmall id="" width="16vw"></ThumbnailPreviewSmall>
-                <ThumbnailPreviewSmall id="" width="16vw"></ThumbnailPreviewSmall>
-                <ThumbnailPreviewSmall id="" width="16vw"></ThumbnailPreviewSmall>
-
-                <ThumbnailPreviewSmall id="" width="16vw"></ThumbnailPreviewSmall>
-                <ThumbnailPreviewSmall id="" width="16vw"></ThumbnailPreviewSmall>
-                <ThumbnailPreviewSmall id="" width="16vw"></ThumbnailPreviewSmall>
-                <ThumbnailPreviewSmall id="" width="16vw"></ThumbnailPreviewSmall>
+                <ThumbnailPreviewSmall id="" width={`${videoWidth}${videoWidthUnit}`}></ThumbnailPreviewSmall>
+                <ThumbnailPreviewSmall id="" width={`${videoWidth}${videoWidthUnit}`}></ThumbnailPreviewSmall>
+                <ThumbnailPreviewSmall id="" width={`${videoWidth}${videoWidthUnit}`}></ThumbnailPreviewSmall>
+                <ThumbnailPreviewSmall id="" width={`${videoWidth}${videoWidthUnit}`}></ThumbnailPreviewSmall>
 
 
             </div>
