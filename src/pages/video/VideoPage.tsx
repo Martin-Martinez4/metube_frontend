@@ -1,5 +1,5 @@
 
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
 import { formatdate } from "../../app/utilis/dateFormaters";
 import dayjs from 'dayjs';
@@ -10,8 +10,12 @@ import VideoPlayer from "../../components/video/videoplayer/VideoPlayer"
 import { gql } from "../../__generated__/gql";
 
 import "./VideoPage.scss";
+import SubscribeButton, { SUBSCRIBE_QUERY } from "../../components/subscribebutton/SubscribeButton";
+import { Like_Dislike, VideoLikeStatusQuery } from "../../__generated__/graphql";
+import { useEffect, useState } from "react";
+import LikeDislike from "../../components/likeDislike/VideoLikeDislike";
 
-  const VIDEO_QUERY = gql(/* GraphQL */`
+const VIDEO_QUERY = gql(/* GraphQL */`
     query Video($id: ID!){
       video(id: $id){
         id
@@ -31,27 +35,31 @@ import "./VideoPage.scss";
         }
         profile{
           username
+          userIsSubscribedTo
         }
       
       }
-    }
+    },
+    
   `);
 
 function VideoPage() {
 
-  const {video_id} = useParams();
+  const { video_id } = useParams();
 
-  
-  
-  const { loading, error, data } = useQuery(VIDEO_QUERY, {
+
+  const { loading, error, data, refetch } = useQuery(VIDEO_QUERY, {
     variables: { id: `${video_id}` },
   });
-
   
-  if(loading){
+  useEffect(() => {
+    refetch({ id: video_id })
+  }, [])
+
+  if (loading) {
     return <p>Loading...</p>
   }
-  
+
   return (
     <>
       <TopNav></TopNav>
@@ -74,13 +82,9 @@ function VideoPage() {
 
                       <div className="flexcolumn AlignItemsCenter marginr2">
 
-                        <div className="textaligncenter ">
-
-                          <img src="/Thumbsup.svg"></img><span className="marginr2 marginl1">{data?.video?.statistic?.likes}</span>
-                          <img src="/Thumbsdown.svg"></img><span className="marginl1">{data?.video?.statistic?.dislikes}</span>
-                        </div>
+                        
                         {/* ~118px width */}
-                        <div>---------------</div>
+                        <LikeDislike video_id={video_id ? video_id : ""} likes={data?.video?.statistic?.likes} dislikes={data?.video?.statistic?.dislikes}></LikeDislike>
                       </div>
 
                     </div>
@@ -105,10 +109,11 @@ function VideoPage() {
               </div>
 
               <div className="flex">
-
+                {/* 
                 <div className="btn bgred colorwhite marginr2 videopage__video__info__button--subscribe">
                   Subscribe
-                </div>
+                </div> */}
+                <SubscribeButton username={data?.video?.profile?.username} isSubscribed={data?.video?.profile?.userIsSubscribedTo}></SubscribeButton>
               </div>
 
             </div>
@@ -292,7 +297,7 @@ function VideoPage() {
           <ThumbnailPreviewSmall id="1"></ThumbnailPreviewSmall>
           <ThumbnailPreviewSmall id="1"></ThumbnailPreviewSmall>
           <ThumbnailPreviewSmall id="1"></ThumbnailPreviewSmall>
- id="1"
+          id="1"
           <div className="whitespace"></div>
 
 

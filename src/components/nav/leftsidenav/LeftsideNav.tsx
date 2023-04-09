@@ -7,7 +7,8 @@ function LeftsideNav() {
     const entries = [
         {
             icon: "/navicons/HomeIcon.svg",
-            title: "Home"
+            title: "Home",
+            link: "/"
 
         },
         {
@@ -49,7 +50,7 @@ function LeftsideNav() {
 
         },
         {
-            icon: "ProfileImageSmall.svg",
+            icon: "/ProfileImageSmall.svg",
             title: "placeholder"
 
         },

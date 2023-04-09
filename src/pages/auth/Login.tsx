@@ -113,6 +113,8 @@ function login() {
                 navigate(`${state?.continue || "/"}`)
             })
             .catch(err => {
+
+                console.log(err)
                 setFormSigninErrors([...formSigninErrors, "username or password are incorrect."])
             })
 

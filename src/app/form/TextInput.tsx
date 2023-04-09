@@ -1,7 +1,7 @@
 import { Dispatch, FocusEvent, SetStateAction, useEffect, useState } from "react"
 import { handleFormInputChange } from "../utilis/eventhandlers"
 
-type WithSateObject<T> = {
+type WithStateObject<T> = {
   stateObject: T,
   setStateObject: Dispatch<SetStateAction <T>>,
   inputName: string,
@@ -10,7 +10,7 @@ type WithSateObject<T> = {
   validationFunction?: (e: FocusEvent<HTMLInputElement>) => string[],
 }
 
-const TextInput = <T extends  {[index: string]: string}>({stateObject, setStateObject, inputName, label, type, validationFunction}: WithSateObject<T>) => {
+const TextInput = <T extends  {[index: string]: string}>({stateObject, setStateObject, inputName, label, type, validationFunction}: WithStateObject<T>) => {
 
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
 

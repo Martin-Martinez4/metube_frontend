@@ -81,8 +81,16 @@ table {
 	cursor: pointer;
 }
 
+.borderred{
+	border: 1px solid red;
+}
+
 .flex{
 	display: flex;
+}
+
+.fillRed path{
+	fill: rgb(255, 0, 0);
 }
 
 .flexColumn{
@@ -183,6 +191,12 @@ table {
 
 .bgblue{
 	background-color: var(--blue);
+}
+.bglightblue{
+	background-color: var(--lightblue);
+}
+.bgdarkblue{
+	background-color: var(--darkblue);
 }
 
 .colorwhite{
