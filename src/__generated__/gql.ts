@@ -13,6 +13,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
+    "\n    query GetVideoComments($video_id: String!) {\n  getVideoComments(video_id: $video_id) {\n    id\n    parent_id\n    body\n    status\n    \n    Profile{\n      username\n      displayname\n    }\n  }\n},\n    \n  ": types.GetVideoCommentsDocument,
     "\n    query VideoLikeStatus($id: ID!){\n      getVideoLikeStatus(id: $id)\n    }\n\n": types.VideoLikeStatusDocument,
     "\n\n    mutation LikeVideo($video_id: String!){\n      likeVideo(video_id: $video_id)\n    }\n": types.LikeVideoDocument,
     "\n\n    mutation DislikeVideo($video_id: String!){\n      dislikeVideo(video_id: $video_id)\n    }\n": types.DislikeVideoDocument,
@@ -22,7 +23,7 @@ const documents = {
     "\nmutation Register($username: String!, $displayname: String!, $password: String!, $password2: String!){\n  register(profileToRegister:{username: $username, displayname: $displayname, password: $password, password2:$password2}){\n    username\n    displayname\n    subscribers\n    isChannel\n  }\n}\n": types.RegisterDocument,
     "\nquery Videos{\n  videos(amount: 4){\n    id\n    url\n    contentinformation{\n      title\n    }\n    thumbnail{\n      url\n    }\n    statistic{\n      views\n    }\n    profile{\n      username\n    }\n  \n  }\n}\n": types.VideosDocument,
     "\nquery Profile($username: String!){\n  profile(username: $username){\n    username\n    displayname\n    subscribers\n    userIsSubscribedTo\n  \n  }\n}\n": types.ProfileDocument,
-    "\n    query Video($id: ID!){\n      video(id: $id){\n        id\n        url\n        contentinformation{\n          title\n          description\n          published\n        }\n        thumbnail{\n          url\n        }\n        statistic{\n          likes\n          dislikes\n          views\n        }\n        profile{\n          username\n          userIsSubscribedTo\n        }\n      \n      }\n    },\n    \n  ": types.VideoDocument,
+    "\n    query Video($id: ID!){\n      video(id: $id){\n        id\n        url\n        contentinformation{\n          title\n          description\n          published\n        }\n        thumbnail{\n          url\n        }\n        statistic{\n          likes\n          dislikes\n          views\n          comments\n        }\n        profile{\n          username\n          userIsSubscribedTo\n        }\n      \n      }\n    },\n    \n  ": types.VideoDocument,
 };
 
 /**
@@ -39,6 +40,10 @@ const documents = {
  */
 export function gql(source: string): unknown;
 
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n    query GetVideoComments($video_id: String!) {\n  getVideoComments(video_id: $video_id) {\n    id\n    parent_id\n    body\n    status\n    \n    Profile{\n      username\n      displayname\n    }\n  }\n},\n    \n  "): (typeof documents)["\n    query GetVideoComments($video_id: String!) {\n  getVideoComments(video_id: $video_id) {\n    id\n    parent_id\n    body\n    status\n    \n    Profile{\n      username\n      displayname\n    }\n  }\n},\n    \n  "];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -78,7 +83,7 @@ export function gql(source: "\nquery Profile($username: String!){\n  profile(use
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n    query Video($id: ID!){\n      video(id: $id){\n        id\n        url\n        contentinformation{\n          title\n          description\n          published\n        }\n        thumbnail{\n          url\n        }\n        statistic{\n          likes\n          dislikes\n          views\n        }\n        profile{\n          username\n          userIsSubscribedTo\n        }\n      \n      }\n    },\n    \n  "): (typeof documents)["\n    query Video($id: ID!){\n      video(id: $id){\n        id\n        url\n        contentinformation{\n          title\n          description\n          published\n        }\n        thumbnail{\n          url\n        }\n        statistic{\n          likes\n          dislikes\n          views\n        }\n        profile{\n          username\n          userIsSubscribedTo\n        }\n      \n      }\n    },\n    \n  "];
+export function gql(source: "\n    query Video($id: ID!){\n      video(id: $id){\n        id\n        url\n        contentinformation{\n          title\n          description\n          published\n        }\n        thumbnail{\n          url\n        }\n        statistic{\n          likes\n          dislikes\n          views\n          comments\n        }\n        profile{\n          username\n          userIsSubscribedTo\n        }\n      \n      }\n    },\n    \n  "): (typeof documents)["\n    query Video($id: ID!){\n      video(id: $id){\n        id\n        url\n        contentinformation{\n          title\n          description\n          published\n        }\n        thumbnail{\n          url\n        }\n        statistic{\n          likes\n          dislikes\n          views\n          comments\n        }\n        profile{\n          username\n          userIsSubscribedTo\n        }\n      \n      }\n    },\n    \n  "];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};
