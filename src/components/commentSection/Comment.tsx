@@ -1,5 +1,6 @@
 import { Like_Dislike,  Comment as  Commenttype } from "../../__generated__/graphql";
 import { formatdate } from "../../app/utilis/dateFormaters";
+import CommentLikeDislike from "../likeDislike/CommentLikeDislike";
 
 type props  = {
     comment: Commenttype,
@@ -13,11 +14,13 @@ function Comment({ comment }: props) {
 
                 <div className="videopage__comments__comment__text marginl3">
                     <p className="marginb2">{comment.Profile?.username} • {formatdate(comment.datePosted) + " ago"}</p>
-                    <p>
+                    <p className="marginb3">
                         {comment.body}
                     </p>
                     
-                    <p><img src="/ResponsesIcon.svg"></img> 200k replies</p>
+                    <CommentLikeDislike comment_id={comment.id} likes={comment.likes} dislikes={comment.dislikes} userlikedComment={comment.status} ></CommentLikeDislike>
+                    
+                    <p><img src="/ResponsesIcon.svg"></img> {comment.responses ?  `${comment.responses}` + "replies" : ""} </p>
                     {/* 
                     <div className="videopage__responses margint4">
 

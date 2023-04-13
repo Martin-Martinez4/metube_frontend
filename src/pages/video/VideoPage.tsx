@@ -1,8 +1,8 @@
 
-import { useMutation, useQuery } from "@apollo/client";
+import { useEffect } from "react";
+import { useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
 import { formatdate } from "../../app/utilis/dateFormaters";
-import dayjs from 'dayjs';
 import TopNav from "../../components/nav/topnav/TopNav"
 import ThumbnailPreviewSmall from "../../components/video/thumbnailpreview/ThumbnailPreviewSmall";
 import VideoDescription from "../../components/video/videodescription/VideoDescription";
@@ -10,10 +10,8 @@ import VideoPlayer from "../../components/video/videoplayer/VideoPlayer"
 import { gql } from "../../__generated__/gql";
 
 import "./VideoPage.scss";
-import SubscribeButton, { SUBSCRIBE_QUERY } from "../../components/subscribebutton/SubscribeButton";
-import { Like_Dislike, VideoLikeStatusQuery } from "../../__generated__/graphql";
-import { useEffect, useState } from "react";
-import LikeDislike from "../../components/likeDislike/VideoLikeDislike";
+import SubscribeButton from "../../components/subscribebutton/SubscribeButton";
+import VideoLikeDislike from "../../components/likeDislike/VideoLikeDislike";
 import CommentSection from "../../components/commentSection/CommentSection";
 
 const VIDEO_QUERY = gql(/* GraphQL */`
@@ -86,7 +84,7 @@ function VideoPage() {
 
 
                         {/* ~118px width */}
-                        <LikeDislike video_id={video_id ? video_id : ""} likes={data?.video?.statistic?.likes} dislikes={data?.video?.statistic?.dislikes}></LikeDislike>
+                        <VideoLikeDislike video_id={video_id ? video_id : ""} likes={data?.video?.statistic?.likes} dislikes={data?.video?.statistic?.dislikes}></VideoLikeDislike>
                       </div>
 
                     </div>

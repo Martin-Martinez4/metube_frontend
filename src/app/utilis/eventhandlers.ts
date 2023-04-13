@@ -9,7 +9,7 @@ const handleToggleBooleanState = (event: React.MouseEvent<HTMLElement, MouseEven
 
 }
 
-const handleFormInputChange = <T,>(e: ChangeEvent<HTMLInputElement>, currentState: T, setFunction: Dispatch<SetStateAction <T>>) => {
+const handleFormInputChange = <T,>(e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>, currentState: T, setFunction: Dispatch<SetStateAction <T>>) => {
 
     const newValue = e.target.value;
 

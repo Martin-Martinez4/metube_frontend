@@ -3,6 +3,8 @@ import { useQuery } from "@apollo/client";
 import { gql } from "../../__generated__/gql";
 import Comment from "./Comment";
 import { Like_Dislike,  Comment as  Commenttype } from "../../__generated__/graphql";
+import { useEffect } from "react";
+import CreateComment from "./CreateComment";
 
 type props = {
     video_id: string,
@@ -16,6 +18,9 @@ const VIDEO_COMMENTS = gql(/* GraphQL */`
     parent_id
     body
     status
+    likes
+    dislikes
+    responses
     
     Profile{
       username
@@ -28,11 +33,15 @@ const VIDEO_COMMENTS = gql(/* GraphQL */`
 
 function CommentSection({video_id, number_of_comments}: props) {
 
-    const {data, loading, error} = useQuery(VIDEO_COMMENTS, {
+    const {data, loading, error, refetch} = useQuery(VIDEO_COMMENTS, {
         variables: {
             video_id: video_id
         }
     })
+
+    useEffect(() => {
+        refetch({ video_id: video_id })
+    }, [])
 
     if(loading){
         return (<p>Loading</p>)
@@ -43,6 +52,7 @@ function CommentSection({video_id, number_of_comments}: props) {
             <div className="videopage__comments">
     
                 <p className="marginb3">{number_of_comments? number_of_comments : ""} Comments</p>
+                <CreateComment></CreateComment>
 
                 {
                     data.getVideoComments.map((comment) => {

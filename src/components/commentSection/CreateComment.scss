@@ -1,0 +1,27 @@
+
+.createComment{
+    width: 100%;
+    resize: none;
+
+    padding: .25rem;
+
+    font-family: Lora, Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+
+    // height: 1rem;
+    // min-height: 1rem;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    // max-height: 50vh;
+    overflow-x: auto;
+    overflow-y: hidden;
+    
+    &:focus-within{
+        border: none;
+        outline: none;
+        border-bottom: 1px solid #ccc;
+    }
+
+}
+
+

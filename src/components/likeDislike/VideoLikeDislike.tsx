@@ -29,7 +29,7 @@ type props = {
   dislikes: number | undefined
 }
 
-function LikeDislike({ video_id, likes, dislikes }: props) {
+function VideoLikeDislike({ video_id, likes, dislikes }: props) {
 
   const userLikedVideo = useQuery(USER_LIKED_VIDEO, {
     variables: { id: `${video_id}` },
@@ -167,6 +167,6 @@ function LikeDislike({ video_id, likes, dislikes }: props) {
   )
 }
 
-export default LikeDislike
+export default VideoLikeDislike
 
 
