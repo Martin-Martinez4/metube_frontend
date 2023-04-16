@@ -102,6 +102,9 @@ table {
 .justifyContentCenter{
 	justify-content: center;
 }
+.justifyContentEnd{
+	justify-content: end;
+}
 
 .AlignItemsCenter{
 	align-items: center;

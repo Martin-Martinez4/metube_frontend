@@ -16,6 +16,7 @@ query Videos{
     url
     contentinformation{
       title
+      published
     }
     thumbnail{
       url
@@ -64,6 +65,8 @@ function Home() {
 
                 if(video === null) return
                 const {id, contentinformation, profile, statistic, thumbnail } = video
+
+                console.log(contentinformation)
               
               return (
                 <>
@@ -75,8 +78,9 @@ function Home() {
                   views={statistic ? statistic.views : undefined} 
                   thumbnail={thumbnail ? thumbnail.url : ""} 
                   profile_id={profile ? profile.username : ""} 
+                  published_date={contentinformation ? contentinformation.published : ""}
                   width="19vw"
-                ></ThumbnailPreview>
+                  ></ThumbnailPreview>
                 <ThumbnailPreview
                   key={id}
                   id={id} 
@@ -85,8 +89,9 @@ function Home() {
                   views={statistic ? statistic.views : undefined} 
                   thumbnail={thumbnail ? thumbnail.url : ""} 
                   profile_id={profile ? profile.username : ""} 
+                  published_date={contentinformation ? contentinformation.published : ""}
                   width="19vw"
-                ></ThumbnailPreview>
+                  ></ThumbnailPreview>
                 <ThumbnailPreview
                   key={id}
                   id={id} 
@@ -95,6 +100,7 @@ function Home() {
                   views={statistic ? statistic.views : undefined} 
                   thumbnail={thumbnail ? thumbnail.url : ""} 
                   profile_id={profile ? profile.username : ""} 
+                  published_date={contentinformation ? contentinformation.published : ""}
                   width="19vw"
                 ></ThumbnailPreview>
                 </>)

@@ -21,6 +21,7 @@ const VIDEO_COMMENTS = gql(/* GraphQL */`
     likes
     dislikes
     responses
+    datePosted
     
     Profile{
       username
@@ -75,10 +76,12 @@ function CommentSection({ video_id, number_of_comments }: props) {
         refetch({ video_id: video_id })
     }, [])
 
-    function addNewComment(comment: CommentInput) {
+    async function addNewComment(comment: CommentInput): Promise<{ created: boolean, error: Error | null }> {
+
+        const result = { created: false, error: null };
 
 
-        createComment({
+        const res = await createComment({
             variables: {
 
                 body: comment.body,
@@ -87,23 +90,32 @@ function CommentSection({ video_id, number_of_comments }: props) {
 
 
         })
-        .then(res => {
+            .then(res => {
 
-            const createdComment = res.data?.createComment
+                const createdComment = res.data?.createComment;
+                
+                if (comments) {
+                    
+                    setComments([<Comment key={createdComment?.id} comment={createdComment as Commenttype}></Comment>, ...comments])
+                }
+                else {
+                    setComments([<Comment key={createdComment?.id} comment={createdComment as Commenttype}></Comment>])
+                    
+                }
 
+                result.created = true;
+                // error stays as null
 
-            if (comments) {
-    
-                // setComments([...comments, <Comment key={createdComment?.id} comment={{ body: createdComment?.body || "", video_id: video_id, likes: createdComment?.likes || 0, dislikes: createdComment?.dislikes || 0, responses: createdComment?.responses || 0, datePosted: createdComment?.datePosted||"", id: createdComment?.id || "" }}></Comment>])
-                setComments([...comments, <Comment key={createdComment?.id} comment={createdComment as Commenttype}></Comment>])
-            }
-            else {
-                setComments([<Comment key={"test"} comment={{ body: comment.body, video_id: comment.VideoId, likes: 0, dislikes: 0, responses: 0, datePosted: "today", id: "121123123" }}></Comment>])
-    
-            }
+                return result
+                
+            })
+            .catch(err => {
 
-        })
-        .catch(err => err)
+                result.error = err
+                return result
+            })
+
+            return res;
 
 
 
@@ -128,7 +140,7 @@ function CommentSection({ video_id, number_of_comments }: props) {
             <div className="videopage__comments">
 
                 <p className="marginb3">{number_of_comments ? number_of_comments : ""} Comments</p>
-                <CreateComment></CreateComment>
+                <CreateComment handleCreateComment={addNewComment} video_id={video_id}></CreateComment>
 
                 {
                     comments

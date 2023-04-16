@@ -8,6 +8,7 @@ type props  = {
 
 
 function Comment({ comment }: props) {
+
   return (
     <div className="videopage__comments__comment margint4">
 

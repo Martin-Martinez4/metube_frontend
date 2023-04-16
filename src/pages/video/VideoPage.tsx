@@ -36,6 +36,7 @@ const VIDEO_QUERY = gql(/* GraphQL */`
         profile{
           username
           userIsSubscribedTo
+          subscribers
         }
       
       }
@@ -104,7 +105,7 @@ function VideoPage() {
                 <img className="thumbnailpreview__info__userprofile marginr2" src={`http://localhost:8081/profile/` + data?.video?.profile?.username + "/"}></img>
                 <div className="flexColumn">
                   <span style={{ wordBreak: "break-word", maxWidth: "25vw" }}>{data?.video?.profile?.username}</span>
-                  <span>184K subscribers </span>
+                  <span>{data?.video?.profile?.subscribers} subscribers </span>
                 </div>
               </div>
 

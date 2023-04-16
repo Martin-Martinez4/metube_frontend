@@ -2,8 +2,9 @@
 import { useNavigate } from "react-router-dom"
 import { ThumbnailPreviewProps } from "../../../app/model/ThumbnailPreview"
 import "./ThumbnailPreview.scss"
+import { formatdate } from "../../../app/utilis/dateFormaters"
 
-function ThumbnailPreview({ id, width, title, channelname, views, thumbnail, profile_id }: ThumbnailPreviewProps) {
+function ThumbnailPreview({ id, width, title, channelname, views, thumbnail, profile_id, published_date }: ThumbnailPreviewProps) {
 
   const navigate = useNavigate()
 
@@ -21,7 +22,7 @@ function ThumbnailPreview({ id, width, title, channelname, views, thumbnail, pro
               <div className="thumbnailpreview__info__textarea">
                   <p className="thumbnailpreview__videotitle">{title}</p>
                     <p className="thumbnailpreview__userinformation">{channelname}</p>
-                  <p className="thumbnailpreview__userinformation">{views} views • 2years ago</p>
+                  <p className="thumbnailpreview__userinformation">{views} views • {published_date ? formatdate(published_date) + " ago": ""}</p>
               </div>
             </div>
 

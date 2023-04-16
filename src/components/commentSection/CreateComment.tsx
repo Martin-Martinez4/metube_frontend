@@ -2,8 +2,16 @@
 import { useEffect, useRef, useState } from "react";
 import "./CreateComment.scss";
 import { handleFormInputChange } from "../../app/utilis/eventhandlers";
+import { CommentInput } from "../../__generated__/graphql";
 
-function CreateComment() {
+type props = {
+
+  handleCreateComment: (comment: CommentInput) =>  Promise<{created: boolean, error: Error | null}>,
+  video_id :string,
+
+}
+
+function CreateComment({ handleCreateComment, video_id }: props) {
 
   const [editMode, setEditMode] = useState(false);
 
@@ -20,6 +28,29 @@ function CreateComment() {
       textareaRef.current.style.height = scrollHeight + "px";
     }
   }, [commentBoxText, editMode]);
+
+  async function handleSubmitComment(){
+
+    const resultComment = await handleCreateComment({body: commentBoxText.commentBoxText, VideoId: video_id})
+
+    if(resultComment.error !== null || resultComment.created === false){
+
+      alert("Create Comment failed")
+      alert(resultComment.created)
+
+      return
+
+    }else{
+
+      setEditMode(false)
+      setCommentBoxText({...commentBoxText, commentBoxText: ""})
+
+      return
+
+    }
+
+
+  }
 
   return (
     <div className={editMode ? "flexColumn" : "flex"}>
@@ -77,7 +108,7 @@ function CreateComment() {
           ?
           <div className="flex justifyContentEnd">
             <div className="btn marginr2 bgred colorwhite" onClick={() => setEditMode(false)}>Cancel</div>
-            <div className="btn bgblue colorwhite">Comment</div>
+            <div className="btn bgblue colorwhite" onClick={() => handleSubmitComment()}>Comment</div>
           </div>
           :
           ""

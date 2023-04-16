@@ -7,9 +7,9 @@ import { Validator } from "../../app/utilis/validateInput";
 import { gql } from "../../__generated__/gql";
 
 
-import "./login.scss";
 import { useMutation } from "@apollo/client";
 import { useLocation, useNavigate } from "react-router-dom";
+import "./login.scss";
 
 export const LOGIN_QUERY = gql(/* GraphQL */`
 mutation Login($username: String!, $password: String!){
@@ -33,7 +33,7 @@ mutation Register($username: String!, $displayname: String!, $password: String!,
 }
 `);
 
-function login() {
+function Login() {
 
 
     const [login] = useMutation(LOGIN_QUERY);
@@ -380,5 +380,5 @@ function login() {
     )
 }
 
-export default login
+export default Login
 

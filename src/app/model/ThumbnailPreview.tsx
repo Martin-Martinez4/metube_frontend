@@ -8,6 +8,7 @@ export type ThumbnailPreviewProps = {
     views?: number,
     thumbnail?: string,
     profile_id?: string,
+    published_date?: string,
   }
   
 

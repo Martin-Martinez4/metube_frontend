@@ -116,8 +116,6 @@ function CommentLikeDislike({ comment_id, likes, dislikes, userlikedComment }: p
 
   }, [])
 
-  console.log(userlikedComment)
-
   return (
     <>
       <div>
