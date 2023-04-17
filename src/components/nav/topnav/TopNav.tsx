@@ -21,7 +21,7 @@ function TopNav() {
             <input type="search" className="topnav__searchbar__input"
             placeholder={`${loggedInUser.Username}`}></input>
             {/* placeholder="Search..."></input> */}
-            <button type="submit"className="topnav__searchbar__button"><img style={{ width: "40%" }} src="/MagnifyingGlass2.svg"></img></button>
+            <div className="topnav__searchbar__button"><img className="topnav__searchbar__icon" style={{ width: "40%" }} src="/MagnifyingGlass2.svg"></img></div>
         </fieldset>
 
         <div>

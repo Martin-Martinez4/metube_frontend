@@ -31,11 +31,31 @@
 
         background-color: var(--white);
 
+        transition: all .5s;
+
+
         &:focus-within{
 
             border: 2px solid #538CA3;
             box-shadow: 1px 1px 5px #538CA3;
+            border-radius: 10px;
+            transition: all .25s;
+            
+            & > .topnav__searchbar__button{
+                
+                border-radius: 0 10px 10px 0px;
+                transition: all .25s;
 
+            }
+
+
+        }
+
+        &__icon{
+            position: absolute;
+            left: 25%;
+            top: 0;
+            transform: translate(0, 10%);
         }
 
 
@@ -84,6 +104,9 @@
 
             border-radius: 0 20px  20px 0;
             box-sizing: border-box;
+
+            position: relative;
+
 
         }
 

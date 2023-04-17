@@ -34,88 +34,121 @@ query Videos{
 
 function Home() {
 
-  const {data, loading, error} = useQuery(VIDEOS_QUERY);
+  const { data, loading, error } = useQuery(VIDEOS_QUERY);
 
-  if (loading) return <p>Loading...</p>
+  if (loading) {
+
+    <>
+
+      <TopNav></TopNav>
+      <div className="home">
+
+        <div className="flex">
+          <LeftsideNav></LeftsideNav>
+
+
+          {/* need to implement infinite scrolling */}
+          <div className="home__videoarea">
+            <div className="home__categoriesnav">
+              <span className="home__categoriesnav__category marginr4">All</span>
+              <span className="home__categoriesnav__category marginr4">Computer programming</span>
+              <span className="home__categoriesnav__category marginr4">Coding</span>
+              <span className="home__categoriesnav__category marginr4">Animation</span>
+
+            </div>
+
+            <div className="home__videoarea__container">
+
+              loading
+
+            </div>
+
+            <div className="whitespace"></div>
+
+          </div>
+        </div>
+      </div>
+
+    </>
+
+  }
   if (error) return <p>{`${error}`}</p>
 
   return (
-<>
+    <>
 
-    <TopNav></TopNav>
-    <div className="home">
+      <TopNav></TopNav>
+      <div className="home">
 
-      <div className="flex">
-        <LeftsideNav></LeftsideNav>
+        <div className="flex">
+          <LeftsideNav></LeftsideNav>
 
 
-        {/* need to implement infinite scrolling */}
-        <div className="home__videoarea">
-        <div className="home__categoriesnav">
-          <span className="home__categoriesnav__category marginr4">All</span> 
-          <span className="home__categoriesnav__category marginr4">Computer programming</span> 
-          <span className="home__categoriesnav__category marginr4">Coding</span>
-          <span className="home__categoriesnav__category marginr4">Animation</span>
+          {/* need to implement infinite scrolling */}
+          <div className="home__videoarea">
+            <div className="home__categoriesnav">
+              <span className="home__categoriesnav__category marginr4">All</span>
+              <span className="home__categoriesnav__category marginr4">Computer programming</span>
+              <span className="home__categoriesnav__category marginr4">Coding</span>
+              <span className="home__categoriesnav__category marginr4">Animation</span>
 
-        </div>
+            </div>
 
             <div className="home__videoarea__container">
 
               {data?.videos?.map((video) => {
 
-                if(video === null) return
-                const {id, contentinformation, profile, statistic, thumbnail } = video
+                if (video === null) return
+                const { id, contentinformation, profile, statistic, thumbnail } = video
 
-                console.log(contentinformation)
-              
-              return (
-                <>
-                <ThumbnailPreview
-                  key={id}
-                  id={id} 
-                  title={contentinformation ? contentinformation.title : ""} 
-                  channelname={profile ? profile.username : ""} 
-                  views={statistic ? statistic.views : undefined} 
-                  thumbnail={thumbnail ? thumbnail.url : ""} 
-                  profile_id={profile ? profile.username : ""} 
-                  published_date={contentinformation ? contentinformation.published : ""}
-                  width="19vw"
-                  ></ThumbnailPreview>
-                <ThumbnailPreview
-                  key={id}
-                  id={id} 
-                  title={contentinformation ? contentinformation.title : ""} 
-                  channelname={profile ? profile.username : ""} 
-                  views={statistic ? statistic.views : undefined} 
-                  thumbnail={thumbnail ? thumbnail.url : ""} 
-                  profile_id={profile ? profile.username : ""} 
-                  published_date={contentinformation ? contentinformation.published : ""}
-                  width="19vw"
-                  ></ThumbnailPreview>
-                <ThumbnailPreview
-                  key={id}
-                  id={id} 
-                  title={contentinformation ? contentinformation.title : ""} 
-                  channelname={profile ? profile.username : ""} 
-                  views={statistic ? statistic.views : undefined} 
-                  thumbnail={thumbnail ? thumbnail.url : ""} 
-                  profile_id={profile ? profile.username : ""} 
-                  published_date={contentinformation ? contentinformation.published : ""}
-                  width="19vw"
-                ></ThumbnailPreview>
-                </>)
-              
+                return (
+                  <>
+                    <ThumbnailPreview
+                      key={id}
+                      id={id}
+                      title={contentinformation ? contentinformation.title : ""}
+                      channelname={profile ? profile.username : ""}
+                      views={statistic ? statistic.views : undefined}
+                      thumbnail={thumbnail ? thumbnail.url : ""}
+                      profile_id={profile ? profile.username : ""}
+                      published_date={contentinformation ? contentinformation.published : ""}
+                      width="19vw"
+                    ></ThumbnailPreview>
+                    <ThumbnailPreview
+                      key={id}
+                      id={id}
+                      title={contentinformation ? contentinformation.title : ""}
+                      channelname={profile ? profile.username : ""}
+                      views={statistic ? statistic.views : undefined}
+                      thumbnail={thumbnail ? thumbnail.url : ""}
+                      profile_id={profile ? profile.username : ""}
+                      published_date={contentinformation ? contentinformation.published : ""}
+                      width="19vw"
+                    ></ThumbnailPreview>
+                    <ThumbnailPreview
+                      key={id}
+                      id={id}
+                      title={contentinformation ? contentinformation.title : ""}
+                      channelname={profile ? profile.username : ""}
+                      views={statistic ? statistic.views : undefined}
+                      thumbnail={thumbnail ? thumbnail.url : ""}
+                      profile_id={profile ? profile.username : ""}
+                      published_date={contentinformation ? contentinformation.published : ""}
+                      width="19vw"
+                    ></ThumbnailPreview>
+                  </>)
+
               })}
-              
+
             </div>
 
             <div className="whitespace"></div>
-        
+
+          </div>
         </div>
       </div>
-    </div>
 
-</>
+    </>
   )
 }
 

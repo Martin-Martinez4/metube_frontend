@@ -1,6 +1,6 @@
 
 import { useEffect } from "react";
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
 import { formatdate } from "../../app/utilis/dateFormaters";
 import TopNav from "../../components/nav/topnav/TopNav"
@@ -13,6 +13,7 @@ import "./VideoPage.scss";
 import SubscribeButton from "../../components/subscribebutton/SubscribeButton";
 import VideoLikeDislike from "../../components/likeDislike/VideoLikeDislike";
 import CommentSection from "../../components/commentSection/CommentSection";
+import AddVideoView from "../../components/video/addView/AddVideoView";
 
 const VIDEO_QUERY = gql(/* GraphQL */`
     query Video($id: ID!){
@@ -44,18 +45,20 @@ const VIDEO_QUERY = gql(/* GraphQL */`
     
   `);
 
+
 function VideoPage() {
 
   const { video_id } = useParams();
-
 
   const { loading, error, data, refetch } = useQuery(VIDEO_QUERY, {
     variables: { id: `${video_id}` },
   });
 
   useEffect(() => {
-    refetch({ id: video_id })
+    refetch({ id: video_id });
+
   }, [])
+
 
   if (loading) {
     return <p>Loading...</p>
@@ -63,6 +66,7 @@ function VideoPage() {
 
   return (
     <>
+      <AddVideoView video_id={video_id}></AddVideoView>
       <TopNav></TopNav>
       <div className="videopage__container">
 
