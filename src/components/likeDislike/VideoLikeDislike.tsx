@@ -2,6 +2,7 @@ import { useQuery, useMutation } from "@apollo/client";
 import { useEffect, useState } from "react";
 import { Like_Dislike } from "../../__generated__/graphql";
 import { gql } from "../../__generated__/gql";
+import { formatNumber } from "../../app/utilis/numberFormater";
 
 const USER_LIKED_VIDEO = gql(/* GraphQL */`
     query VideoLikeStatus($id: ID!){
@@ -133,8 +134,8 @@ function VideoLikeDislike({ video_id, likes, dislikes }: props) {
           videoLikeStatus === Like_Dislike.Like
             ?
             <>
-              <img src="/ThumbsupBlue.svg" onClick={handleLikeVideo} className="pointer"></img><span className="marginr2 marginl1">{likesAndDislikes.likes}</span>
-              <img src="/Thumbsdown.svg" onClick={handleDisLikeVideo} className="pointer"></img><span className="marginl1">{likesAndDislikes.dislikes}</span>
+              <img src="/ThumbsupBlue.svg" onClick={handleLikeVideo} className="pointer"></img><span className="marginr2 marginl1">{formatNumber(likesAndDislikes.likes) }</span>
+              <img src="/Thumbsdown.svg" onClick={handleDisLikeVideo} className="pointer"></img><span className="marginl1">{formatNumber(likesAndDislikes.dislikes)}</span>
             </>
             :
             ""

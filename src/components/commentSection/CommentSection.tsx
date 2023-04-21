@@ -1,10 +1,12 @@
 
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation, useLazyQuery } from "@apollo/client";
+
 import { gql } from "../../__generated__/gql";
 import Comment from "./Comment";
-import { Like_Dislike, Comment as Commenttype, CommentInput } from "../../__generated__/graphql";
-import { useEffect, useState } from "react";
+import { Comment as Commenttype, CommentInput } from "../../__generated__/graphql";
+import { Suspense, useEffect, useState } from "react";
 import CreateComment from "./CreateComment";
+import LoadingSpinner from "../loadingIndicator/LoadingSpinner";
 
 type props = {
     video_id: string,
@@ -22,6 +24,7 @@ const VIDEO_COMMENTS = gql(/* GraphQL */`
     dislikes
     responses
     datePosted
+    video_id
     
     Profile{
       username
@@ -31,6 +34,8 @@ const VIDEO_COMMENTS = gql(/* GraphQL */`
 },
     
   `);
+
+
 
 export const CREATE_COMMENT = gql(/* GraphQL */`
 
@@ -44,6 +49,7 @@ export const CREATE_COMMENT = gql(/* GraphQL */`
             dislikes
             responses
             datePosted
+            video_id
 
             Profile{
                 username
@@ -55,13 +61,10 @@ export const CREATE_COMMENT = gql(/* GraphQL */`
 
 function CommentSection({ video_id, number_of_comments }: props) {
 
-    const { data, loading, error, refetch } = useQuery(VIDEO_COMMENTS, {
-        variables: {
-            video_id: video_id
-        }
-    })
-
+    const [getComments, { data, loading, error, refetch }] = useLazyQuery(VIDEO_COMMENTS);
     const [createComment] = useMutation(CREATE_COMMENT);
+
+    const [showComments, setShowComments] = useState(false)
 
 
     const [comments, setComments] = useState(data?.getVideoComments.map((comment) => {
@@ -71,15 +74,9 @@ function CommentSection({ video_id, number_of_comments }: props) {
         )
     }))
 
-
-    useEffect(() => {
-        refetch({ video_id: video_id })
-    }, [])
-
     async function addNewComment(comment: CommentInput): Promise<{ created: boolean, error: Error | null }> {
 
         const result = { created: false, error: null };
-
 
         const res = await createComment({
             variables: {
@@ -93,21 +90,21 @@ function CommentSection({ video_id, number_of_comments }: props) {
             .then(res => {
 
                 const createdComment = res.data?.createComment;
-                
+
                 if (comments) {
-                    
+
                     setComments([<Comment key={createdComment?.id} comment={createdComment as Commenttype}></Comment>, ...comments])
                 }
                 else {
                     setComments([<Comment key={createdComment?.id} comment={createdComment as Commenttype}></Comment>])
-                    
+
                 }
 
                 result.created = true;
                 // error stays as null
 
                 return result
-                
+
             })
             .catch(err => {
 
@@ -115,10 +112,7 @@ function CommentSection({ video_id, number_of_comments }: props) {
                 return result
             })
 
-            return res;
-
-
-
+        return res;
 
     }
 
@@ -131,29 +125,50 @@ function CommentSection({ video_id, number_of_comments }: props) {
         }))
     }, [data])
 
-    if (loading) {
-        return (<p>Loading</p>)
-    }
-    else if (data) {
+    useEffect(() => {
+        refetch({video_id: video_id})
+    }, [showComments])
 
-        return (
-            <div className="videopage__comments">
+    return (
+        <div className="videopage__comments">
+            <div className="flex marginb3 AlignItemsCenter">
 
-                <p className="marginb3">{number_of_comments ? number_of_comments : ""} Comments</p>
-                <CreateComment handleCreateComment={addNewComment} video_id={video_id}></CreateComment>
-
-                {
-                    comments
-                }
-
+                <img className={`pointer marginr1 ${showComments ? "" : "transformRotNeg90"}`} src="/ResponsesIcon.svg" style={{ width: ".8rem" }}
+                    onClick={
+                        () => {
+                            getComments({ variables: { video_id: video_id } })
+                            setShowComments(!showComments)
+                        }
+                    }
+                ></img>
+                <p>{number_of_comments ? number_of_comments : ""} Comments</p>
             </div>
-        )
-    }
-    else {
-        return (<p>Problem getting comments</p>)
-    }
+            {
+                showComments
+                    ?
+                    <Suspense fallback={
+                        <div className="flex justifyContentCenter" style={{ height: "100%" }}>
 
+                            <LoadingSpinner></LoadingSpinner>
+
+                        </div>
+                    }>
+                        <CreateComment handleCreateComment={addNewComment} video_id={video_id}></CreateComment>
+                        {
+                            comments
+                        }
+                    </Suspense>
+                    :
+                    ""
+
+            }
+
+
+        </div>
+    )
 }
+
+
 
 export default CommentSection
 

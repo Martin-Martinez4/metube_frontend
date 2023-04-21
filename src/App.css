@@ -181,6 +181,12 @@ table {
 .margint4{
 	margin-top: 1rem;
 }
+.margint5{
+	margin-top: 1.25rem;
+}
+.margint6{
+	margin-top: 1.5rem;
+}
 
 .bgred{
 	background-color: var(--red);
@@ -255,10 +261,6 @@ table {
 	opacity: 90%;
 }
 
-.hoverlighten:hover{
-	opacity: 90%;
-}
-
 .bordernone{
 	border: none;
 }
@@ -278,4 +280,31 @@ table {
 .hovercolorwhite:hover{
 	color: var(--white);
 }
+.hoverShadowLightBlue:hover{
+	box-shadow: 1px 1px  5px var(--lightblue);
+}
+.hoverPill:hover{
+	border-radius: 16px;
+}
+
+.transformRot90{
+	transform: rotate(90deg);
+}
+.transformRotNeg90{
+	transform: rotate(-90deg);
+}
+.transformRotNeg180{
+	transform: rotate(-180deg);
+}
+
+.padding0{
+
+	padding: 0;
+}
+.padding1{
+
+	padding: .25rem;
+}
+
+
 

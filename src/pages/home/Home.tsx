@@ -38,38 +38,42 @@ function Home() {
 
   if (loading) {
 
-    <>
+    return (
 
-      <TopNav></TopNav>
-      <div className="home">
+      <>
 
-        <div className="flex">
-          <LeftsideNav></LeftsideNav>
+        <TopNav></TopNav>
+        <div className="home">
+
+          <div className="flex">
+            <LeftsideNav></LeftsideNav>
 
 
-          {/* need to implement infinite scrolling */}
-          <div className="home__videoarea">
-            <div className="home__categoriesnav">
-              <span className="home__categoriesnav__category marginr4">All</span>
-              <span className="home__categoriesnav__category marginr4">Computer programming</span>
-              <span className="home__categoriesnav__category marginr4">Coding</span>
-              <span className="home__categoriesnav__category marginr4">Animation</span>
+            {/* need to implement infinite scrolling */}
+            <div className="home__videoarea">
+              <div className="home__categoriesnav">
+                <span className="home__categoriesnav__category marginr4">All</span>
+                <span className="home__categoriesnav__category marginr4">Computer programming</span>
+                <span className="home__categoriesnav__category marginr4">Coding</span>
+                <span className="home__categoriesnav__category marginr4">Animation</span>
+
+              </div>
+
+              <div className="flex justifyContentCenter" style={{ height: "100%" }}>
+
+                  <img src="/LoadingRings.svg" style={{ width: "10%", margin: "auto"}}></img>
+
+              </div>
+
+              <div className="whitespace"></div>
 
             </div>
-
-            <div className="home__videoarea__container">
-
-              loading
-
-            </div>
-
-            <div className="whitespace"></div>
-
           </div>
         </div>
-      </div>
 
-    </>
+      </>
+    )
+
 
   }
   if (error) return <p>{`${error}`}</p>

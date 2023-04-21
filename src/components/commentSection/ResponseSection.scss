@@ -1,0 +1,18 @@
+.reply{
+    &__button{
+        font-style: oblique;
+        
+        &:hover{
+            font-style: normal;
+            
+        }
+    }
+}
+
+.ResponseSection{
+
+    &__linebreak{
+        margin-top: 2rem;
+        border-top: 1px solid var(--lightblueTransparent);
+    }
+}

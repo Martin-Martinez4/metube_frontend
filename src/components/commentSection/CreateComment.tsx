@@ -6,17 +6,21 @@ import { CommentInput } from "../../__generated__/graphql";
 
 type props = {
 
-  handleCreateComment: (comment: CommentInput) =>  Promise<{created: boolean, error: Error | null}>,
-  video_id :string,
+  handleCreateComment: (comment: CommentInput) => Promise<{ created: boolean, error: Error | null }>,
+  video_id: string,
+  initialData?: string,
+  handleCancel?: () => void,
+  startInEditMode?: boolean,
+  handleSubmit?: () => void,
 
 }
 
-function CreateComment({ handleCreateComment, video_id }: props) {
+function CreateComment({ handleCreateComment, video_id, initialData, handleCancel, startInEditMode, handleSubmit }: props) {
 
-  const [editMode, setEditMode] = useState(false);
+  const [editMode, setEditMode] = useState(startInEditMode);
 
   const [commentBoxText, setCommentBoxText] = useState({
-    commentBoxText: ""
+    commentBoxText: initialData ? initialData : ""
   });
 
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
@@ -29,21 +33,25 @@ function CreateComment({ handleCreateComment, video_id }: props) {
     }
   }, [commentBoxText, editMode]);
 
-  async function handleSubmitComment(){
+  async function handleSubmitComment() {
 
-    const resultComment = await handleCreateComment({body: commentBoxText.commentBoxText, VideoId: video_id})
+    const resultComment = await handleCreateComment({ body: commentBoxText.commentBoxText, VideoId: video_id })
 
-    if(resultComment.error !== null || resultComment.created === false){
+    if (resultComment.error !== null || resultComment.created === false) {
 
       alert("Create Comment failed")
       alert(resultComment.created)
 
       return
 
-    }else{
+    } else {
 
       setEditMode(false)
-      setCommentBoxText({...commentBoxText, commentBoxText: ""})
+      setCommentBoxText({ ...commentBoxText, commentBoxText: "" })
+
+      if(handleSubmit){
+        handleSubmit();
+      }
 
       return
 
@@ -97,7 +105,7 @@ function CreateComment({ handleCreateComment, video_id }: props) {
             onFocus={() => setEditMode(true)}
             style={{ height: "1rem" }}
             value={""}
-            
+
           >
           </textarea>
       }
@@ -107,7 +115,14 @@ function CreateComment({ handleCreateComment, video_id }: props) {
         editMode
           ?
           <div className="flex justifyContentEnd">
-            <div className="btn marginr2 bgred colorwhite" onClick={() => setEditMode(false)}>Cancel</div>
+            <div className="btn marginr2 bgred colorwhite" onClick={() => {
+              if (handleCancel) {
+
+                handleCancel()
+              }
+              setEditMode(false)
+            }}>Cancel
+            </div>
             <div className="btn bgblue colorwhite" onClick={() => handleSubmitComment()}>Comment</div>
           </div>
           :

@@ -7,6 +7,7 @@ import PlaylistHorizontal from "../../components/playlist/PlaylistHorizontal";
 import { gql } from "../../__generated__/gql";
 import "./ProfilePage.scss";
 import SubscribeButton from "../../components/subscribebutton/SubscribeButton";
+import { formatNumber } from "../../app/utilis/numberFormater";
 
 const PROFILE_QUERY = gql(/* GraphQL */`
 query Profile($username: String!){
@@ -49,7 +50,7 @@ function ProfilePage() {
                                     <div className="flexColumn">
 
                                         <span className="profilepage__channelname">{data?.profile?.username}</span>
-                                        <span className="profilepage__subcount">{data?.profile?.subscribers} subscribers </span>
+                                        <span className="profilepage__subcount">{formatNumber(data?.profile?.subscribers)} subscribers </span>
                                     </div>
                                 </div>
 

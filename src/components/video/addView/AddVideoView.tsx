@@ -38,7 +38,7 @@ function AddVideoView({video_id}: props) {
 
 
     return (
-        <>test</>
+        <></>
     )
 }
 

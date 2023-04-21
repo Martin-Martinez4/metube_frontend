@@ -14,6 +14,7 @@ import SubscribeButton from "../../components/subscribebutton/SubscribeButton";
 import VideoLikeDislike from "../../components/likeDislike/VideoLikeDislike";
 import CommentSection from "../../components/commentSection/CommentSection";
 import AddVideoView from "../../components/video/addView/AddVideoView";
+import { formatNumber } from "../../app/utilis/numberFormater";
 
 const VIDEO_QUERY = gql(/* GraphQL */`
     query Video($id: ID!){
@@ -80,7 +81,7 @@ function VideoPage() {
               <h1 className="marginb1 videopage__video__title">{data?.video?.contentinformation?.title}</h1>
 
               <div className="marginb2 flex justifyContentSpaceBetween">
-                {data?.video?.statistic?.views} views • {data?.video?.contentinformation?.published ? formatdate(data?.video?.contentinformation?.published) : ""} ago
+                {formatNumber(data?.video?.statistic?.views)} views • {data?.video?.contentinformation?.published ? formatdate(data?.video?.contentinformation?.published) : ""} ago
                 <div className="flex">
                   <div className="flexcolumn justifyContentCenter">
                     <div className="flex justifyContentCenter">
@@ -109,7 +110,7 @@ function VideoPage() {
                 <img className="thumbnailpreview__info__userprofile marginr2" src={`http://localhost:8081/profile/` + data?.video?.profile?.username + "/"}></img>
                 <div className="flexColumn">
                   <span style={{ wordBreak: "break-word", maxWidth: "25vw" }}>{data?.video?.profile?.username}</span>
-                  <span>{data?.video?.profile?.subscribers} subscribers </span>
+                  <span>{formatNumber(data?.video?.profile?.subscribers)} subscribers </span>
                 </div>
               </div>
 
@@ -153,7 +154,6 @@ function VideoPage() {
           <ThumbnailPreviewSmall id="1"></ThumbnailPreviewSmall>
           <ThumbnailPreviewSmall id="1"></ThumbnailPreviewSmall>
           <ThumbnailPreviewSmall id="1"></ThumbnailPreviewSmall>
-          id="1"
           <div className="whitespace"></div>
 
 
