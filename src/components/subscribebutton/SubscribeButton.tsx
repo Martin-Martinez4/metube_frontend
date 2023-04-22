@@ -5,6 +5,7 @@
 import { useMutation } from "@apollo/client";
 import { gql } from "../../__generated__/gql";
 import { useEffect, useState } from "react";
+import { handleAccessError } from "../../app/errors/handleAccessError/HandleAccessError";
 
 type SubscribeButtonProps = {
     username: string | undefined,
@@ -31,66 +32,54 @@ function SubscribeButton({ username, isSubscribed }: SubscribeButtonProps) {
 
     const [isSubscribe, setIsSubscribe] = useState<boolean | undefined | null>(isSubscribed);
 
-    function handleSubscribe(){
+    function handleSubscribe() {
 
-        if (username){
+        if (username) {
 
             subscribe({
                 variables: {
                     subscribee: username,
                 }
             })
-            .then(res => {
-    
-                if(res.data?.subscribe){
-                    
-                    setIsSubscribe(res.data?.subscribe)
-                }
-    
-    
-            })
-            .catch(err => {
-    
-    
-                if(err.message === "no token present, access denied"){
-    
-                    console.log("access denied")
-    
-                }
-    
-            })
+                .then(res => {
+
+                    if (res.data?.subscribe) {
+
+                        setIsSubscribe(res.data?.subscribe)
+                    }
+
+
+                })
+                .catch(err => {
+
+                    handleAccessError(err)
+                })
         }
 
 
     }
-    function handleUnsubscribe(){
+    function handleUnsubscribe() {
 
-        if(username){
+        if (username) {
 
             unsubscribe({
                 variables: {
                     subscribee: username,
                 }
             })
-            .then(res => {
-    
-                if(res.data?.unsubscribe){
-                    
-                    setIsSubscribe(!res.data?.unsubscribe)
-                }
-    
-    
-            })
-            .catch(err => {
-    
-    
-                if(err.message === "no token present, access denied"){
-    
-                    console.log("access denied")
-    
-                }
-    
-            })
+                .then(res => {
+
+                    if (res.data?.unsubscribe) {
+
+                        setIsSubscribe(!res.data?.unsubscribe)
+                    }
+
+
+                })
+                .catch(err => {
+
+                    handleAccessError(err)
+                })
         }
 
 

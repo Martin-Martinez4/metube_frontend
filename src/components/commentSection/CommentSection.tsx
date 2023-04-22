@@ -7,6 +7,8 @@ import { Comment as Commenttype, CommentInput } from "../../__generated__/graphq
 import { Suspense, useEffect, useState } from "react";
 import CreateComment from "./CreateComment";
 import LoadingSpinner from "../loadingIndicator/LoadingSpinner";
+import { handleAccessError } from "../../app/errors/handleAccessError/HandleAccessError";
+import { loggedInUserVar } from "../../app/apolloCache/InMemoryCache";
 
 type props = {
     video_id: string,
@@ -66,6 +68,7 @@ function CommentSection({ video_id, number_of_comments }: props) {
 
     const [showComments, setShowComments] = useState(false)
 
+    const isLoggedIn = loggedInUserVar().isLoggedIn;
 
     const [comments, setComments] = useState(data?.getVideoComments.map((comment) => {
 
@@ -108,6 +111,9 @@ function CommentSection({ video_id, number_of_comments }: props) {
             })
             .catch(err => {
 
+
+                handleAccessError(err)
+
                 result.error = err
                 return result
             })
@@ -126,7 +132,7 @@ function CommentSection({ video_id, number_of_comments }: props) {
     }, [data])
 
     useEffect(() => {
-        refetch({video_id: video_id})
+        refetch({ video_id: video_id })
     }, [showComments])
 
     return (
@@ -153,7 +159,13 @@ function CommentSection({ video_id, number_of_comments }: props) {
 
                         </div>
                     }>
-                        <CreateComment handleCreateComment={addNewComment} video_id={video_id}></CreateComment>
+                        {
+                            isLoggedIn
+                                ?
+                                <CreateComment handleCreateComment={addNewComment} video_id={video_id}></CreateComment>
+                                :
+                                ""
+                        }
                         {
                             comments
                         }

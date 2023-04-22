@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Like_Dislike } from "../../__generated__/graphql";
 import { gql } from "../../__generated__/gql";
 import { formatNumber } from "../../app/utilis/numberFormater";
+import { handleAccessError } from "../../app/errors/handleAccessError/HandleAccessError";
 
 const USER_LIKED_VIDEO = gql(/* GraphQL */`
     query VideoLikeStatus($id: ID!){
@@ -36,10 +37,10 @@ function VideoLikeDislike({ video_id, likes, dislikes }: props) {
     variables: { id: `${video_id}` },
   });
 
-  
+
   const [likeVideo] = useMutation(LIKE_VIDEO);
   const [dislikeVideo] = useMutation(DISLIKE_VIDEO);
-  
+
   const [videoLikeStatus, setVideoLikeStatus] = useState<Like_Dislike | null | undefined>(userLikedVideo.data?.getVideoLikeStatus);
   const [likesAndDislikes, setLikesAndDislikes] = useState<{ likes: number | undefined, dislikes: number | undefined }>({
     likes: likes,
@@ -63,18 +64,22 @@ function VideoLikeDislike({ video_id, likes, dislikes }: props) {
 
             setVideoLikeStatus(Like_Dislike.Like);
 
-            
-            if(VideoLikeStatusBeforeCurrentAction === Like_Dislike.Dislike){
+
+            if (VideoLikeStatusBeforeCurrentAction === Like_Dislike.Dislike) {
 
 
               setLikesAndDislikes({ likes: likesAndDislikes.likes === undefined ? likesAndDislikes.likes : ++likesAndDislikes.likes, dislikes: likesAndDislikes.dislikes === undefined ? likesAndDislikes.dislikes : --likesAndDislikes.dislikes })
 
-            }else{
-              
+            } else {
+
               setLikesAndDislikes({ ...likesAndDislikes, likes: likesAndDislikes.likes === undefined ? likesAndDislikes.likes : ++likesAndDislikes.likes })
             }
 
           }
+        })
+        .catch(err => {
+
+          handleAccessError(err)
         })
 
     }
@@ -97,18 +102,22 @@ function VideoLikeDislike({ video_id, likes, dislikes }: props) {
 
             setVideoLikeStatus(Like_Dislike.Dislike);
 
-            if(VideoLikeStatusBeforeCurrentAction === Like_Dislike.Like){
-       
-              
+            if (VideoLikeStatusBeforeCurrentAction === Like_Dislike.Like) {
+
+
               setLikesAndDislikes({ likes: likesAndDislikes.likes === undefined ? likesAndDislikes.likes : --likesAndDislikes.likes, dislikes: likesAndDislikes.dislikes === undefined ? likesAndDislikes.dislikes : ++likesAndDislikes.dislikes })
-              
-            }else{
-              
+
+            } else {
+
               setLikesAndDislikes({ ...likesAndDislikes, dislikes: likesAndDislikes.dislikes === undefined ? likesAndDislikes.dislikes : ++likesAndDislikes.dislikes })
             }
 
 
           }
+        })
+        .catch(err => {
+
+          handleAccessError(err)
         })
 
     }
@@ -117,12 +126,12 @@ function VideoLikeDislike({ video_id, likes, dislikes }: props) {
 
   useEffect(() => {
     userLikedVideo.refetch({ id: video_id })
-    .then(
-      res => {
+      .then(
+        res => {
 
-        setVideoLikeStatus(res.data.getVideoLikeStatus);
-      }
-    )
+          setVideoLikeStatus(res.data.getVideoLikeStatus);
+        }
+      )
 
   }, [])
 
@@ -134,7 +143,7 @@ function VideoLikeDislike({ video_id, likes, dislikes }: props) {
           videoLikeStatus === Like_Dislike.Like
             ?
             <>
-              <img src="/ThumbsupBlue.svg" onClick={handleLikeVideo} className="pointer"></img><span className="marginr2 marginl1">{formatNumber(likesAndDislikes.likes) }</span>
+              <img src="/ThumbsupBlue.svg" onClick={handleLikeVideo} className="pointer"></img><span className="marginr2 marginl1">{formatNumber(likesAndDislikes.likes)}</span>
               <img src="/Thumbsdown.svg" onClick={handleDisLikeVideo} className="pointer"></img><span className="marginl1">{formatNumber(likesAndDislikes.dislikes)}</span>
             </>
             :
@@ -160,7 +169,7 @@ function VideoLikeDislike({ video_id, likes, dislikes }: props) {
             :
             ""
         }
-       
+
       </div>
       {/* ~118px width */}
       <div>---------------</div>

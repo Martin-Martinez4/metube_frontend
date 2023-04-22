@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import CreateComment from "./CreateComment";
 
 import "./ResponseSection.scss";
+import { handleAccessError } from "../../app/errors/handleAccessError/HandleAccessError";
+import { loggedInUserVar } from "../../app/apolloCache/InMemoryCache";
 
 type props = {
     numberOfResponses: number | undefined,
@@ -56,6 +58,8 @@ export const CREATE_REPSONSE = gql(/* GraphQL */`
         }
     }
 `);
+
+const isLoggedIn = loggedInUserVar().isLoggedIn;
 
 function ResponseSection({ numberOfResponses, video_id, parent_id }: props) {
 
@@ -130,6 +134,8 @@ function ResponseSection({ numberOfResponses, video_id, parent_id }: props) {
             })
             .catch(err => {
 
+                handleAccessError(err)
+
                 result.error = err
                 return result
             })
@@ -174,11 +180,17 @@ function ResponseSection({ numberOfResponses, video_id, parent_id }: props) {
                         :
                         ""
                 }
-                <div className="reply__button hoverPill colorblue hoverlighten pointer" onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    setCreateResponseMode(true);
-                }}>reply</div>
+                {
+                    isLoggedIn
+                    ?
+                    <div className="reply__button hoverPill colorblue hoverlighten pointer" onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        setCreateResponseMode(true);
+                    }}>reply</div>
+                    :
+                    ""
+                }
             </div>
             {
                 createResponseMode
@@ -198,9 +210,6 @@ function ResponseSection({ numberOfResponses, video_id, parent_id }: props) {
                 showReplies
                     ?
                     <div className="videopage__responses margint4">
-
-                        {/* <CreateComment handleCreateComment={addNewResponse} video_id={video_id}></CreateComment> */}
-
 
                         {
                             responses

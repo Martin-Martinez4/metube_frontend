@@ -280,6 +280,9 @@ table {
 .hovercolorwhite:hover{
 	color: var(--white);
 }
+.hovercolorlightblue:hover{
+	color: var(--lightblue);
+}
 .hoverShadowLightBlue:hover{
 	box-shadow: 1px 1px  5px var(--lightblue);
 }

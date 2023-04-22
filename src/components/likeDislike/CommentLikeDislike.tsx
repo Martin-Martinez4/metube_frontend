@@ -2,6 +2,7 @@ import { useQuery, useMutation } from "@apollo/client";
 import { useEffect, useState } from "react";
 import { Like_Dislike } from "../../__generated__/graphql";
 import { gql } from "../../__generated__/gql";
+import { handleAccessError } from "../../app/errors/handleAccessError/HandleAccessError";
 
 export const LIKE_COMMENT = gql(/* GraphQL */`
 
@@ -71,6 +72,10 @@ function CommentLikeDislike({ comment_id, likes, dislikes, userlikedComment }: p
 
           }
         })
+        .catch(err => {
+
+          handleAccessError(err)
+        })
 
     }
 
@@ -104,6 +109,10 @@ function CommentLikeDislike({ comment_id, likes, dislikes, userlikedComment }: p
 
 
           }
+        })
+        .catch(err => {
+
+          handleAccessError(err)
         })
 
     }

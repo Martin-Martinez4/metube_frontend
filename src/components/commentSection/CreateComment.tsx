@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import "./CreateComment.scss";
 import { handleFormInputChange } from "../../app/utilis/eventhandlers";
+import { loggedInUserVar } from "../../app/apolloCache/InMemoryCache";
 import { CommentInput } from "../../__generated__/graphql";
 
 type props = {
@@ -15,7 +16,10 @@ type props = {
 
 }
 
+
 function CreateComment({ handleCreateComment, video_id, initialData, handleCancel, startInEditMode, handleSubmit }: props) {
+
+  const loggedInUser = loggedInUserVar()
 
   const [editMode, setEditMode] = useState(startInEditMode);
 
@@ -49,7 +53,7 @@ function CreateComment({ handleCreateComment, video_id, initialData, handleCance
       setEditMode(false)
       setCommentBoxText({ ...commentBoxText, commentBoxText: "" })
 
-      if(handleSubmit){
+      if (handleSubmit) {
         handleSubmit();
       }
 
@@ -60,7 +64,9 @@ function CreateComment({ handleCreateComment, video_id, initialData, handleCance
 
   }
 
+
   return (
+
     <div className={editMode ? "flexColumn" : "flex"}>
       <div>
 
@@ -71,10 +77,10 @@ function CreateComment({ handleCreateComment, video_id, initialData, handleCance
 
               <p className="marginb3">You are commenting as </p>
               <div className="flex">
-                <img className="thumbnailpreview__info__userprofile marginb3 marginr3" src={`http://localhost:8081/profile/${""}/`}></img>
+                <img className="thumbnailpreview__info__userprofile marginb3 marginr3" src={`http://localhost:8081/profile/${loggedInUser.Username}/`}></img>
                 <div>
-                  <p>username</p>
-                  <p>@tagName</p>
+                  <p>{loggedInUser.Displayname}</p>
+                  <p>@{loggedInUser.Username}</p>
 
                 </div>
 

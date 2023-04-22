@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { CommentInput, Comment as Commenttype } from "../../__generated__/graphql";
 import { formatdate } from "../../app/utilis/dateFormaters";
+import { loggedInUserVar } from "../../app/apolloCache/InMemoryCache";
 import CommentLikeDislike from "../likeDislike/CommentLikeDislike";
 import CreateComment from "./CreateComment";
 
@@ -13,6 +14,8 @@ type props = {
 function Response({ comment, handleAddNewResponse }: props) {
 
     const [createResponseMode, setCreateResponseMode] = useState(false);
+
+    const isLoggedIn = loggedInUserVar().isLoggedIn
 
     return (
 
@@ -32,11 +35,17 @@ function Response({ comment, handleAddNewResponse }: props) {
                     <CommentLikeDislike comment_id={comment.id} likes={comment.likes} dislikes={comment.dislikes} userlikedComment={comment.status} ></CommentLikeDislike>
 
                 </div>
-                <div className="reply__button hoverPill colorblue hoverlighten pointer" onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        setCreateResponseMode(!createResponseMode);
-                    }}>reply</div>
+                {
+                    isLoggedIn
+                    ?
+                    <div className="reply__button hoverPill colorblue hoverlighten pointer" onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            setCreateResponseMode(!createResponseMode);
+                        }}>reply</div>
+                    :
+                    ""
+                }
                     {
                         createResponseMode
                         ?
