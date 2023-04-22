@@ -1,7 +1,6 @@
+.videopage {
 
-.videopage{
-
-    &__container{
+    &__container {
 
         display: flex;
 
@@ -14,54 +13,125 @@
 
     }
 
-    &__suggestions{
+    &__suggestions {
 
         width: 20vw;
         margin-left: 2rem;
 
+        @media screen and (max-width: 620px) {
+
+            display: none;
+        }
+
     }
 
-    &__video{
+    &__video {
 
         width: 65vw;
 
         margin-top: .5rem;
 
-        &__info{
+        &__likesAndViews {
+
+            @media screen and (max-width: 620px) {
+                
+                flex-direction: column;
+                width: 100%;
+            }
+        }
+
+        &__likes {
+
+            margin-top: 1rem;
+        }
+
+        &__profileAndSubscribe{
+
+            align-items: center;
+            
+            @media screen and (max-width: 620px) {
+                
+                flex-direction: column;
+                width: 100%;
+                align-items: baseline;
+                padding: 0 0.5rem 0 0.5rem;
+
+            }
+        }
+        
+        &__profile{
+            @media screen and (max-width: 620px) {
+                
+                width: 100%;
+            }
+
+        }
+
+        &__username{
+            word-break: break-word;
+            max-width: 60vw; 
+
+            @media screen and (max-width: 620px) {
+                
+                width: 60vw;
+            }
+        }
+
+
+        @media screen and (max-width: 620px) {
+
+            width: 100%;
+        }
+
+        &__info {
             word-break: break-all;
 
-            &__button{
+            @media screen and (max-width: 620px) {
 
-                &--subscribe{
+                padding: 0 0.5rem 0 0.5rem;
+                box-sizing: border-box;
+                width: 100vw;
+
+            }
+
+            padding: 0 0.5rem 0 0.5rem;
+
+            &__button {
+
+                &--subscribe {
 
                     font-size: 1.2rem;
                     padding: .5rem;
 
-                    border: 1px solid var(--darkred); 
+                    border: 1px solid var(--darkred);
                 }
 
             }
 
-            &__icons{
-
-            }
         }
 
-        &__title{
+        &__title {
             font-size: 1.5rem;
             margin: .5rem 0 .5rem 0;
         }
 
     }
 
-    &__comments{
+    &__comments {
 
         margin-left: 1rem;
 
-        &__comment{
+        @media screen and (max-width: 620px) {
+
+            margin-left: .5rem;
+
+
+        }
+
+        &__comment {
             display: flex;
-            
-            &__text{
+
+            &__text {
 
                 width: 90%;
 
@@ -75,17 +145,17 @@
 
     }
 
-    &__responses{
+    &__responses {
 
         width: 100%;
         // margin-left: .5rem;
-        
 
-        &__response{
+
+        &__response {
             display: flex;
-            
-            &__text{
-                
+
+            &__text {
+
                 width: 90%;
 
                 font-size: 1rem;
@@ -100,11 +170,11 @@
 
 
 }
-summary{ 
+
+summary {
     list-style: none;
-    
+
     // &::marker{ 
     //     display: none; 
     // } 
 }
-

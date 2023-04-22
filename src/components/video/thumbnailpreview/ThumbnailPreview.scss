@@ -17,6 +17,11 @@
 
     
         }
+
+        @media screen and (max-width: 620px) {
+            
+            width: 75vw;
+        }
     }
 
     &__thumbnail{
@@ -55,10 +60,10 @@
         
             }
 
-            @media screen and (max-width: 1550px) {
+            @media screen and (max-width: 620px) {
             
-                min-width: 1rem;
-                min-height: 1rem;
+                width: 1rem;
+                height: 1rem;
     
         
             }

@@ -58,7 +58,7 @@ function LeftsideNav() {
     ]
 
   return (
-    <div className="leftsidenav">
+    <div className="leftsidenav hiddenAt620px">
         <LeftsideNavSection entries={entries}></LeftsideNavSection>
         <LeftsideNavSection header="Profiles" iconClasses="round" entries={profileEntries}></LeftsideNavSection>
       

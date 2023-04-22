@@ -88,8 +88,11 @@ function VideoPage() {
 
               <h1 className="marginb1 videopage__video__title">{data?.video?.contentinformation?.title}</h1>
 
-              <div className="marginb2 flex justifyContentSpaceBetween">
+              <div className="marginb2 flex justifyContentSpaceBetween videopage__video__likesAndViews">
+                <div className="marginb2">
+
                 {formatNumber(data?.video?.statistic?.views)} views • {data?.video?.contentinformation?.published ? formatdate(data?.video?.contentinformation?.published) : ""} ago
+                </div>
                 <div className="flex">
                   <div className="flexcolumn justifyContentCenter">
                     <div className="flex justifyContentCenter">
@@ -111,18 +114,18 @@ function VideoPage() {
 
 
 
-            <div className="flex AlignItemsCenter justifyContentSpaceBetween marginb3">
+            <div className="flex justifyContentSpaceBetween marginb3 videopage__video__profileAndSubscribe">
 
-              <div className="flex AlignItemsCenter">
+              <div className="flex AlignItemsCenter videopage__video__profile">
 
                 <img className="thumbnailpreview__info__userprofile marginr2" src={`http://localhost:8081/profile/` + data?.video?.profile?.username + "/"}></img>
                 <div className="flexColumn">
-                  <span style={{ wordBreak: "break-word", maxWidth: "25vw" }}>{data?.video?.profile?.username}</span>
+                  <span className="videopage__video__username">{data?.video?.profile?.username}</span>
                   <span>{formatNumber(data?.video?.profile?.subscribers)} subscribers </span>
                 </div>
               </div>
 
-              <div className="flex">
+              <div className="flex margint3">
 
                 <SubscribeButton username={data?.video?.profile?.username} isSubscribed={data?.video?.profile?.userIsSubscribedTo}></SubscribeButton>
               </div>

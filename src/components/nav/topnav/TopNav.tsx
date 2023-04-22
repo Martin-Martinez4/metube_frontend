@@ -28,14 +28,15 @@ function TopNav() {
 
   return (
     <div className="topnav">
-      <div>
-        <img className="pointer" src="/NameAndLogoSmall.svg" alt="MeTube logo" onClick={() => { navigate(`/`) }}></img>
-      </div>
+        <img className="pointer topnav__logo" src="/NameAndLogoSmall.svg" alt="MeTube Logo" onClick={() => { navigate(`/`) }}></img>
       <fieldset className="topnav__searchbar">
-        <input type="search" className="topnav__searchbar__input"
-          placeholder="search..."></input>
-        {/* placeholder="Search..."></input> */}
-        <div className="topnav__searchbar__button"><img className="topnav__searchbar__icon" style={{ width: "40%" }} src="/MagnifyingGlass2.svg"></img></div>
+        <input 
+          type="search" 
+          className="topnav__searchbar__input"
+          placeholder="search..."
+          onFocus={() => {}}
+        ></input>
+        <div className="topnav__searchbar__button"><img className="topnav__searchbar__icon" src="/MagnifyingGlass2.svg"></img></div>
       </fieldset>
 
       <div>

@@ -10,6 +10,15 @@
   --darkblue: #243F4A;
   --lightblue: #67AECA;
 
+  --leftNavWidth: 12vw;
+
+  
+}
+@media screen and (max-width: 620px) {
+  #root{
+
+    --leftNavWidth: 0vw;
+  }
 }
 
 .elementToFadeInAndOut {
