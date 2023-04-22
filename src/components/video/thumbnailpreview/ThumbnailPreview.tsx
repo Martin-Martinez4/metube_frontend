@@ -10,7 +10,8 @@ function ThumbnailPreview({ id, width, title, channelname, views, thumbnail, pro
 
   return (
 
-    <div className="pointer" style={{ width: `${width}`}}>
+    // <div className="pointer thumbnailpreview__contianer" style={{ width: `${width}`}}>
+    <div className="pointer thumbnailpreview__container">
         <div className="thumbnailpreview">
 
           <img onClick={() => {navigate(`/video/${id}`)}} className="thumbnailpreview__thumbnail" src={`http://localhost:8081`+ thumbnail}></img>

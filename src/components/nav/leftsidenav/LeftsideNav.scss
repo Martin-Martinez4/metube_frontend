@@ -1,5 +1,4 @@
-
-.leftsidenav{
+.leftsidenav {
 
     box-sizing: border-box;
     width: 12vw;
@@ -12,3 +11,12 @@
 
 }
 
+@media only screen and (max-width: 920px) {
+
+    .leftsidenav {
+        width: 10vw;
+
+
+    }
+
+}

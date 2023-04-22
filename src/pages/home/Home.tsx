@@ -8,6 +8,7 @@ import { useQuery } from "@apollo/client";
 import { gql } from "../../__generated__/gql";
 
 import "./Home.scss";
+import { useNavigate } from "react-router-dom";
 
 export const VIDEOS_QUERY = gql(/* GraphQL */`
 query Videos{
@@ -36,6 +37,8 @@ function Home() {
 
   const { data, loading, error } = useQuery(VIDEOS_QUERY);
 
+  const navigate = useNavigate();
+
   if (loading) {
 
     return (
@@ -61,7 +64,7 @@ function Home() {
 
               <div className="flex justifyContentCenter" style={{ height: "100%" }}>
 
-                  <img src="/LoadingRings.svg" style={{ width: "10%", margin: "auto"}}></img>
+                <img src="/LoadingRings.svg" style={{ width: "10%", margin: "auto" }}></img>
 
               </div>
 
@@ -76,7 +79,52 @@ function Home() {
 
 
   }
-  if (error) return <p>{`${error}`}</p>
+  if (error) {
+
+    return (
+      <>
+        <TopNav></TopNav>
+        <div className="home">
+
+          <div className="flex">
+            <LeftsideNav></LeftsideNav>
+
+
+            {/* need to implement infinite scrolling */}
+            <div className="home__videoarea">
+              <div className="home__categoriesnav">
+                <span className="home__categoriesnav__category marginr4">All</span>
+                <span className="home__categoriesnav__category marginr4">Computer programming</span>
+                <span className="home__categoriesnav__category marginr4">Coding</span>
+                <span className="home__categoriesnav__category marginr4">Animation</span>
+
+              </div>
+
+              <div className="home__videoarea__container">
+
+                <div>
+
+                  <p>An error has occured...</p>
+                  <p
+                    className="hovercolorlightblue pointer"
+                    onClick={() => {
+
+                      navigate('/', { replace: true })
+                    }
+                    }>Click here to go the home page or try again later
+                  </p>
+                </div>
+
+              </div>
+
+              <div className="whitespace"></div>
+
+            </div>
+          </div>
+        </div>
+      </>
+    )
+  }
 
   return (
     <>

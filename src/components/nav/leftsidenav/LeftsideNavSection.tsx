@@ -27,7 +27,7 @@ function LeftsideNavSection({ header, entries, iconClasses }: LeftsideNavSection
             {
                 header
                     ?
-                    <h2 className="LeftsideNavSection__header">{header}</h2>
+                    <h2 className="LeftsideNavSection__header hiddenAt920px">{header}</h2>
                     :
                     ""
 
@@ -44,7 +44,7 @@ function LeftsideNavSection({ header, entries, iconClasses }: LeftsideNavSection
                                     ""
                             }}>
                                 <img className={`LeftsideNavSection__entries--icon pointer ${iconClasses ? iconClasses : ""}`} src={`${entry.icon}`} />
-                                <span className="LeftsideNavSection__entries--title pointer" >{entry.title}</span>
+                                <span className="LeftsideNavSection__entries--title pointer hiddenAt920px" >{entry.title}</span>
                             </div>
                         )
                     })

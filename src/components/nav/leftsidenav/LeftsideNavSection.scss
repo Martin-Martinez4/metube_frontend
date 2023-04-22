@@ -1,23 +1,22 @@
-
-.LeftsideNavSection{
+.LeftsideNavSection {
 
     margin-bottom: 1rem;
-    
 
-    &__header{
+
+    &__header {
 
         font-size: 1.2rem;
         margin-bottom: 1rem;
     }
 
-    &__entries{
+    &__entries {
 
         display: flex;
         flex-direction: column;
         gap: 12px;
 
 
-        &--icon{
+        &--icon {
 
             width: 32px;
             height: 32px;
@@ -26,7 +25,7 @@
 
         }
 
-        &--title{
+        &--title {
 
             font-size: 1.1rem;
             // height: 1.5rem;
@@ -34,21 +33,40 @@
             max-width: 90%;
             overflow: hidden;
             text-overflow: ellipsis;
-            white-space:nowrap
+            white-space: nowrap
         }
 
     }
 
-    &__entry{
+    &__entry {
 
         display: flex;
         align-items: center;
 
     }
 
-    &__linebreak{
+    &__linebreak {
         margin-top: 2rem;
         border-top: 1px solid #D9DEE0;
     }
 }
 
+@media only screen and (max-width: 920px) {
+
+
+    .LeftsideNavSection {
+
+
+        &__entry {
+
+            display: flex;
+            align-items: center;
+            margin: auto;
+
+        }
+
+
+    }
+
+
+}

@@ -63,7 +63,7 @@ export const CREATE_COMMENT = gql(/* GraphQL */`
 
 function CommentSection({ video_id, number_of_comments }: props) {
 
-    const [getComments, { data, loading, error, refetch }] = useLazyQuery(VIDEO_COMMENTS);
+    const [getComments, { data, error, refetch }] = useLazyQuery(VIDEO_COMMENTS);
     const [createComment] = useMutation(CREATE_COMMENT);
 
     const [showComments, setShowComments] = useState(false)
@@ -135,6 +135,7 @@ function CommentSection({ video_id, number_of_comments }: props) {
         refetch({ video_id: video_id })
     }, [showComments])
 
+
     return (
         <div className="videopage__comments">
             <div className="flex marginb3 AlignItemsCenter">
@@ -153,7 +154,7 @@ function CommentSection({ video_id, number_of_comments }: props) {
                 showComments
                     ?
                     <Suspense fallback={
-                        <div className="flex justifyContentCenter" style={{ height: "100%" }}>
+                        <div className="flex justifyContentCenter AlignItemsCenter" style={{ height: "100vh" }}>
 
                             <LoadingSpinner></LoadingSpinner>
 
@@ -174,10 +175,28 @@ function CommentSection({ video_id, number_of_comments }: props) {
                     ""
 
             }
+            {
+                showComments && error
+                    ?
+                    <div>
+                        Something went wrong...
+                        <p
+                        className="hovercolorlightblue pointer" 
+                        onClick={
+                            () => {
+                                getComments({ variables: { video_id: video_id } })
+                                setShowComments(!showComments)
+                            }
+                        }>Click here to try to get the comment again</p>
+                    </div>
+                    :
+                    ""
+            }
 
 
         </div>
     )
+
 }
 
 

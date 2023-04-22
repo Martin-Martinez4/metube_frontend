@@ -1,7 +1,13 @@
 
-function LoadingSpinner() {
+
+type props = {
+    diameter?: string
+}
+
+
+function LoadingSpinner({ diameter }: props) {
     return (
-        <svg width="38" height="38" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" stroke="#3E6B7D">
+        <svg width={diameter ? diameter :"38"} height={diameter ? diameter :"38"} viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" stroke="#3E6B7D">
             <g fill="none" fill-rule="evenodd">
                 <g transform="translate(1 1)" stroke-width="2">
                     <circle stroke-opacity=".5" cx="18" cy="18" r="18" />
@@ -11,7 +17,7 @@ function LoadingSpinner() {
                             type="rotate"
                             from="0 18 18"
                             to="360 18 18"
-                            dur="1s"
+                            dur=".8s"
                             repeatCount="indefinite" />
                     </path>
                 </g>

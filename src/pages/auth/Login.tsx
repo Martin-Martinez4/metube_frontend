@@ -178,21 +178,21 @@ function Login() {
                 password2: formState.registerConfirmPassword,
             }
         })
-        .then(res => {
+            .then(res => {
 
-            const user = res.data?.register
-            loggedInUserVar({
-                isLoggedIn: true,
-                Username: user?.username as string,
-                Displayname: user?.displayname as string,
-                IsChannel: user?.isChannel as boolean,
+                const user = res.data?.register
+                loggedInUserVar({
+                    isLoggedIn: true,
+                    Username: user?.username as string,
+                    Displayname: user?.displayname as string,
+                    IsChannel: user?.isChannel as boolean,
+                })
+
+                navigate(`${state?.continue || "/"}`)
             })
-
-            navigate(`${state?.continue || "/"}`)
-        })
-        .catch(err => {
-            setFormSigninErrors([...formRegisterErrors, "an error occured while registering user."])
-        })
+            .catch(err => {
+                setFormSigninErrors([...formRegisterErrors, "an error occured while registering user."])
+            })
 
         return
 
@@ -205,83 +205,19 @@ function Login() {
         <>
 
             <TopNav></TopNav>
-            <div className="login">
-                {
-                    formMode === "login"
-                        ?
-                        <div className="login__container flexColumn AlignItemsCenter">
-                            {
-
-                                formSigninErrors.length > 0
-                                    ?
-                                    formSigninErrors.map((formSigninError) => {
-
-                                        return (<p key={"form " + formSigninError} className="marginb3 bgred colorwhite padding1" style={{ float: "left", width: "70%", }}>{formSigninError}</p>)
-
-                                    })
-                                    :
-                                    ""
-                            }
-
-                            <img className="login__logo marginb5" src="./NameAndLogoSmallAlt.svg" ></img>
-                            <span className="login__formheader marginb4">Signin</span>
-                            <form className="login__form flexColumn AlignItemsCenter" onSubmit={() => { }}>
-
-                                <TextInput
-                                    stateObject={formState}
-                                    setStateObject={setFormState}
-                                    inputName="signinUsername"
-                                    label="username"
-                                    validationFunction={(e: FocusEvent<HTMLInputElement>) => {
-
-                                        inputValidator.clearErrors();
-                                        inputValidator.setValue = formState.signinUsername;
-                                        const errors = inputValidator.typeCheck("string").maxLength(20).allowAlphaNumericOnly().required().getErrors;
-
-                                        return errors;
-
-                                    }}
-                                />
-                                <TextInput
-                                    stateObject={formState}
-                                    setStateObject={setFormState}
-                                    inputName="signinPassword"
-                                    label="password"
-                                    type="password"
-                                    validationFunction={(e: FocusEvent<HTMLInputElement>) => {
-
-                                        inputValidator.clearErrors();
-                                        inputValidator.setValue = formState.signinPassword;
-                                        const errors = inputValidator.typeCheck("string").maxLength(20).required().getErrors;
-
-                                        return errors;
-
-                                    }}
-                                ></TextInput>
-
-                                <p className="login__form--text marginb5">Not your computer? Use Guest mode to sign in privately.</p>
-                                <div className="login__form--buttonGroup flex justifyContentSpaceBetween">
-
-                                    <div
-                                        className=" login__form--createAccount btn colorblue pointer hoverbgblue hovercolorwhite"
-                                        onClick={() => setFormMode("register")}
-                                    >Create Account</div>
-                                    <div className="btn bgblue colorwhite hoverlighten" onClick={() => handleSignin()}>Signin</div>
-                                </div>
-                            </form>
-
-                        </div>
-                        :
-                        formMode === "register"
+            <div className="login__area">
+                <div className="login">
+                    {
+                        formMode === "login"
                             ?
                             <div className="login__container flexColumn AlignItemsCenter">
                                 {
 
-                                    formRegisterErrors.length > 0
+                                    formSigninErrors.length > 0
                                         ?
-                                        formRegisterErrors.map((formRegisterError) => {
+                                        formSigninErrors.map((formSigninError) => {
 
-                                            return (<p className="marginb3 bgred colorwhite padding1" style={{ float: "left", width: "70%", }}>{formRegisterError}</p>)
+                                            return (<p key={"form " + formSigninError} className="marginb3 bgred colorwhite padding1" style={{ float: "left", width: "70%", }}>{formSigninError}</p>)
 
                                         })
                                         :
@@ -289,92 +225,159 @@ function Login() {
                                 }
 
                                 <img className="login__logo marginb5" src="./NameAndLogoSmallAlt.svg" ></img>
-                                <span className="login__formheader marginb4">Register</span>
+                                <span className="login__formheader marginb4">Signin</span>
                                 <form className="login__form flexColumn AlignItemsCenter" onSubmit={() => { }}>
 
                                     <TextInput
                                         stateObject={formState}
                                         setStateObject={setFormState}
-                                        inputName="registerUsername"
+                                        inputName="signinUsername"
                                         label="username"
                                         validationFunction={(e: FocusEvent<HTMLInputElement>) => {
 
                                             inputValidator.clearErrors();
-                                            inputValidator.setValue = formState.registerUsername;
+                                            inputValidator.setValue = formState.signinUsername;
                                             const errors = inputValidator.typeCheck("string").maxLength(20).allowAlphaNumericOnly().required().getErrors;
 
                                             return errors;
 
                                         }}
-                                    ></TextInput>
-
+                                    />
                                     <TextInput
                                         stateObject={formState}
                                         setStateObject={setFormState}
-                                        inputName="registerDisplayname"
-                                        label="display name"
-                                        validationFunction={(e: FocusEvent<HTMLInputElement>) => {
-
-                                            inputValidator.clearErrors();
-                                            inputValidator.setValue = formState.registerDisplayname;
-                                            const errors = inputValidator.typeCheck("string").maxLength(20).allowAlphaNumericOnly().required().getErrors;
-
-                                            return errors;
-
-                                        }}
-                                    ></TextInput>
-
-                                    <TextInput
-                                        stateObject={formState}
-                                        setStateObject={setFormState}
-                                        inputName="registerPassword"
+                                        inputName="signinPassword"
                                         label="password"
                                         type="password"
                                         validationFunction={(e: FocusEvent<HTMLInputElement>) => {
 
                                             inputValidator.clearErrors();
-                                            inputValidator.setValue = formState.registerPassword;
+                                            inputValidator.setValue = formState.signinPassword;
                                             const errors = inputValidator.typeCheck("string").maxLength(20).required().getErrors;
 
                                             return errors;
 
                                         }}
                                     ></TextInput>
-                                    <TextInput
-                                        stateObject={formState}
-                                        setStateObject={setFormState}
-                                        inputName="registerConfirmPassword"
-                                        label="confirm password"
-                                        type="password"
-                                        validationFunction={(e: FocusEvent<HTMLInputElement>) => {
-
-                                            inputValidator.clearErrors();
-                                            inputValidator.setValue = formState.registerConfirmPassword;
-                                            const errors = inputValidator.typeCheck("string").maxLength(20).required().getErrors;
-
-                                            return errors;
-
-                                        }}
-                                    ></TextInput>
-
 
                                     <p className="login__form--text marginb5">Not your computer? Use Guest mode to sign in privately.</p>
                                     <div className="login__form--buttonGroup flex justifyContentSpaceBetween">
 
                                         <div
                                             className=" login__form--createAccount btn colorblue pointer hoverbgblue hovercolorwhite"
-                                            onClick={() => setFormMode("login")}
-                                        >Back</div>
-                                        <div className="btn bgblue colorwhite hoverlighten" onClick={handleRegister}>Next</div>
+                                            onClick={() => setFormMode("register")}
+                                        >Create Account</div>
+                                        <div className="btn bgblue colorwhite hoverlighten" onClick={() => handleSignin()}>Signin</div>
                                     </div>
                                 </form>
 
                             </div>
                             :
-                            ""
-                }
+                            formMode === "register"
+                                ?
+                                <div className="login__container flexColumn AlignItemsCenter">
+                                    {
 
+                                        formRegisterErrors.length > 0
+                                            ?
+                                            formRegisterErrors.map((formRegisterError) => {
+
+                                                return (<p className="marginb3 bgred colorwhite padding1" style={{ float: "left", width: "70%", }}>{formRegisterError}</p>)
+
+                                            })
+                                            :
+                                            ""
+                                    }
+
+                                    <img className="login__logo marginb5" src="./NameAndLogoSmallAlt.svg" ></img>
+                                    <span className="login__formheader marginb4">Register</span>
+                                    <form className="login__form flexColumn AlignItemsCenter" onSubmit={() => { }}>
+
+                                        <TextInput
+                                            stateObject={formState}
+                                            setStateObject={setFormState}
+                                            inputName="registerUsername"
+                                            label="username"
+                                            validationFunction={(e: FocusEvent<HTMLInputElement>) => {
+
+                                                inputValidator.clearErrors();
+                                                inputValidator.setValue = formState.registerUsername;
+                                                const errors = inputValidator.typeCheck("string").maxLength(20).allowAlphaNumericOnly().required().getErrors;
+
+                                                return errors;
+
+                                            }}
+                                        ></TextInput>
+
+                                        <TextInput
+                                            stateObject={formState}
+                                            setStateObject={setFormState}
+                                            inputName="registerDisplayname"
+                                            label="display name"
+                                            validationFunction={(e: FocusEvent<HTMLInputElement>) => {
+
+                                                inputValidator.clearErrors();
+                                                inputValidator.setValue = formState.registerDisplayname;
+                                                const errors = inputValidator.typeCheck("string").maxLength(20).allowAlphaNumericOnly().required().getErrors;
+
+                                                return errors;
+
+                                            }}
+                                        ></TextInput>
+
+                                        <TextInput
+                                            stateObject={formState}
+                                            setStateObject={setFormState}
+                                            inputName="registerPassword"
+                                            label="password"
+                                            type="password"
+                                            validationFunction={(e: FocusEvent<HTMLInputElement>) => {
+
+                                                inputValidator.clearErrors();
+                                                inputValidator.setValue = formState.registerPassword;
+                                                const errors = inputValidator.typeCheck("string").maxLength(20).required().getErrors;
+
+                                                return errors;
+
+                                            }}
+                                        ></TextInput>
+                                        <TextInput
+                                            stateObject={formState}
+                                            setStateObject={setFormState}
+                                            inputName="registerConfirmPassword"
+                                            label="confirm password"
+                                            type="password"
+                                            validationFunction={(e: FocusEvent<HTMLInputElement>) => {
+
+                                                inputValidator.clearErrors();
+                                                inputValidator.setValue = formState.registerConfirmPassword;
+                                                const errors = inputValidator.typeCheck("string").maxLength(20).required().getErrors;
+
+                                                return errors;
+
+                                            }}
+                                        ></TextInput>
+
+
+                                        <p className="login__form--text marginb5">Not your computer? Use Guest mode to sign in privately.</p>
+                                        <div className="login__form--buttonGroup flex justifyContentSpaceBetween">
+
+                                            <div
+                                                className=" login__form--createAccount btn colorblue pointer hoverbgblue hovercolorwhite"
+                                                onClick={() => setFormMode("login")}
+                                            >Back</div>
+                                            <div className="btn bgblue colorwhite hoverlighten" onClick={handleRegister}>Next</div>
+                                        </div>
+                                    </form>
+
+                                </div>
+                                :
+                                ""
+                    }
+
+                </div>
             </div>
+
 
         </>
     )

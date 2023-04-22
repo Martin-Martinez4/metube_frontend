@@ -1,11 +1,23 @@
 .thumbnailpreview{
     
-    width: 20vw;
+    width: 100%;
     height: auto;
 
     margin: 1rem 0 1rem 0rem; 
 
     text-overflow: ellipsis;
+
+    &__container{
+
+        width: 20vw;
+
+        @media screen and (max-width: 1550px) {
+            
+            width: 25vw;
+
+    
+        }
+    }
 
     &__thumbnail{
         background-color: #808B8E;
@@ -40,6 +52,14 @@
                 
                 min-width: 2.5rem;
                 min-height: 2.5rem;
+        
+            }
+
+            @media screen and (max-width: 1550px) {
+            
+                min-width: 1rem;
+                min-height: 1rem;
+    
         
             }
         }

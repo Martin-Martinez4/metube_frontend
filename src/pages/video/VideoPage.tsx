@@ -15,6 +15,7 @@ import VideoLikeDislike from "../../components/likeDislike/VideoLikeDislike";
 import CommentSection from "../../components/commentSection/CommentSection";
 import AddVideoView from "../../components/video/addView/AddVideoView";
 import { formatNumber } from "../../app/utilis/numberFormater";
+import LoadingSpinner from "../../components/loadingIndicator/LoadingSpinner";
 
 const VIDEO_QUERY = gql(/* GraphQL */`
     query Video($id: ID!){
@@ -62,7 +63,14 @@ function VideoPage() {
 
 
   if (loading) {
-    return <p>Loading...</p>
+    return (
+      <div className="flex justifyContentCenter AlignItemsCenter" style={{ height: "100vh" }}>
+
+<LoadingSpinner diameter={"15%"}></LoadingSpinner>
+
+
+      </div>
+    )
   }
 
   return (
