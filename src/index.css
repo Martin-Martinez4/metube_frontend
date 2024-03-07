@@ -1,0 +1,115 @@
+#root {
+  --white: #FEFEFF;
+  --grey: #808B8E;
+  --gray: #808B8E;
+  --light-gray: #D9DEE0;
+  --black: #23202C;
+  --dark-blue: #16141d;
+
+  --red: #F51548;
+  --darkred: #9e062a;
+  --blue: #3E6B7D;
+  --darkblue: #243F4A;
+  --lightblue: #67AECA;
+  --highlight-blue: #538CA3;
+
+  --body-color:var(--white);
+  --top-nav-color: var(--dark-blue);
+  --missing-items-background: var(--gray);
+  --highlight: var(--highlight-blue);
+  --accent-1: var(--light-gray);
+
+  --leftNavWidth: 12vw;
+
+  
+}
+@media screen and (max-width: 620px) {
+  #root{
+
+    --leftNavWidth: 0vw;
+  }
+}
+
+.elementToFadeInAndOut {
+  opacity: 1;
+  animation: fadeIn 1s linear;
+}
+
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0
+  }
+
+  75% {
+    opacity: .5
+  }
+
+  100% {
+    opacity: 1
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1
+  }
+
+  75% {
+    opacity: .5
+  }
+
+  100% {
+    opacity: 0
+  }
+}
+
+@keyframes moveUp {
+  from {
+    top: 0px;
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    top: 0
+  }
+
+  75% {
+    opacity: .5
+  }
+
+  100% {
+    opacity: 1
+  }
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0
+  }
+
+  75% {
+    opacity: .5
+  }
+
+  100% {
+    opacity: 1;
+    top: -7px
+  }
+}
+
+@keyframes shrink {
+  0% {
+    scale: 1;
+  }
+
+  75% {
+    scale: .75;
+  }
+
+  100% {
+    scale: 0;
+  }
+}

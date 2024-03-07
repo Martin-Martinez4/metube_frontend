@@ -1,0 +1,12 @@
+.leftsidenav {
+
+    box-sizing: border-box;
+    width: var(--leftNavWidth);
+    height: calc(100vh - 4.6rem);
+    overflow-y: auto;
+    // box-shadow: 0px 1px 2px #808B8E;
+    margin-right: 10px;
+
+    padding: 1rem;
+
+}
