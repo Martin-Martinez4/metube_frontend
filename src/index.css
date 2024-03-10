@@ -1,4 +1,4 @@
-#root {
+:root {
   --white: #FEFEFF;
   --grey: #808B8E;
   --gray: #808B8E;
@@ -14,15 +14,20 @@
   --highlight-blue: #538CA3;
 
   --body-color:var(--white);
+  --text-color: var(--black);
   --top-nav-color: var(--dark-blue);
   --missing-items-background: var(--gray);
   --highlight: var(--highlight-blue);
   --accent-1: var(--light-gray);
+  --accent-2: var(--light-gray);
+  --input-background: var(--white);
 
   --leftNavWidth: 12vw;
 
+  color: var(--text-color);
   
 }
+
 @media screen and (max-width: 620px) {
   #root{
 

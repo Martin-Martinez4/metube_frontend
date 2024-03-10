@@ -1,10 +1,15 @@
 
+import { useContext } from "react"
 import "./LeftsideNav.scss"
 import LeftsideNavSection from "./LeftsideNavSection"
+import { ThemeContext } from "../../../App"
 
 function LeftsideNav() {
+    const {theme} = useContext(ThemeContext)
 
-    const entries = [
+    console.log(theme)
+
+    const entries = theme == 'light' ? [
         {
             icon: "/navicons/HomeIcon.svg",
             title: "Home",
@@ -33,6 +38,40 @@ function LeftsideNav() {
         },
         {
             icon: "/navicons/LibraryIcon.svg",
+            title: "Library"
+
+        },
+    ]
+    :
+    [
+        {
+            icon: "/navicons/HomeIcon_white.svg",
+            title: "Home",
+            link: "/"
+
+        },
+        {
+            icon: "/navicons/TrendingIcon_white.svg",
+            title: "Trending"
+
+        },
+        {
+            icon: "/navicons/WatchLaterIcon_white.svg",
+            title: "Watch Later"
+
+        },
+        {
+            icon: "/navicons/ThumbupIconSidebar_white.svg",
+            title: "Liked"
+            
+        },
+        {
+            icon: "/navicons/HistoryIcon_white.svg",
+            title: "History"
+
+        },
+        {
+            icon: "/navicons/LibraryIcon_white.svg",
             title: "Library"
 
         },

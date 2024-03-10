@@ -27,7 +27,7 @@
 
     padding: 1rem;
     position: fixed;
-    background: white;
+    background: var(--body-color);
 
     overflow-x: auto;
 
@@ -39,7 +39,7 @@
     &__category {
 
       width: fit-content;
-      background: rgb(233, 230, 238);
+      background: var(--accent-1);
       padding: .5rem 1rem .5rem 1rem;
       border-radius: 10px 10%;
 

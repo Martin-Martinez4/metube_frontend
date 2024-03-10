@@ -1,11 +1,14 @@
 
 import React from 'react'
+import { createContext } from 'react';
 import ReactDOM from 'react-dom/client'
 import { RouterProvider } from 'react-router-dom'
 import { router } from './app/Router/Routes'
 import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import { cache } from './app/apolloCache/InMemoryCache';
 import './index.css';
+import { ThemeProvider } from './components/context/themecontext/ThemeProvider';
+
 
 
 const link = createHttpLink({
@@ -21,10 +24,17 @@ const client = new ApolloClient({
 
 })
 
+
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
+
     <ApolloProvider client={client}>
-      <RouterProvider router={router} />
+      <ThemeProvider>
+
+
+        <RouterProvider router={router} />
+      </ThemeProvider>
     </ApolloProvider>
   </React.StrictMode>,
 )

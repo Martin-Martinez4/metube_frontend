@@ -32,3 +32,6 @@ node_modules
 stats.html
 
 .eslintcache
+
+# env files
+*.env

@@ -3,9 +3,23 @@ import { Outlet } from 'react-router-dom';
 import { loggedInUserVar } from './app/apolloCache/InMemoryCache';
 
 import './App.css';
-import { useEffect } from 'react';
+import { createContext, useEffect } from 'react';
 import { gql } from './__generated__/gql';
 import { useLazyQuery } from '@apollo/client';
+import { ThemeProvider } from './components/context/themecontext/ThemeProvider';
+
+// Define the shape of the context data using a TypeScript interface
+interface ThemeContextData {
+  theme: string;
+  toggleTheme: () => void;
+}
+
+// Create the context with an initial value and the TypeScript interface
+export const ThemeContext = createContext<ThemeContextData>({
+  theme: 'light',
+  toggleTheme: () => {},
+});
+
 
 const GET_LOGGED_IN_USER = gql(/* GraphQL */`
     query GetLoggenInUser{
@@ -50,10 +64,10 @@ function App() {
   }, [])
 
   return (
+    
+    
     <div className="App">
-
-      <Outlet />
-
+        <Outlet />
 
     </div>
   )

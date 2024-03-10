@@ -3,7 +3,7 @@
     position: sticky;
     top: 0;
 
-    background: var(--dark-blue);
+    background: var(--top-nav-color);
     height: 4.5rem;
 
     box-sizing: border-box;
@@ -41,11 +41,11 @@
         height: 2rem;
         width: 40vw;
 
-        border-radius: 15px;
+        border-radius: 20px;
 
-        border: 1px solid var(--grey);
+        border: 1px solid var(--top-nav-color);
 
-        background-color: var(--white);
+        background-color: var(--top-nav-color);
 
         transition: all .5s;
 
@@ -73,6 +73,7 @@
             box-shadow: 1px 1px 5px var( --highlight);
             border-radius: 10px;
             transition: all .5s;
+            background: var(--white);
 
             @media screen and (max-width: 620px) {
 
@@ -99,6 +100,7 @@
             transform: translate(-50%, -50%);
             width: 1.5rem;
             height: 1.5rem;
+            background: var(--accent-2);
             
             @media screen and (max-width: 620px) {
                 
@@ -159,7 +161,7 @@
 
             cursor: pointer;
 
-            background-color: var(--accent-1);
+            background-color: var(--accent-2);
             margin: 0;
 
             padding: 0;
@@ -200,9 +202,9 @@
     position: relative;
 
     &__menu {
-        background: var(--white);
+        background: var(--body-color);
         width: fit-content;
-        color: var(--black);
+        color: var(--text-color);
 
         border-radius: 5px;
         padding: 1rem;

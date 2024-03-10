@@ -4,6 +4,7 @@ import { useMutation, useReactiveVar } from "@apollo/client";
 import { loggedInUserVar } from "../../../app/apolloCache/InMemoryCache";
 import { gql } from "../../../__generated__/gql";
 import "./TopNav.scss";
+import { ThemeSwitcher } from "../../context/themecontext/ThemeSwitcher";
 
 export const LOGOUT_QUERY = gql(/* GraphQL */`
 mutation Logout{
@@ -42,7 +43,11 @@ function TopNav() {
         <div className="topnav__searchbar__button"><img className="topnav__searchbar__icon" src="/MagnifyingGlass2.svg"></img></div>
       </fieldset>
 
-      <div>
+      <div className="flex">
+        <div className="marginr4">
+
+          <ThemeSwitcher></ThemeSwitcher>
+        </div>
 
         <div>
           {
@@ -78,9 +83,6 @@ function TopNav() {
                 className="pointer hovercolorlightblue"
               >Signout</p>
               :
-
-
-
               <p
                 onClick={() => {
 
