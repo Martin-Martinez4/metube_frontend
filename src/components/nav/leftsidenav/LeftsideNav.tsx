@@ -40,12 +40,12 @@ function LeftsideNav() {
 
     const profileEntries = [
         {
-            icon: "http://192.168.1.46:8081/profile/coding_channel/",
+            icon: `http://${import.meta.env.VITE_HOST_URL}:${import.meta.env.VITE_HOST_PORT}/profile/coding_channel/`,
             title: "coding_channel"
 
         },
         {
-            icon: "http://192.168.1.46:8081/profile/TBD/",
+            icon: `http://${import.meta.env.VITE_HOST_URL}:${import.meta.env.VITE_HOST_PORT}/profile/TBD/`,
             title: "TBD"
 
         },

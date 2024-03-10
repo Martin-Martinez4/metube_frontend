@@ -17,13 +17,13 @@ function ThumbnailPreview({ id, width, url, title, channelname, views, thumbnail
 
             <div className="thumbnailpreview__thumbnail__duration">{duration? durationFromSeconds(duration) : ""}</div>
             <Link to={`/video/${id}`}>
-              <img className="thumbnailpreview__thumbnail" src={`http://192.168.1.46:8081`+ `/downloads/${url.split("/")[2]}.jpg/`}></img>
+              <img className="thumbnailpreview__thumbnail" src={`http://${import.meta.env.VITE_HOST_URL}:${import.meta.env.VITE_HOST_PORT}`+ `/downloads/${url.split("/")[2]}.jpg/`}></img>
             </Link>
           </div>
 
             <div  className="thumbnailpreview__info">
               <Link to={`/profile/${profile_id}`}>
-                <img className="thumbnailpreview__info__userprofile" src={`http://192.168.1.46:8081/profile/` + channelname + "/"}></img>
+                <img className="thumbnailpreview__info__userprofile" src={`http://${import.meta.env.VITE_HOST_URL}:${import.meta.env.VITE_HOST_PORT}/profile/` + channelname + "/"}></img>
 
               </Link>
 

@@ -12,7 +12,7 @@ function Comment({ comment }: props) {
     return (
         <div className="videopage__comments__comment margint6">
 
-            <img className="thumbnailpreview__info__userprofile" src={`http://192.168.1.46:8081/profile/${comment.Profile?.username}/`}></img>
+            <img className="thumbnailpreview__info__userprofile" src={`http://${import.meta.env.VITE_HOST_URL}:${import.meta.env.VITE_HOST_PORT}/profile/${comment.Profile?.username}/`}></img>
 
             <div className="videopage__comments__comment__text marginl3">
                 <p className="marginb2">{comment.Profile?.username} • {formatdate(comment.datePosted) + " ago"}</p>

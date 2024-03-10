@@ -77,7 +77,7 @@ function VideoPlayer({ video_url }: { video_url: string }) {
     aspectRatio: '16:9',
     nativeControlsForTouch: true,
     sources: [{
-      src: `http://192.168.1.46:8081${video_url}`,
+      src: `http://${import.meta.env.VITE_HOST_URL}:${import.meta.env.VITE_HOST_PORT}${video_url}`,
       type: "application/x-mpegURL"
     }],
     userActions: {

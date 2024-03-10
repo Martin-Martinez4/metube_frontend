@@ -21,7 +21,7 @@ function Response({ comment, handleAddNewResponse }: props) {
 
         
         <div className="videopage__responses__response margint5">
-            <img className="thumbnailpreview__info__userprofile" src={`http://192.168.1.46:8081/profile/${comment.Profile?.username}/`}></img>
+            <img className="thumbnailpreview__info__userprofile" src={`http://${import.meta.env.VITE_HOST_URL}:${import.meta.env.VITE_HOST_PORT}/profile/${comment.Profile?.username}/`}></img>
 
             <div className="videopage__responses__response__text marginl3">
 

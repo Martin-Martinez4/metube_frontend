@@ -1,7 +1,8 @@
 import { CodegenConfig } from '@graphql-codegen/cli';
+import 'vite/client'
 
 const config: CodegenConfig = {
-  schema: 'http://192.168.1.46:8080/query',
+  schema: `http://${import.meta.env.VITE_API_URL}/query`,
   documents: ['src/**/*.tsx'],
   generates: {
     './src/__generated__/': {

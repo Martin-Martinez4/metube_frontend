@@ -119,7 +119,7 @@ function VideoPage() {
 
               <div className="flex AlignItemsCenter videopage__video__profile">
 
-                <img className="thumbnailpreview__info__userprofile marginr2" src={`http://localhost:8081/profile/` + data?.video?.profile?.username + "/"}></img>
+                <img className="thumbnailpreview__info__userprofile marginr2" src={`http://localhost:${import.meta.env.VITE_HOST_PORT}/profile/` + data?.video?.profile?.username + "/"}></img>
                 <div className="flexColumn">
                   <span className="videopage__video__username">{data?.video?.profile?.username}</span>
                   <span>{formatNumber(data?.video?.profile?.subscribers)} subscribers </span>

@@ -36,7 +36,7 @@ function ProfilePage() {
                 <LeftsideNav></LeftsideNav>
                 <div className="profilepage__content">
                     <div className="profilepage__headerimage margint1">
-                        <img className="profilepage__headerimage cover" src={`http://192.168.1.46:8081/banner/${username}/`} alt="" />
+                        <img className="profilepage__headerimage cover" src={`http://${import.meta.env.VITE_HOST_URL}:${import.meta.env.VITE_HOST_PORT}/banner/${username}/`} alt="" />
                     </div>
 
                     <div className="marginl6 margint4">
@@ -46,7 +46,7 @@ function ProfilePage() {
 
                                 <div className="flex AlignItemsCenter">
 
-                                    <img className="profilepage__userprofile marginr2" src={`http://192.168.1.46:8081/profile/${username}/`}></img>
+                                    <img className="profilepage__userprofile marginr2" src={`http://${import.meta.env.VITE_HOST_URL}:${import.meta.env.VITE_HOST_PORT}/profile/${username}/`}></img>
                                     <div className="flexColumn">
 
                                         <span className="profilepage__channelname">{data?.profile?.username}</span>

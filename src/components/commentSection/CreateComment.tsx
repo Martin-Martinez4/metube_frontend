@@ -77,7 +77,7 @@ function CreateComment({ handleCreateComment, video_id, initialData, handleCance
 
               <p className="marginb3">You are commenting as </p>
               <div className="flex">
-                <img className="thumbnailpreview__info__userprofile marginb3 marginr3" src={`http://192.168.1.46:8081/profile/${loggedInUser.Username}/`}></img>
+                <img className="thumbnailpreview__info__userprofile marginb3 marginr3" src={`http://${import.meta.env.VITE_HOST_URL}:${import.meta.env.VITE_HOST_PORT}/profile/${loggedInUser.Username}/`}></img>
                 <div>
                   <p>{loggedInUser.Displayname}</p>
                   <p>@{loggedInUser.Username}</p>
@@ -87,7 +87,7 @@ function CreateComment({ handleCreateComment, video_id, initialData, handleCance
               </div>
             </div>
             :
-            <img className="thumbnailpreview__info__userprofile marginr3" src={`http://192.168.1.46:8081/profile/${""}/`}></img>
+            <img className="thumbnailpreview__info__userprofile marginr3" src={`http://${import.meta.env.VITE_HOST_URL}:${import.meta.env.VITE_HOST_PORT}/profile/${""}/`}></img>
         }
 
       </div>

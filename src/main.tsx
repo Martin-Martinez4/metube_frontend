@@ -9,7 +9,7 @@ import './index.css';
 
 
 const link = createHttpLink({
-  uri: `http://192.168.1.46:8080/query`,
+  uri: `http://${import.meta.env.VITE_API_URL}:${import.meta.env.VITE_API_PORT}/query`,
   credentials: 'include'
 });
 
