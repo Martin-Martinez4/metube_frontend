@@ -7,6 +7,7 @@ import Home from "../../pages/home/Home";
 import ProfilePage from "../../pages/profile/ProfilePage";
 import VideoPage from "../../pages/video/VideoPage";
 import Login from "../../pages/auth/Login";
+import Search from "../../pages/search/Search";
 
 export const routes: RouteObject[] = [
 
@@ -18,6 +19,10 @@ export const routes: RouteObject[] = [
             {
                 path: "video/:video_id", 
                 element: <VideoPage />,
+            },
+            {
+                path: "search", 
+                element: <Search />,
             },
             {
                 path: "profile/:username", 

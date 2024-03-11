@@ -1,10 +1,11 @@
 
-import { useLocation, useNavigate, Link } from "react-router-dom";
+import { useLocation, useNavigate, Link, useSearchParams, createSearchParams } from "react-router-dom";
 import { useMutation, useReactiveVar } from "@apollo/client";
 import { loggedInUserVar } from "../../../app/apolloCache/InMemoryCache";
 import { gql } from "../../../__generated__/gql";
 import "./TopNav.scss";
 import { ThemeSwitcher } from "../../context/themecontext/ThemeSwitcher";
+import { FormEvent, useState } from "react";
 
 export const LOGOUT_QUERY = gql(/* GraphQL */`
 mutation Logout{
@@ -20,10 +21,25 @@ mutation Logout{
 function TopNav() {
 
   const navigate = useNavigate();
+  let [searchParams, setSearchParam] = useSearchParams();
+
 
   const [logout] = useMutation(LOGOUT_QUERY);
 
   const loggedInUser = useReactiveVar(loggedInUserVar).isLoggedIn;
+
+  const [searchTerm, setSearchTerm] = useState("");
+  function handleSearch(e: FormEvent<HTMLFormElement>){
+    e.preventDefault()
+
+    if(searchTerm == "") return
+    navigate({
+      pathname: "/search",
+      search: createSearchParams({
+          title: searchTerm
+      }).toString()
+  });
+  }
 
   const { state } = useLocation();
 
@@ -33,15 +49,20 @@ function TopNav() {
 
         <img className="pointer topnav__logo" src="/NameAndLogoSmall.svg" alt="MeTube Logo"></img>
       </Link>
+      <form onSubmit={(e) => handleSearch(e)}>
+
       <fieldset className="topnav__searchbar">
         <input 
           type="search" 
           className="topnav__searchbar__input"
           placeholder="search..."
           onFocus={() => {}}
-        ></input>
-        <div className="topnav__searchbar__button"><img className="topnav__searchbar__icon" src="/MagnifyingGlass2.svg"></img></div>
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          ></input>
+        <div className="topnav__searchbar__button" onClick={(e) => handleSearch(e)} ><img className="topnav__searchbar__icon" src="/MagnifyingGlass2.svg"></img></div>
       </fieldset>
+        </form>
 
       <div className="flex">
         <div className="marginr4">

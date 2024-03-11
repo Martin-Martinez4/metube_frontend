@@ -7,8 +7,6 @@ import { ThemeContext } from "../../../App"
 function LeftsideNav() {
     const {theme} = useContext(ThemeContext)
 
-    console.log(theme)
-
     const entries = theme == 'light' ? [
         {
             icon: "/navicons/HomeIcon.svg",

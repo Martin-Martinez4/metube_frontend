@@ -109,6 +109,9 @@ table {
 .AlignItemsCenter{
 	align-items: center;
 }
+.alignContentCenter{
+	align-content: center;
+}
 
 .justifyContentSpaceBetween{
 	justify-content: space-between;

@@ -32,6 +32,7 @@ const documents = {
     "\nmutation Register($username: String!, $displayname: String!, $password: String!, $password2: String!){\n  register(profileToRegister:{username: $username, displayname: $displayname, password: $password, password2:$password2}){\n    username\n    displayname\n    subscribers\n    isChannel\n  }\n}\n": types.RegisterDocument,
     "\nquery Videos{\n  videos(amount: 12){\n    id\n    url\n    duration\n    contentinformation{\n      title\n      published\n    }\n    thumbnail{\n      url\n    }\n    statistic{\n      views\n    }\n    profile{\n      username\n    }\n  \n  }\n}\n": types.VideosDocument,
     "\nquery Profile($username: String!){\n  profile(username: $username){\n    username\n    displayname\n    subscribers\n    userIsSubscribedTo\n  \n  }\n}\n": types.ProfileDocument,
+    "\nquery SearchForVideoByTitle($searchTerm: String!) {\n  SearchForVideoByTitle(searchTerm: $searchTerm){\n    id\n    url\n    duration\n    contentinformation{\n      title\n      published\n    }\n    thumbnail{\n      url\n    }\n    statistic{\n      views\n    }\n    profile{\n      username\n    }\n  \n  }\n}\n": types.SearchForVideoByTitleDocument,
     "\n    query Video($id: ID!){\n      video(id: $id){\n        id\n        url\n        contentinformation{\n          title\n          description\n          published\n        }\n        thumbnail{\n          url\n        }\n        statistic{\n          likes\n          dislikes\n          views\n          comments\n        }\n        profile{\n          username\n          userIsSubscribedTo\n          subscribers\n        }\n      \n      }\n    },\n    \n  ": types.VideoDocument,
 };
 
@@ -125,6 +126,10 @@ export function gql(source: "\nquery Videos{\n  videos(amount: 12){\n    id\n   
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\nquery Profile($username: String!){\n  profile(username: $username){\n    username\n    displayname\n    subscribers\n    userIsSubscribedTo\n  \n  }\n}\n"): (typeof documents)["\nquery Profile($username: String!){\n  profile(username: $username){\n    username\n    displayname\n    subscribers\n    userIsSubscribedTo\n  \n  }\n}\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\nquery SearchForVideoByTitle($searchTerm: String!) {\n  SearchForVideoByTitle(searchTerm: $searchTerm){\n    id\n    url\n    duration\n    contentinformation{\n      title\n      published\n    }\n    thumbnail{\n      url\n    }\n    statistic{\n      views\n    }\n    profile{\n      username\n    }\n  \n  }\n}\n"): (typeof documents)["\nquery SearchForVideoByTitle($searchTerm: String!) {\n  SearchForVideoByTitle(searchTerm: $searchTerm){\n    id\n    url\n    duration\n    contentinformation{\n      title\n      published\n    }\n    thumbnail{\n      url\n    }\n    statistic{\n      views\n    }\n    profile{\n      username\n    }\n  \n  }\n}\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
