@@ -129,7 +129,6 @@ function Home() {
 
   return (
     <>
-
       <TopNav></TopNav>
       <div className="home">
 

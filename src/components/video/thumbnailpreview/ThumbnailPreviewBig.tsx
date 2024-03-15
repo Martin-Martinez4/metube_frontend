@@ -24,6 +24,7 @@ function ThumbnailPreviewBig({ id, width, url, title, channelname, views, thumbn
 
                     <div className="thumbnailpreview--big__info__textarea">
 
+                        {/* Change to use URL */}
                         <Link to={`/video/${id}`} className="thumbnailpreview__videotitle__link">
                             <p className="thumbnailpreview__videotitle" >{title}</p>
                         </Link>

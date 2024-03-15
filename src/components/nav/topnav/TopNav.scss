@@ -34,6 +34,7 @@
 
         }
     }
+ 
 
     &__searchbar {
 
@@ -57,11 +58,7 @@
             &:has(.topnav__searchbar:focus-within) {
 
                 transition: all .1s;
-                width: 95vw;
-
-                position: absolute;
-                left: 0;
-
+                // width: 95vw;
             }
         }
 
@@ -105,8 +102,6 @@
             @media screen and (max-width: 620px) {
                 
                 margin: 0;
-                position: absolute;
-                transform: translate(-50%, -50%);
                 width: 1rem;
                 height: 1rem;
             }

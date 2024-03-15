@@ -14,7 +14,7 @@ function VideoDescription({ description }: {description: string | undefined}) {
     <div className="video__description">
          {/* style Maybe add a onclick event instead? */}
         <div className={` ${seeMore ? "hidden" : ""}`}>
-            {description}… 
+            {description?.substring(0,120)}… 
             <span className="bold marginl2 pointer" onClick={(e) => handleToggleBooleanState(e,seeMore,setSeeMore)}>{seeMore ? "" : "See More"}</span>
         </div>
         <div className={` ${seeMore ? "" : "hidden"}`}>

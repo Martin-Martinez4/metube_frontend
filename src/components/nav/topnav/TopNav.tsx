@@ -49,9 +49,9 @@ function TopNav() {
 
         <img className="pointer topnav__logo" src="/NameAndLogoSmall.svg" alt="MeTube Logo"></img>
       </Link>
+      <fieldset className="topnav__searchbar">
       <form onSubmit={(e) => handleSearch(e)}>
 
-      <fieldset className="topnav__searchbar">
         <input 
           type="search" 
           className="topnav__searchbar__input"
@@ -60,9 +60,9 @@ function TopNav() {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           ></input>
+        </form>
         <div className="topnav__searchbar__button" onClick={(e) => handleSearch(e)} ><img className="topnav__searchbar__icon" src="/MagnifyingGlass2.svg"></img></div>
       </fieldset>
-        </form>
 
       <div className="flex">
         <div className="marginr4">

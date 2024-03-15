@@ -11,7 +11,7 @@ function ThumbnailPreview({ id, width, url, title, channelname, views, thumbnail
   // console.log(durationFromSeconds(duration!))
   return (
     // <div className="pointer thumbnailpreview__contianer" style={{ width: `${width}`}}>
-    <div className="pointer thumbnailpreview__container">
+    <div className="thumbnailpreview__container">
         <div className="thumbnailpreview">
           <div className="thumbnailpreview__thumbnail__container">
 
@@ -29,6 +29,7 @@ function ThumbnailPreview({ id, width, url, title, channelname, views, thumbnail
 
               <div className="thumbnailpreview__info__textarea">
 
+                  {/* change to use url */}
                   <Link to={`/video/${id}`} className="thumbnailpreview__videotitle__link">
                     <p className="thumbnailpreview__videotitle" >{title}</p>
                   </Link>
