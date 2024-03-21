@@ -25,6 +25,7 @@ const documents = {
     "\n\n    mutation LikeVideo($video_id: String!){\n      likeVideo(video_id: $video_id)\n    }\n": types.LikeVideoDocument,
     "\n\n    mutation DislikeVideo($video_id: String!){\n      dislikeVideo(video_id: $video_id)\n    }\n": types.DislikeVideoDocument,
     "\nmutation Logout{\n  logout{\n    username\n    displayname\n    subscribers\n    isChannel\n  }\n}\n": types.LogoutDocument,
+    "\nquery Videos2{\n  videos(amount: 5){\n    id\n    url\n    duration\n    contentinformation{\n      title\n      published\n    }\n    thumbnail{\n      url\n    }\n    statistic{\n      views\n    }\n    profile{\n      username\n    }\n  \n  }\n}\n": types.Videos2Document,
     "\n\n    mutation subscribe($subscribee: String!){\n        subscribe(subscribee: $subscribee)\n    }\n": types.SubscribeDocument,
     "\n\n    mutation unsubscribe($subscribee: String!){\n        unsubscribe(subscribee: $subscribee)\n    }\n": types.UnsubscribeDocument,
     "\n    mutation VideoView($video_id: String!){\n  \t\n      videoView(video_id: $video_id)\n      \n    }\n  ": types.VideoViewDocument,
@@ -33,7 +34,7 @@ const documents = {
     "\nquery Videos{\n  videos(amount: 12){\n    id\n    url\n    duration\n    contentinformation{\n      title\n      published\n    }\n    thumbnail{\n      url\n    }\n    statistic{\n      views\n    }\n    profile{\n      username\n    }\n  \n  }\n}\n": types.VideosDocument,
     "\nquery Profile($username: String!){\n  profile(username: $username){\n    username\n    displayname\n    subscribers\n    userIsSubscribedTo\n  \n  }\n}\n": types.ProfileDocument,
     "\nquery SearchForVideoByTitle($searchTerm: String!) {\n  SearchForVideoByTitle(searchTerm: $searchTerm){\n    id\n    url\n    duration\n    contentinformation{\n      title\n      published\n    }\n    thumbnail{\n      url\n    }\n    statistic{\n      views\n    }\n    profile{\n      username\n    }\n  \n  }\n}\n": types.SearchForVideoByTitleDocument,
-    "\n    query Video($id: ID!){\n      video(id: $id){\n        id\n        url\n        contentinformation{\n          title\n          description\n          published\n        }\n        thumbnail{\n          url\n        }\n        statistic{\n          likes\n          dislikes\n          views\n          comments\n        }\n        profile{\n          username\n          userIsSubscribedTo\n          subscribers\n        }\n      \n      }\n    },\n    \n  ": types.VideoDocument,
+    "\n    query Video($id: ID!){\n      video(id: $id){\n        id\n        url\n        contentinformation{\n          title\n          description\n          published\n        }\n        thumbnail{\n          url\n        }\n        statistic{\n          likes\n          dislikes\n          views\n          comments\n        }\n        profile{\n          username\n          userIsSubscribedTo\n          subscribers\n        }\n      \n      }\n    },\n    \n    \n  ": types.VideoDocument,
 };
 
 /**
@@ -101,6 +102,10 @@ export function gql(source: "\nmutation Logout{\n  logout{\n    username\n    di
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function gql(source: "\nquery Videos2{\n  videos(amount: 5){\n    id\n    url\n    duration\n    contentinformation{\n      title\n      published\n    }\n    thumbnail{\n      url\n    }\n    statistic{\n      views\n    }\n    profile{\n      username\n    }\n  \n  }\n}\n"): (typeof documents)["\nquery Videos2{\n  videos(amount: 5){\n    id\n    url\n    duration\n    contentinformation{\n      title\n      published\n    }\n    thumbnail{\n      url\n    }\n    statistic{\n      views\n    }\n    profile{\n      username\n    }\n  \n  }\n}\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function gql(source: "\n\n    mutation subscribe($subscribee: String!){\n        subscribe(subscribee: $subscribee)\n    }\n"): (typeof documents)["\n\n    mutation subscribe($subscribee: String!){\n        subscribe(subscribee: $subscribee)\n    }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
@@ -133,7 +138,7 @@ export function gql(source: "\nquery SearchForVideoByTitle($searchTerm: String!)
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n    query Video($id: ID!){\n      video(id: $id){\n        id\n        url\n        contentinformation{\n          title\n          description\n          published\n        }\n        thumbnail{\n          url\n        }\n        statistic{\n          likes\n          dislikes\n          views\n          comments\n        }\n        profile{\n          username\n          userIsSubscribedTo\n          subscribers\n        }\n      \n      }\n    },\n    \n  "): (typeof documents)["\n    query Video($id: ID!){\n      video(id: $id){\n        id\n        url\n        contentinformation{\n          title\n          description\n          published\n        }\n        thumbnail{\n          url\n        }\n        statistic{\n          likes\n          dislikes\n          views\n          comments\n        }\n        profile{\n          username\n          userIsSubscribedTo\n          subscribers\n        }\n      \n      }\n    },\n    \n  "];
+export function gql(source: "\n    query Video($id: ID!){\n      video(id: $id){\n        id\n        url\n        contentinformation{\n          title\n          description\n          published\n        }\n        thumbnail{\n          url\n        }\n        statistic{\n          likes\n          dislikes\n          views\n          comments\n        }\n        profile{\n          username\n          userIsSubscribedTo\n          subscribers\n        }\n      \n      }\n    },\n    \n    \n  "): (typeof documents)["\n    query Video($id: ID!){\n      video(id: $id){\n        id\n        url\n        contentinformation{\n          title\n          description\n          published\n        }\n        thumbnail{\n          url\n        }\n        statistic{\n          likes\n          dislikes\n          views\n          comments\n        }\n        profile{\n          username\n          userIsSubscribedTo\n          subscribers\n        }\n      \n      }\n    },\n    \n    \n  "];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};

@@ -20,7 +20,6 @@ function VideoDescription({ description }: {description: string | undefined}) {
         <div className={` ${seeMore ? "" : "hidden"}`}>
             {description}
           
-
           <p className="bold pointer" onClick={(e) => handleToggleBooleanState(e, seeMore,setSeeMore)}>See Less</p>
      </div>
     </div>

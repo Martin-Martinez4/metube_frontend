@@ -1,11 +1,12 @@
 .video__description{
-    white-space: pre;
-    background: var(--missing-items-background);
+    white-space: break-spaces;
+    background: var(--top-nav-color);
     min-height: 5rem;
 
     border-radius: 5px;
 
     padding: 1rem;
     line-height: 1.5rem;
-
+    
+    margin-bottom: 1rem;
 }

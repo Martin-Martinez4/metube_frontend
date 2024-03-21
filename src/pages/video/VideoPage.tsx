@@ -16,6 +16,7 @@ import CommentSection from "../../components/commentSection/CommentSection";
 import AddVideoView from "../../components/video/addView/AddVideoView";
 import { formatNumber } from "../../app/utilis/numberFormater";
 import LoadingSpinner from "../../components/loadingIndicator/LoadingSpinner";
+import SmallPreviews from "../../components/smallPreviews/SmallPreviews";
 
 const VIDEO_QUERY = gql(/* GraphQL */`
     query Video($id: ID!){
@@ -45,7 +46,9 @@ const VIDEO_QUERY = gql(/* GraphQL */`
       }
     },
     
+    
   `);
+
 
 
 function VideoPage() {
@@ -119,7 +122,7 @@ function VideoPage() {
 
               <div className="flex AlignItemsCenter videopage__video__profile">
 
-                <img className="thumbnailpreview__info__userprofile marginr2" src={`http://localhost:${import.meta.env.VITE_HOST_PORT}/profile/` + data?.video?.profile?.username + "/"}></img>
+                <img className="thumbnailpreview__info__userprofile marginr2" src={`http://${import.meta.env.VITE_HOST_URL}:${import.meta.env.VITE_HOST_PORT}/profile/` + data?.video?.profile?.username + "/"}></img>
                 <div className="flexColumn">
                   <span className="videopage__video__username">{data?.video?.profile?.username}</span>
                   <span>{formatNumber(data?.video?.profile?.subscribers)} subscribers </span>
@@ -141,35 +144,7 @@ function VideoPage() {
           <CommentSection video_id={video_id ? video_id : ""} number_of_comments={data?.video?.statistic?.comments}></CommentSection>
 
         </div>
-        <div className="videopage__suggestions">
-
-          <ThumbnailPreviewSmall id="1"></ThumbnailPreviewSmall>
-          <ThumbnailPreviewSmall id="1"></ThumbnailPreviewSmall>
-          <ThumbnailPreviewSmall id="1"></ThumbnailPreviewSmall>
-          <ThumbnailPreviewSmall id="1"></ThumbnailPreviewSmall>
-          <ThumbnailPreviewSmall id="1"></ThumbnailPreviewSmall>
-          <ThumbnailPreviewSmall id="1"></ThumbnailPreviewSmall>
-          <ThumbnailPreviewSmall id="1"></ThumbnailPreviewSmall>
-          <ThumbnailPreviewSmall id="1"></ThumbnailPreviewSmall>
-          <ThumbnailPreviewSmall id="1"></ThumbnailPreviewSmall>
-          <ThumbnailPreviewSmall id="1"></ThumbnailPreviewSmall>
-          <ThumbnailPreviewSmall id="1"></ThumbnailPreviewSmall>
-          <ThumbnailPreviewSmall id="1"></ThumbnailPreviewSmall>
-          <ThumbnailPreviewSmall id="1"></ThumbnailPreviewSmall>
-          <ThumbnailPreviewSmall id="1"></ThumbnailPreviewSmall>
-          <ThumbnailPreviewSmall id="1"></ThumbnailPreviewSmall>
-          <ThumbnailPreviewSmall id="1"></ThumbnailPreviewSmall>
-          <ThumbnailPreviewSmall id="1"></ThumbnailPreviewSmall>
-          <ThumbnailPreviewSmall id="1"></ThumbnailPreviewSmall>
-          <ThumbnailPreviewSmall id="1"></ThumbnailPreviewSmall>
-          <ThumbnailPreviewSmall id="1"></ThumbnailPreviewSmall>
-          <ThumbnailPreviewSmall id="1"></ThumbnailPreviewSmall>
-          <ThumbnailPreviewSmall id="1"></ThumbnailPreviewSmall>
-          <ThumbnailPreviewSmall id="1"></ThumbnailPreviewSmall>
-          <div className="whitespace"></div>
-
-
-        </div>
+        <SmallPreviews></SmallPreviews>
 
 
       </div>
