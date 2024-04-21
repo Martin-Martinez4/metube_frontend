@@ -1,3 +1,4 @@
+import { VideoPreview } from "./video"
 
 export type ThumbnailPreviewProps = {
 
@@ -11,6 +12,12 @@ export type ThumbnailPreviewProps = {
     thumbnail?: string,
     profile_id?: string,
     published_date?: string,
-  }
+}
+  
+export type ThumbnailPreviewSmallProps = {
+
+    width?: string,
+    video: VideoPreview
+}
   
 

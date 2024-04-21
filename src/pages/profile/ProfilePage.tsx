@@ -8,6 +8,7 @@ import { gql } from "../../__generated__/gql";
 import "./ProfilePage.scss";
 import SubscribeButton from "../../components/subscribebutton/SubscribeButton";
 import { formatNumber } from "../../app/utilis/numberFormater";
+import ThumbnailPreviewSmall from "../../components/video/thumbnailpreview/ThumbnailPreviewSmall";
 
 const PROFILE_QUERY = gql(/* GraphQL */`
 query Profile($username: String!){
@@ -19,15 +20,45 @@ query Profile($username: String!){
   
   }
 }
+
 `);
+
+const PROFILE_QUERY2 = gql(/* GraphQL */`
+query GetVideosByProfile($username: String!) {
+  getVideosByProfileUsername(profileUsername: $username){
+    id
+    url
+    duration
+    contentinformation{
+      title
+      published
+    }
+    thumbnail{
+      url
+    }
+    statistic{
+      views
+    }
+    profile{
+      username
+    }
+  
+  }
+}
+
+`);
+
 
 function ProfilePage() {
 
     const { username } = useParams()
 
     const { data } = useQuery(PROFILE_QUERY, {
-        variables: { username: `${username}` }
-    })
+        variables: { username: `${username}`, profileUsername: `${username}` }
+    });
+    const { data: data2} = useQuery(PROFILE_QUERY2, {
+        variables: { username: `${username}`, profileUsername: `${username}` }
+    });
 
     return (
         <>
@@ -75,13 +106,18 @@ function ProfilePage() {
                                 <span className="marginr2 marginb2 pointer">About</span>
 
                             </div>
+                            
+                            <div className="flex">
+
+                                {data2?.getVideosByProfileUsername?.map((video) => {return (<ThumbnailPreviewSmall width={"16vw"} video={video}></ThumbnailPreviewSmall>)})}
+                            </div>
 
                             {/* horizontal playlist of videos */}
                             {/* make it scrollable by using javascript */}
+                            {/* <PlaylistHorizontal></PlaylistHorizontal>
                             <PlaylistHorizontal></PlaylistHorizontal>
                             <PlaylistHorizontal></PlaylistHorizontal>
-                            <PlaylistHorizontal></PlaylistHorizontal>
-                            <PlaylistHorizontal></PlaylistHorizontal>
+                            <PlaylistHorizontal></PlaylistHorizontal> */}
 
                             {/* <div className="whitespace"></div> */}
 

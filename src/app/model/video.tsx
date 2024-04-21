@@ -30,7 +30,9 @@ export type Thumbnail = {
     url: string,
 }
 
-
+export type Statistic = {
+    views: number,
+}
 
 
 // title={contentinformation.title} channelname={profile.username} views={statistic.views} thumbnail={thumbnail.url} profile_id={profile.id}
@@ -42,7 +44,7 @@ export type VideoPreview = {
     profile_id: string,
     contentinformation: ContentInformation,
     thumbnail: Thumbnail,
-    // statistic: Statistic,
+    statistic: Statistic,
     status: Status,
     profile: Profile,
 
