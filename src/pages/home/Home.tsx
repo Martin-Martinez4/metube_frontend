@@ -10,9 +10,9 @@ import { gql } from "../../__generated__/gql";
 import "./Home.scss";
 import { useNavigate } from "react-router-dom";
 
-export const VIDEOS_QUERY = gql(/* GraphQL */`
-query Videos{
-  videos(amount: 12){
+export const VIDEOS_QUERY_OFFSET = gql(/* GraphQL */`
+query GetMultipleVideosSetOrder($seed: Float = 0.5, $limit: Int = 2, $offset: Int = 1) {
+  GetMultipleVideosSetOrder(seed: $seed, limit: $limit, offset:$offset){
     id
     url
     duration
@@ -36,9 +36,46 @@ query Videos{
 
 function Home() {
 
-  const { data, loading, error } = useQuery(VIDEOS_QUERY);
+  const { data, loading, error, fetchMore } = useQuery(VIDEOS_QUERY_OFFSET, {
+    variables: { seed: 0.5, limit: 9, offset: 0 }
+  });
+
 
   const navigate = useNavigate();
+
+  console.log(data)
+
+  // function onLoadMore(){
+  //   console.log("works")
+  // }
+
+  const onLoadMore = () => {
+    console.log("Load More")
+
+    console.log("here")
+    return fetchMore({
+      variables: {
+        offset: data?.GetMultipleVideosSetOrder?.length
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult) return prev;
+        return Object.assign({}, prev, {
+          GetMultipleVideosSetOrder: [...prev.GetMultipleVideosSetOrder, ...fetchMoreResult.GetMultipleVideosSetOrder]
+        });
+      }
+    })
+  }
+
+
+  const handleScroll = ({ currentTarget }, onLoadMore) => {
+    if (
+      currentTarget.scrollTop + currentTarget.clientHeight >=
+      currentTarget.scrollHeight
+    ) {
+      console.log("Should work")
+      onLoadMore();
+    }
+  };
 
   if (loading) {
 
@@ -83,7 +120,7 @@ function Home() {
 
     return (
       <>
-      {console.log(error)}
+        {console.log(error)}
         <TopNav></TopNav>
         <div className="home">
 
@@ -137,7 +174,7 @@ function Home() {
 
 
           {/* need to implement infinite scrolling */}
-          <div className="home__videoarea">
+          <div className="home__videoarea" onScroll={e => handleScroll(e, onLoadMore)}>
             <div className="home__categoriesnav">
               <span className="home__categoriesnav__category marginr4">All</span>
               <span className="home__categoriesnav__category marginr4">Computer programming</span>
@@ -146,9 +183,9 @@ function Home() {
 
             </div>
 
-            <div className="home__videoarea__container">
+            <div className="home__videoarea__container" id="videosContainer" >
 
-              {data?.videos?.map((video) => {
+              {data?.GetMultipleVideosSetOrder?.map((video) => {
 
                 if (video === null) return
                 const { id, contentinformation, profile, statistic, thumbnail, url, duration } = video
@@ -174,6 +211,7 @@ function Home() {
 
             </div>
 
+
             <div className="whitespace"></div>
 
           </div>
@@ -184,4 +222,4 @@ function Home() {
   )
 }
 
-export default Home
+export default Home;
