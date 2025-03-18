@@ -53,7 +53,7 @@ function ProfilePage() {
 
     const { username } = useParams()
 
-    const { data } = useQuery(PROFILE_QUERY, {
+    const { data, loading } = useQuery(PROFILE_QUERY, {
         variables: { username: `${username}`, profileUsername: `${username}` }
     });
     const { data: data2} = useQuery(PROFILE_QUERY2, {
@@ -96,7 +96,8 @@ function ProfilePage() {
                             </div>
 
                         </div>
-                        <div className="profilepage__playlistcontainer">
+                        {/* <div className="profilepage__playlistcontainer"> */}
+                        <div>
                             {/* changes what is displayed in this area */}
                             <div className="profilepage__nav">
                                 {/* Lazy load sections */}
@@ -107,10 +108,14 @@ function ProfilePage() {
 
                             </div>
                             
-                            <div className="flex">
+                            <div className="flex flex-wrap">
+                                {loading ? <img src="/LoadingRings.svg" style={{ width: "10%", margin: "auto" }}></img> :
 
-                                {data2?.getVideosByProfileUsername?.map((video) => {return (<ThumbnailPreviewSmall width={"16vw"} video={video}></ThumbnailPreviewSmall>)})}
+                                    data2?.getVideosByProfileUsername?.map((video) => {return (<ThumbnailPreviewSmall width={"16vw"} video={video}></ThumbnailPreviewSmall>)})
+                                }
+
                             </div>
+                                <div className="whitespace"></div>
 
                             {/* horizontal playlist of videos */}
                             {/* make it scrollable by using javascript */}
@@ -126,6 +131,7 @@ function ProfilePage() {
 
                     </div>
                 </div>
+
             </div>
         </>
     )

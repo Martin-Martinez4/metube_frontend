@@ -1,0 +1,11 @@
+.search__videoarea__container{
+    
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 4rem;
+    overflow-y: auto;
+    height: 85vh;
+
+    scrollbar-color: var(--accent-2) var(--body-color);
+    scrollbar-width: auto;
+} 

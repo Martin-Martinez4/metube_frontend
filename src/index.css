@@ -1,5 +1,6 @@
 :root {
   --white: #FEFEFF;
+  --silver: #a4a5b6;
   --grey: #808B8E;
   --gray: #808B8E;
   --light-gray: #D9DEE0;
@@ -15,7 +16,7 @@
 
   --body-color:var(--white);
   --text-color: var(--black);
-  --top-nav-color: var(--dark-blue);
+  --top-nav-color: var(--silver);
   --missing-items-background: var(--gray);
   --highlight: var(--highlight-blue);
   --accent-1: var(--light-gray);

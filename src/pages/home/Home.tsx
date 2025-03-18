@@ -9,6 +9,7 @@ import { gql } from "../../__generated__/gql";
 
 import "./Home.scss";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 export const VIDEOS_QUERY_OFFSET = gql(/* GraphQL */`
 query GetMultipleVideosSetOrder($seed: Float = 0.5, $limit: Int = 2, $offset: Int = 1) {
@@ -36,43 +37,43 @@ query GetMultipleVideosSetOrder($seed: Float = 0.5, $limit: Int = 2, $offset: In
 
 function Home() {
 
-  const { data, loading, error, fetchMore } = useQuery(VIDEOS_QUERY_OFFSET, {
-    variables: { seed: 0.5, limit: 9, offset: 0 }
-  });
+  const [randSeed, setRandSeed] = useState(Math.random() * 1 * (Math.round(Math.random()) ? 1 : -1));
+  const [ableToFetchMore, setAbleToFetchMore] = useState(true);
 
+  
+  const { data, loading, error, fetchMore } = useQuery(VIDEOS_QUERY_OFFSET, {
+    variables: { seed: randSeed, limit: 9, offset: 0 }
+  });
 
   const navigate = useNavigate();
 
-  console.log(data)
-
-  // function onLoadMore(){
-  //   console.log("works")
-  // }
-
   const onLoadMore = () => {
-    console.log("Load More")
-
-    console.log("here")
-    return fetchMore({
-      variables: {
-        offset: data?.GetMultipleVideosSetOrder?.length
-      },
-      updateQuery: (prev, { fetchMoreResult }) => {
-        if (!fetchMoreResult) return prev;
-        return Object.assign({}, prev, {
-          GetMultipleVideosSetOrder: [...prev.GetMultipleVideosSetOrder, ...fetchMoreResult.GetMultipleVideosSetOrder]
-        });
-      }
-    })
+    if(ableToFetchMore){
+      setAbleToFetchMore(false)
+      return fetchMore({
+        variables: {
+          offset: data?.GetMultipleVideosSetOrder?.length
+        },
+        updateQuery: (prev, { fetchMoreResult }) => {
+          if (!fetchMoreResult) return prev;
+          return Object.assign({}, prev, {
+            GetMultipleVideosSetOrder: [...prev.GetMultipleVideosSetOrder, ...fetchMoreResult.GetMultipleVideosSetOrder]
+          });
+        }
+      })
+    }
+    else{
+      setTimeout(()=>{setAbleToFetchMore(true)}, 500)
+    }
   }
 
 
   const handleScroll = ({ currentTarget }, onLoadMore) => {
+    
     if (
       currentTarget.scrollTop + currentTarget.clientHeight >=
-      currentTarget.scrollHeight
+      currentTarget.scrollHeight-50
     ) {
-      console.log("Should work")
       onLoadMore();
     }
   };
@@ -105,7 +106,7 @@ function Home() {
 
               </div>
 
-              <div className="whitespace"></div>
+              {/* <div className="whitespace"></div> */}
 
             </div>
           </div>
@@ -128,7 +129,6 @@ function Home() {
             <LeftsideNav></LeftsideNav>
 
 
-            {/* need to implement infinite scrolling */}
             <div className="home__videoarea">
               <div className="home__categoriesnav">
                 <span className="home__categoriesnav__category marginr4">All</span>
@@ -174,7 +174,7 @@ function Home() {
 
 
           {/* need to implement infinite scrolling */}
-          <div className="home__videoarea" onScroll={e => handleScroll(e, onLoadMore)}>
+          <div className="home__videoarea flex">
             <div className="home__categoriesnav">
               <span className="home__categoriesnav__category marginr4">All</span>
               <span className="home__categoriesnav__category marginr4">Computer programming</span>
@@ -183,7 +183,7 @@ function Home() {
 
             </div>
 
-            <div className="home__videoarea__container" id="videosContainer" >
+            <div className="home__videoarea__container flexwrap" id="videosContainer"  onScroll={e => handleScroll(e, onLoadMore)}>
 
               {data?.GetMultipleVideosSetOrder?.map((video) => {
 

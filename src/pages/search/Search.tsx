@@ -2,6 +2,7 @@
 import TopNav from "../../components/nav/topnav/TopNav"
 import LeftsideNav from "../../components/nav/leftsidenav/LeftsideNav";
 import 'video.js/dist/video-js.css';
+import "./Search.scss";
 
 import { useQuery } from "@apollo/client";
 import { gql } from "../../__generated__/gql";
@@ -48,7 +49,7 @@ let [searchParams] = useSearchParams();
       <>
 
         <TopNav></TopNav>
-        <div className="home">
+        <div className="test">
 
           <div className="flex">
             {/* <LeftsideNav></LeftsideNav> */}
@@ -56,7 +57,7 @@ let [searchParams] = useSearchParams();
 
             {/* need to implement infinite scrolling */}
             <div className="home__videoarea">
-              <div className="flex justifyContentCenter flexColumn" style={{ height: "100%" }}>
+              <div className="flex" style={{ height: "100%" }}>
 
                 <img src="/LoadingRings.svg" style={{ width: "10%", margin: "auto" }}></img>
 
@@ -129,7 +130,7 @@ let [searchParams] = useSearchParams();
           <div className="home__videoarea">
            
 
-            <div className="home__videoarea__container flexColumn alignContentCenter">
+            <div className="search__videoarea__container flexColumn AlignItemsCenter">
 
               {data?.SearchForVideoByTitle?.map((video) => {
 
@@ -155,9 +156,9 @@ let [searchParams] = useSearchParams();
 
               })}
 
+              <div className="whitespace"></div>
             </div>
 
-            <div className="whitespace"></div>
 
           </div>
         </div>
