@@ -2,10 +2,11 @@
   --white: #FEFEFF;
   --silver: #a4a5b6;
   --grey: #808B8E;
-  --gray: #808B8E;
+  --gray: #3b99b3;
   --light-gray: #D9DEE0;
-  --black: #23202C;
-  --dark-blue: #16141d;
+  --black: #0b0718;
+  /* --black: #23202C; */
+  --dark-blue: #07050e;
 
   --red: #F51548;
   --darkred: #9e062a;
@@ -16,7 +17,7 @@
 
   --body-color:var(--white);
   --text-color: var(--black);
-  --top-nav-color: var(--silver);
+  --top-nav-color: var(--gray);
   --missing-items-background: var(--gray);
   --highlight: var(--highlight-blue);
   --accent-1: var(--light-gray);
