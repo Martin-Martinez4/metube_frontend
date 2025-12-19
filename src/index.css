@@ -1,8 +1,10 @@
 #root {
   --white: #FEFEFF;
   --grey: #808B8E;
-  --gray: #808B8E;
-  --black: #23202C;
+  --gray: #3b99b3;
+  --black: #0b0718;
+  /* --black: #23202C; */
+  --dark-blue: #07050e;
 
   --red: #F51548;
   --darkred: #9e062a;
@@ -10,12 +12,29 @@
   --darkblue: #243F4A;
   --lightblue: #67AECA;
 
-  --leftNavWidth: 12vw;
+  --red: #F51548;
+  --darkred: #9e062a;
+  --blue: #3E6B7D;
+  --darkblue: #243F4A;
+  --lightblue: #67AECA;
+  --highlight-blue: #538CA3;
 
-  
+  --body-color: var(--white);
+  --text-color: var(--black);
+  --top-nav-color: var(--gray);
+  --missing-items-background: var(--gray);
+  --highlight: var(--highlight-blue);
+  --accent-1: var(--light-gray);
+  --accent-2: var(--light-gray);
+  --input-background: var(--white);
+  --leftNavWidth: 12vw;
+  color: var(--text-color);
+
+
 }
+
 @media screen and (max-width: 620px) {
-  #root{
+  #root {
 
     --leftNavWidth: 0vw;
   }
