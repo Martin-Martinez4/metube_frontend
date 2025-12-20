@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 export const VIDEOS_QUERY_OFFSET = gql(/* GraphQL */`
-query GetMultipleVideosSetOrder($seed: Float = 0.5, $limit: Int = 2, $offset: Int = 1) {
+query GetMultipleVideosSetOrder($seed: Float = 0.5, $limit: Int = 2, $offset: Int = 0) {
   GetMultipleVideosSetOrder(seed: $seed, limit: $limit, offset:$offset){
     id
     url

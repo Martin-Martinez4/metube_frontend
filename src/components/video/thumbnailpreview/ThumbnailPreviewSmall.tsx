@@ -13,9 +13,9 @@ function ThumbnailPreviewSmall({ width, video }: ThumbnailPreviewSmallProps) {
 
       <div className="thumbnailpreview--small">
 
-      <Link to={`/video/${video?.id}`}>
-              <img className="thumbnailpreview__thumbnail" src={`http://${import.meta.env.VITE_HOST_URL}:${import.meta.env.VITE_HOST_PORT}`+ `/downloads/${video?.url.split("/")[2]}.jpg/`}></img>
-            </Link>
+        <Link to={`/video/${video?.id}`}>
+          <img className="thumbnailpreview__thumbnail" src={`http://${import.meta.env.VITE_HOST_URL}:${import.meta.env.VITE_HOST_PORT}` + `/downloads/${video?.url.split("/")[2]}.jpg/`}></img>
+        </Link>
         <div className="thumbnailpreview--small__info">
 
           <div className="thumbnailpreview--small__info__textarea">
