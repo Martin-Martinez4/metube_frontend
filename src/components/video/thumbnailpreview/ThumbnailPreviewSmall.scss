@@ -11,7 +11,7 @@
 
 
     &__thumbnail{
-        background-color: var(--missing-items-background);
+        background: var(--missing-items-background);
         width: 100%;
         border-radius: 5px;
 
@@ -57,6 +57,7 @@
         -webkit-box-orient: vertical;
         display: -webkit-box;
         -webkit-line-clamp: 2;
+        line-clamp: 2;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: normal;
@@ -83,6 +84,7 @@
         -webkit-box-orient: vertical;
         display: -webkit-box;
         -webkit-line-clamp: 2;
+        line-clamp: 2;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: normal;

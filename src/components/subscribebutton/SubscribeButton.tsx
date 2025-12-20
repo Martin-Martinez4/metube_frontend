@@ -98,7 +98,7 @@ function SubscribeButton({ username, isSubscribed }: SubscribeButtonProps) {
         return (
 
             <div className="btn bgred colorwhite marginr4 videopage__video__info__button--subscribe" onClick={() => handleSubscribe()}>
-                Subscribed
+                Subscribe
             </div>
         )
     }

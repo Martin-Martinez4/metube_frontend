@@ -2,7 +2,7 @@
   --white: #FEFEFF;
   --silver: #a4a5b6;
   --grey: #808B8E;
-  --gray: #3b99b3;
+  --blue-muted: #3b99b3;
   --light-gray: #D9DEE0;
   --black: #0b0718;
   /* --black: #23202C; */
@@ -17,8 +17,8 @@
 
   --body-color:var(--white);
   --text-color: var(--black);
-  --top-nav-color: var(--gray);
-  --missing-items-background: var(--gray);
+  --top-nav-color: var(--blue-muted);
+  --missing-items-background: linear-gradient(45deg, var(--blue-muted), var(--grey));
   --highlight: var(--highlight-blue);
   --accent-1: var(--light-gray);
   --accent-2: var(--light-gray);
@@ -29,6 +29,8 @@
   color: var(--text-color);
   
 }
+
+
 
 @media screen and (max-width: 620px) {
   #root{

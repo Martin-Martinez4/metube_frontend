@@ -1,10 +1,11 @@
-.flex-wrap{
+.flex-wrap {
     flex-wrap: wrap;
 }
-.profilepage{
-    
-    &__content{
-        
+
+.profilepage {
+
+    &__content {
+
         width: calc(100vw - 12vw);
         height: 99vh;
 
@@ -12,7 +13,7 @@
 
     }
 
-    &__nav{
+    &__nav {
 
         display: flex;
         width: 90%;
@@ -25,29 +26,30 @@
 
         border-bottom: 1px solid #becbcf;
 
-        
+
         margin: auto;
         margin-bottom: 2rem;
-        
+
     }
 
-    &__headerimage{
+    &__headerimage {
         width: 100%;
         height: calc((100vw - 15vw)/6.2 - 1px);
 
         background: var(--missing-items-background);
     }
 
-    &__userprofile{
+    &__userprofile {
         width: 5rem;
         height: 5rem;
 
-        border-radius: 100%;
+        border-radius: 50%;
 
         background: var(--missing-items-background);
+        box-shadow: 0 2px 6px rgba(24, 7, 7, 0.25);
     }
 
-    &__channelname{
+    &__channelname {
         word-break: break-word;
         font-size: 1.5rem;
         margin-bottom: .25rem;
@@ -55,15 +57,26 @@
         max-width: 25vw;
     }
 
-    &__subcount{
+    &__subcount {
 
         font-weight: 300;
     }
 
-    &__playlistcontainer{
+    &__playlistcontainer {
         padding-bottom: 10rem;
     }
 
-   
+
 }
 
+@media (max-width: 620px) {
+  .profilepage__nav {
+    gap: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .profilepage__userprofile {
+    width: 4rem;
+    height: 4rem;
+  }
+}

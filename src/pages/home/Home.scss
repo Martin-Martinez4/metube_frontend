@@ -2,13 +2,17 @@
 
   &__videoarea {
 
-    height: 99vh;
+    min-height: 100dvh;
     width: calc(100vw - var(--leftNavWidth));
     // overflow-y: auto;
 
     margin-bottom: 2rem;
 
     justify-content: center;
+    overflow-y: auto;
+
+    scrollbar-color: var(--accent-2) var(--body-color);
+    scrollbar-width: auto;
 
     &__container {
 
@@ -70,4 +74,3 @@
   width: 100% !important;
   height: auto !important;
 }
-
